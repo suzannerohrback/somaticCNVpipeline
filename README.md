@@ -35,11 +35,11 @@ Individual users are responsible for ensuring all dependencies are met
 1, Download the entire repo/folder and put in the desired location
 2, Add this filepath to your PATH variable
   e.g. in ~/.bashrc
-    PATH=$PATH:/path/to/repository/foldername
+    PATH=$PATH:/path/to/repository
     separate from other existing paths in that variable by a : (no spaces)
 3, Add the filepath to the bin folder to your PYTHONPATH variable
   e.g. in ~/.bashrc
-    PYTHONPATH=/path/to/repository/foldername/bin
+    PYTHONPATH=/path/to/repository/bin:$PYTHONPATH
 4, Make sure the parent code file is executable
    e.g. chmod +x /path/to/repository/foldername/parentCode
    
@@ -128,14 +128,14 @@ THIS IS NOT INTEGRATED INTO THE PIPELINE
   
   
 ========================================================================================================================
-CUTOFF DEVELOPMENT
+CUTOFFS
 ========================================================================================================================
 Code for this section is not yet prepared for release
 THIS IS NOT INTEGRATED INTO THE PIPELINE
 Includes code used to perform the analysis that allowed me to create cutoffs for both
   1, Quality control requirements (contraction algorithm)
   2, CNV call post-hoc filtering (bootstrapped one-class support vector machines)
-The reference files I used for performing these analyses are included as well 
+The reference files I used for performing these analyses will be included
   But you desire to do so you will need to write your own parent script to submit them for processing
   
   
