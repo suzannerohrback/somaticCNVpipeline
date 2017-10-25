@@ -8,7 +8,7 @@ CITATION
 ========================================================================================================================
 Feel free to use this code, but please provide credit if utilized for a publication
 Our paper has not yet been published, so currently cite as a URL:
-  Rohrback, Suzanne. Somatic CNV Analysis Pipeline. https://github.com/suzannerohrback/somaticCNVpipeline/. <Accession Date>.
+  Rohrback, Suzanne. Somatic CNV Analysis Pipeline. https://github.com/suzannerohrback/somaticCNVpipeline/. Accession Date.
   
 
 
