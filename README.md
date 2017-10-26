@@ -146,8 +146,11 @@ SIMULATIONS
 ========================================================================================================================
 Code for this section is not yet prepared for release
 THIS IS NOT INTEGRATED INTO THE PIPELINE
+  The python files are data dumps to show how I constructed these approaches
+  I have tried to indicate the lines that need modification with a ##########Note but make no guarantees I found everything
+  
 Includes code used to simulate data for both
-  1, Identifying the copy number state dependence of noise
+  1, Identifying the copy number state dependence of noise (copynumbernoise.py)
   2, Creating false positive CNV calls
   3, Creating true positive CNV calls
 The data files I used are NOT included here, as there are hundreds of them
