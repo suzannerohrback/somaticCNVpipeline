@@ -130,13 +130,14 @@ THIS IS NOT INTEGRATED INTO THE PIPELINE
 ========================================================================================================================
 CUTOFFS
 ========================================================================================================================
-Code for this section is not yet prepared for release
 THIS IS NOT INTEGRATED INTO THE PIPELINE
 Includes code used to perform the analysis that allowed me to create cutoffs for both
   1, Quality control requirements (contraction algorithm)
   2, CNV call post-hoc filtering (bootstrapped one-class support vector machines)
 The reference files I used for performing these analyses are also included
   But you desire to do the same you will need to write your own parent script to submit them for processing
+
+Oct 25, 2017: All code and files have been uploaded.
   
   
 
