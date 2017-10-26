@@ -144,7 +144,6 @@ Oct 25, 2017: All code and files have been uploaded.
 ========================================================================================================================
 SIMULATIONS
 ========================================================================================================================
-Code for this section is not yet prepared for release
 THIS IS NOT INTEGRATED INTO THE PIPELINE
   The python files are data dumps to show how I constructed these approaches
   I have tried to indicate the lines that need modification with a ##########Note but make no guarantees I found everything
@@ -155,5 +154,9 @@ Includes code used to simulate data for both
   3, Creating true positive CNV calls
 The data files I used are NOT included here, as there are hundreds of them
   A selection of the BioSamples in PRJNA415480
+  
+  Oct 25, 2017: All code and files have been uploaded. 
+    Issues identified in these sections can be reported, but they will be a low priority for me to fix as these were single purpose/use scripts
+
   
 
