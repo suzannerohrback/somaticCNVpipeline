@@ -2,6 +2,7 @@
 import random
 import numpy as np
 from sklearn import svm
+import multiprocessing as mp
 
 
 
@@ -117,11 +118,10 @@ def CheckIfEdge(i1, i2, Zdata):
 def getCNVcutoffs(dataDict, rawOutputFilename=False, smallCutoffFile=False, largeCutoffFile=False):
 
 	###variable setup
-  
 	variables = ['bins', 'intdist']
 	parameterDict = {'kernel': 'rbf', 'gamma': 10, 'nu': 0.125}
-  iterations = 10000
- # numBins = 25
+ 	iterations = 10000
+	numCPU = mp.cpu_count()
   
 	maxDict = {x: max([max(dataDict[y][x]) for y in dataDict]) for x in variables}
 	intdistVals = np.arange(0.00, 0.51, 0.01)
@@ -148,7 +148,7 @@ def getCNVcutoffs(dataDict, rawOutputFilename=False, smallCutoffFile=False, larg
 	###Run bootstrapping of fitting a one-class SVM model to large and small alterations	
 	allZdict = {'small': np.zeros(xxx.shape), 'large': np.zeros(xxx.shape)}
 
-  #note: doing this in multiple iterations to avoid running out of memory
+  	#note: doing this in multiple iterations to avoid running out of memory
 	for i in range(iterations/250):
 
 		argList = []
@@ -164,9 +164,19 @@ def getCNVcutoffs(dataDict, rawOutputFilename=False, smallCutoffFile=False, larg
 
 		startArg = i * 250
 		endArg = min([iterations, (i+1)*250])
+		
+		
 		print i+1, 'round of iteration multiprocessing, will go from', startArg, 'to', endArg-1
-#!#!#!#!#!#!#!#!#!#!#!#!#!#!# I NEED TO FIX THIS DAEMON THING
-		results = daemon( runIteration, argList, 0.5, True, 'SVM bootstrapping round ' + str(i+1) )
+		
+		pool = mp.Pool(numCPU)
+		processes = [ pool.apply_async(runIteration, args=x) for x in argList ]
+		pool.close()
+
+		results = len(argList) * [ [] ]
+		
+		for i,j in enumerate(processes):
+			j.wait()
+			results[i] = j.get()
 
 		for j in results:
 			allZdict = { x: allZdict[x] + j[x] for x in allZdict }
