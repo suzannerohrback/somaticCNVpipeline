@@ -48,3 +48,17 @@ Options:
 		This is useful  if you need to trim different files in different manners
 		
 	
+
+
+
+========================================================================================================================
+Notes
+========================================================================================================================
+1/29/2018
+	All code for
+		parsing arguments
+		trimming one file
+		parallel processing of all files
+	Has been written
+	
+	No testing has been performed yet, there are almost certainly bugs to fix
