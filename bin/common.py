@@ -32,7 +32,7 @@ def daemon(target, argList, name, cpuPerProcess=1):
 			p = mp.Process(target=target, args=argList[i])
 			p.start()
 			p.join()
-		else:
-			print( str( '\t\t' + str(i+1) + ' of ' + str(len(argList)) + ' processes complete' ) )
+	#	else:
+	#		print( str( '\t\t' + str(i+1) + ' of ' + str(len(argList)) + ' processes complete' ) )
 
 	print( str( '\tAll processing to ' + name + ' complete\n' ) )
