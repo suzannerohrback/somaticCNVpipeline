@@ -1,0 +1,71 @@
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+SOMATIC CNV PIPELINE
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+
+
+========================================================================================================================
+Purpose
+========================================================================================================================
+
+Detect somatic CNVs from single-cell whole-genome sequencing data of [non-cancerous] mouse or human tissue
+
+Please see additional README files for more detailed information on how to run specific functions
+
+
+
+========================================================================================================================
+Citation
+========================================================================================================================
+
+Feel free to use this code, but please provide credit if utilized for a publication
+Our paper has not yet been published, so currently cite as a URL:
+  Rohrback, Suzanne. Somatic CNV Analysis Pipeline. https://github.com/suzannerohrback/somaticCNVpipeline/. Accession Date.
+
+
+
+========================================================================================================================
+Disclaimer
+========================================================================================================================
+
+Not all of the code in this repository will work on all systems "out of the box"
+  That is because one purpose of this repository is to support continuity within the Jerold Chun lab
+  Portions of the code that are most likely to require modification or independent creation include
+    Mapping
+    Bin location reference
+    Segmentation
+  There are multiple strategies for each of these actions, and it is beyond the scope of this repo to be universally compatible
+		However, I am open to incorporating pull requests providing additional functionality
+		
+	
+	
+========================================================================================================================
+Installation
+========================================================================================================================
+
+Currently nothing fancy is supported (sorry, I'm still learning)
+Individual users are responsible for ensuring all dependencies are met
+
+1, Download the entire repo/folder and put in the desired location
+2, Add this filepath to your PATH variable
+  e.g. in ~/.bashrc
+    PATH=$PATH:/path/to/repository
+    separate from other existing paths in that variable by a : (no spaces)
+3, Add the filepath to the bin folder to your PYTHONPATH variable
+  e.g. in ~/.bashrc
+    PYTHONPATH=/path/to/repository/bin:$PYTHONPATH
+4, Make sure the parent code file is executable
+   e.g. chmod +x /path/to/repository/foldername/parentCode
+5, Make any necessary updates to filepaths in the config.py file
+
+
+
+========================================================================================================================
+Command Line
+========================================================================================================================
+
+Get a help message:
