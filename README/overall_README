@@ -19,12 +19,13 @@ Please see additional README files for more detailed information on how to run s
 
 
 ========================================================================================================================
-Citation
+Requirements
 ========================================================================================================================
 
-Feel free to use this code, but please provide credit if utilized for a publication
-Our paper has not yet been published, so currently cite as a URL:
-  Rohrback, Suzanne. Somatic CNV Analysis Pipeline. https://github.com/suzannerohrback/somaticCNVpipeline/. Accession Date.
+Only single end sequencing data are supported
+	If you have paired end sequencing data, process ONLY R1 or R2
+	
+All fastq files for a single sample must already be concatenated
 
 
 
