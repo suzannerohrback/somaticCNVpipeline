@@ -29,7 +29,22 @@ Command Line
 ========================================================================================================================
 
 Get a help message:
-	
+	somaticCNVcalling.py preprocess -h
+	somaticCNVcalling.py preprocess --help
 	
 Options:
+	somaticCNVcalling.py preprocess [options] /path/to/fastq/files/
+	
+	-5/--trim5
+		Bases to trim from the 5' end of all reads (default=0)
+	-l/--length
+		Desired final read length (default=36)
+		***If anything other than 36 is used, you must provide all of you own reference files
+	-r/--remove
+		Delete the full length fastq files after trimming (default=transfer to a separate folder)
+	-s/--samples
+		A text file containing a list of fastq to run preprocessing on
+		One fastq file per line, do not include filepaths
+		This is useful  if you need to trim different files in different manners
+		
 	
