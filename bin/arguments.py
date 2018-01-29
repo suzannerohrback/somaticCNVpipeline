@@ -49,7 +49,7 @@ def preprocessArgs():
 		help = "Number of 5' bases to trim from fastq reads")
 	parser.add_arugment('-l', '--length', metavar='X', type=int, default=36,
 		help = 'The desired read length')
-	parser.add_arugment('-r', '--remove', action='store_false'
+	parser.add_arugment('-r', '--remove', action='store_true'
 		help = 'Set this flag if you want to delete the full length fastq files')
 	parser.add_argument('-s', '--samples', metavar='/path/to/sample_list.txt', default=False,
 		help='Path to a text file containing a list of fastq files to be processed')
