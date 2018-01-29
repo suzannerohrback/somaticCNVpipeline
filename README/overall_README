@@ -55,3 +55,5 @@ Command Line
 ========================================================================================================================
 
 Get a help message:
+	somaticCNVcalling.py -h
+	somaticCNVcalling.py --help
