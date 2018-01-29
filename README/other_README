@@ -1,0 +1,66 @@
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+ADDITIONAL CODE AND FILES
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+
+
+
+========================================================================================================================
+TEXT FILES
+========================================================================================================================
+Code for this section is not yet prepared for release
+THIS SHOULD BE UNIVERSALLY FUNCTIONAL
+Two types of files are included
+  1, Reference files used at different processing stages
+  2, Test data files from each stage of processing to enable independent troubleshooting
+
+
+
+========================================================================================================================
+CNV ANALYSIS
+========================================================================================================================
+Code for this section is not yet prepared for release
+THIS WILL NOT BE INTEGRATED INTO THE PIPELINE
+  Just a "data dump" from Suzanne's PhD work
+  It may require substantial modifications to become universally functional
+  Included primarily for examples of the forms initial analysis can take
+  
+  
+  
+========================================================================================================================
+CUTOFFS
+========================================================================================================================
+THIS IS NOT INTEGRATED INTO THE PIPELINE
+Includes code used to perform the analysis that allowed me to create cutoffs for both
+  1, Quality control requirements (contraction algorithm)
+  2, CNV call post-hoc filtering (bootstrapped one-class support vector machines)
+The reference files I used for performing these analyses are also included
+  But you desire to do the same you will need to write your own parent script to submit them for processing
+
+Oct 25, 2017: All code and files have been uploaded.
+  
+  
+
+========================================================================================================================
+SIMULATIONS
+========================================================================================================================
+THIS IS NOT INTEGRATED INTO THE PIPELINE
+  The python files are data dumps to show how I constructed these approaches
+  I have tried to indicate the lines that would need modification with a ##########Note 
+    But I make no guarantees I found everything
+  
+Includes code used to simulate data for both
+  1, Identifying the copy number state dependence of noise (copynumbernoise.py)
+  2, Creating false positive CNV calls
+  3, Creating true positive CNV calls
+The data files I used are NOT included here, as there are hundreds of them
+  A selection of the BioSamples in PRJNA415480
+  
+  Oct 25, 2017: All code and files have been uploaded. 
+    Issues identified in these sections can be reported, but they will be a low priority for me to fix as these were single purpose/use scripts
+
+  
