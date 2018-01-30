@@ -1,7 +1,8 @@
 #!/usr/bin/python
-import multiprocessing as mp
 import os
-
+import multiprocessing as mp
+import subprocessing as sub
+import shlex
 
 
 
@@ -88,6 +89,32 @@ def daemon(target, argList, name, cpuPerProcess=1):
 
 	print( str( '\tAll processing to ' + name + ' complete\n' ) )
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+def zipping(filepath, gunzip=True):
+	if filepath.split('.')[-1] != 'gz' and gunzip:
+		return 0
+	elif filepath.split('.')[-1] == 'gz' and not gunzip:
+		return 0
+	
+	if gunzip:
+		cmd = 'gunzip ' + filepath
+	else:
+		cmd = 'gzip ' + filepath
+	
+	cmd = shlex.split(cmd)
+	p = sub.popen(cmd)
+	p.wait()
+	
+	return 0
+	
 	
 	
 	
