@@ -39,8 +39,6 @@ def runAll(args):
 	
 	
 	#use the daemon to and preprocessing code to trim all fastq files with parallel processing
-#	if not args.remove and not os.path.exists(args.FastqDirectory + '/FullLength/'):
-#		os.mkdir(args.FastqDirectory + '/FullLength/')
 		
 	if args.remove:
 		argList = [(x, args.trim5, args.length, remove=True,) for x in fastqFiles]
