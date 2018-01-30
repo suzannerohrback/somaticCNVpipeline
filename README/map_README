@@ -1,0 +1,56 @@
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+MAPPING
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+
+
+========================================================================================================================
+Purpose
+========================================================================================================================
+
+This code maps fastq files and removes PCR duplicates
+Generates a unique.sam file for each sample which will be used in bin counting
+
+All bowtie-specific options, and the reference genome used are linked with the bin reference that is used in counting!
+  They must be used together, or results may not be accurate
+  YOU PROCEED AT YOUR OWN RISK IF ANY OF THESE FILES ARE ALTERED
+  However, all of these references were generated using the strategy outlined here:
+    https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5069701/
+    So it is possible to create your own references if needed
+    Though in this case I still do not guarantee the CNV filtering reference applied later will remain optimal
+
+	
+	
+========================================================================================================================
+Command Line
+========================================================================================================================
+
+Get a help message:
+	somaticCNVcalling map -h
+	somaticCNVcalling map --help
+	
+Options:
+	somaticCNVcalling map [options] 
+	
+  	-t/--trim X X
+		Bases to trim from the 5' and 3' ends of all reads during mapping (default = 0 0)
+		NOT NECESSARY IF PREPROCESSING IS USED
+		Please ensure ALL sequencing reads are the SAME length before using this option
+  
+ 
+	
+
+
+
+========================================================================================================================
+Notes
+========================================================================================================================
+1/30/2018
+	All code for
+		
+	
+	No testing has been performed yet, there are almost certainly a few minor bugs to fix
