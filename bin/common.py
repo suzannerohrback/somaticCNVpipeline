@@ -100,9 +100,9 @@ def daemon(target, argList, name, cpuPerProcess=1):
 	
 def zipping(filepath, gunzip=True):
 	if filepath.split('.')[-1] != 'gz' and gunzip:
-		return 0
+		return filepath
 	elif filepath.split('.')[-1] == 'gz' and not gunzip:
-		return 0
+		return filepath
 	
 	if gunzip:
 		cmd = 'gunzip ' + filepath
