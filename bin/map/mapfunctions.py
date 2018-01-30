@@ -24,7 +24,7 @@ def getBowtieCmd(trim, index, infile, tempDir):
 	basename = os.path.basename(infile)
 	samfile = tempDir + '.'.join(basename.split('.')[:-1]) + '.sam'
 	cmd =	['bowtie',
-			 '-p 16',
+			 '-p 8',
 			 '-S', 
 			 '-t',
 			 '-n 2',
