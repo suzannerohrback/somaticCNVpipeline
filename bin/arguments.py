@@ -63,12 +63,40 @@ def preprocessArgs():
 
 
 
+###interpret arguments needed to perform mapping of fastq files###
+def mapArgs():
+	
+	parser = argparse.ArgumentParser(description='Map fastq files to the appropriate reference genome')
+
+	#required arguments#
+	parser.add_argument('FastqDirectory', 
+		help = 'The path to the folder that contains fastq files to be processed')
+	parser.add_argument('species', choices=['hg38', 'mm10'], 
+		help = 'The genome build of the species being assessed')
+	
+	#optional arguments#
+	parser.add_arugment('-t', '--trim', metavar='X', nargs=2, type=int, default=[0, 0],
+		help = "Number of 5' and 3' bases to trim from fastq reads during mapping")
+	parser.add_arugment('-o', '--output', metavar='/path/to/output_directory/', default=False,
+		help = 'A filepath to the desired directory where you would like sam files saved, if not in the same parent directory as the fastq files')
+	parser.add_argument('-s', '--samples', metavar='/path/to/sample_list.txt', default=False,
+		help='Path to a text file containing a list of fastq files to be processed')
+	
+	
+
+	
+
+
+
+
+
 def fullParser(input):
 
 	functionDict =	{ 
 			'-h': parentArgs,
 			'--help': parentArgs,
 			'preprocess': preprocessArgs, 
+			'map': mapArgs,
 			}
 
 	if input == []:
