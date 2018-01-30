@@ -13,6 +13,14 @@ PLEASE DO NOT SEND ME PULL REQUESTS INCLUDING ANY MODIFICATIONS YOU MAKE TO THIS
 """
 
 
+
+
+
+
+
+
+
+
 class Map:
 	
 	def __init__(self):
@@ -24,8 +32,12 @@ class Map:
 							}
 		
 		self.samtools = '/home/k4zhang/softwares/samtools-0.1.19/samtools'
-		
 ###		self.bowtie = 
+
+
+
+
+
 
 
 
