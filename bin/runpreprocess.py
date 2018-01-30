@@ -2,7 +2,7 @@
 import os
 
 from preprocess import trimfile
-from common import daemon
+import common 
 
 
 
@@ -21,36 +21,33 @@ def runAll(args):
 	print('\n')
 	
 
-	#ensure fastq directory is in the expected format#
-	if args.FastqDirectory[-1] != '/':
-		args.FastqDirectory += '/'
-	
-	
-	
-	#get list of fastq files to process (depending on args.samples)
-	if os.path.exists(args.samples):
-		fastqFiles = []
-		with open(args.samples, 'r') as IN:
-			for x in IN:
-				fastqFiles.append(x.rstrip())
+	#make sure environment is properly prepared#
+	args.FastqDirectory = common.fixDirName(args.FastqDirectory)
+	if not args.remove:
+		common.makeDir(args.FastqDirectory + '/FullLength/')
 
-	else:
+	
+		
+	#get list of fastq files to process (depending on args.samples)
+	if not args.samples:
 		fastqFiles = [ x for x in os.listdir(args.FastqDirectory) if 'fastq' in x.split('.')[-2:] ]
+	else:
+		fastqFiles = common.importSampleList(args.samples)		
 	
 	fastqFiles = [args.FastqDirectory + x for x in fastqFiles]
 	
 	
 	
 	#use the daemon to and preprocessing code to trim all fastq files with parallel processing
-	if args.remove and not os.path.exists(args.FastqDirectory + '/FullLength/'):
-		os.mkdir(args.FastqDirectory + '/FullLength/')
+#	if not args.remove and not os.path.exists(args.FastqDirectory + '/FullLength/'):
+#		os.mkdir(args.FastqDirectory + '/FullLength/')
 		
 	if args.remove:
 		argList = [(x, args.trim5, args.length, remove=True,) for x in fastqFiles]
 	else:
 		argList = [(x, args.trim5, args.length,) for x in fastqFiles]
 		
-	daemon(trimfile.preprocessOne, argList, 'trim sequencing reads to desired length', cpuPerProcess=1)
+	common.daemon(trimfile.preprocessOne, argList, 'trim sequencing reads to desired length', cpuPerProcess=1)
 		
 	
 	
