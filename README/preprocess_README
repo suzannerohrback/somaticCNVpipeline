@@ -36,12 +36,12 @@ Options:
 	somaticCNVcalling preprocess [options] /path/to/fastq/files/
 	
 	-5/--trim5 X
-		Bases to trim from the 5' end of all reads (default=0)
+		Bases to trim from the 5' end of all reads (default = 0)
 	-l/--length X
-		Desired final read length (default=36)
+		Desired final read length (default = 36)
 		***If anything other than 36 is used, you must provide all of you own reference files
 	-r/--remove
-		Delete the full length fastq files after trimming (default=transfer to a separate folder)
+		Delete the full length fastq files after trimming (default = transfer to a separate folder)
 	-s/--samples /path/to/file.txt
 		A text file containing a list of fastq to run preprocessing on
 		One fastq file per line, do not include filepaths
