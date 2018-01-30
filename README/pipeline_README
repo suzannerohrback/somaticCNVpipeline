@@ -42,11 +42,12 @@ Individual users are responsible for ensuring all dependencies are met
   e.g. in ~/.bashrc
     PATH=$PATH:/path/to/repository
     separate from other existing paths in that variable by a : (no spaces)
+    The repository folder is the one which contains the somaticCNVcalling script file
 3, Add the filepath to the bin folder to your PYTHONPATH variable
   e.g. in ~/.bashrc
     PYTHONPATH=/path/to/repository/bin:$PYTHONPATH
 4, Make sure the parent code file is executable
-   e.g. chmod +x /path/to/repository/foldername/parentCode
+   e.g. chmod +x /path/to/repository/foldername/somaticCNVcalling
 5, Make any necessary updates to filepaths in the config.py file
 
 
@@ -56,12 +57,12 @@ Command Line
 ========================================================================================================================
 
 Get a help message:
-	somaticCNVcalling.py -h
-	somaticCNVcalling.py --help
+	somaticCNVcalling -h
+	somaticCNVcalling --help
 
 General usage (see function README files for further information):
-	somaticCNVcalling.py preprocess [options]
-	somaticCNVcalling.py map [options]
+	somaticCNVcalling preprocess [options]
+	somaticCNVcalling map [options]
 	
 	
 	
