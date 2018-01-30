@@ -106,14 +106,16 @@ def zipping(filepath, gunzip=True):
 	
 	if gunzip:
 		cmd = 'gunzip ' + filepath
+		fixname = filepath[:-3]
 	else:
 		cmd = 'gzip ' + filepath
+		fixname = filepath + '.gz'
 	
 	cmd = shlex.split(cmd)
 	p = sub.popen(cmd)
 	p.wait()
 	
-	return 0
+	return fixname
 	
 	
 	
