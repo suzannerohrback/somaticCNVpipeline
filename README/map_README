@@ -56,6 +56,10 @@ Notes
 ========================================================================================================================
 1/30/2018
 	All code for
-		
+		unzipping fastqs
+		determining reference file locations
+		running bowtie
+		running samtools
+	Has been written
 	
 	No testing has been performed yet, there are almost certainly a few minor bugs to fix
