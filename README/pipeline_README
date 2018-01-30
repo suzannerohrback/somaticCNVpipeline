@@ -58,3 +58,12 @@ Command Line
 Get a help message:
 	somaticCNVcalling.py -h
 	somaticCNVcalling.py --help
+
+General usage (see function README files for further information):
+	somaticCNVcalling.py preprocess [options]
+	somaticCNVcalling.py map [options]
+	
+	
+	
+	
+	
