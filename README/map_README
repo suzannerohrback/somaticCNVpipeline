@@ -16,12 +16,12 @@ This code maps fastq files and removes PCR duplicates
 Generates a unique.sam file for each sample which will be used in bin counting
 
 All bowtie-specific options, and the reference genome used are linked with the bin reference that is used in counting!
-  They must be used together, or results may not be accurate
-  YOU PROCEED AT YOUR OWN RISK IF ANY OF THESE FILES ARE ALTERED
-  However, all of these references were generated using the strategy outlined here:
-    https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5069701/
-    So it is possible to create your own references if needed
-    Though in this case I still do not guarantee the CNV filtering reference applied later will remain optimal
+	They must be used together, or results may not be accurate
+	YOU PROCEED AT YOUR OWN RISK IF ANY OF THESE FILES ARE ALTERED
+	However, all of these references were generated using the strategy outlined here:
+		https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5069701/
+		So it is possible to create your own references if needed
+		Though in this case I still do not guarantee the CNV filtering reference applied later will remain optimal
 
 	
 	
@@ -34,15 +34,20 @@ Get a help message:
 	somaticCNVcalling map --help
 	
 Options:
-	somaticCNVcalling map [options] 
+	somaticCNVcalling map [options] /path/to/fastq/files/ genome
+		Currently genome must be either hg38 or mm10
 	
   	-t/--trim X X
 		Bases to trim from the 5' and 3' ends of all reads during mapping (default = 0 0)
 		NOT NECESSARY IF PREPROCESSING IS USED
 		Please ensure ALL sequencing reads are the SAME length before using this option
-  
- 
-	
+  	-o/--output
+		A filepath to the directory where you would like sam files saved
+			(default = same directory as where the Fastq folder is located)
+	-s/--samples
+		A text file containing a list of fastq to run preprocessing on
+		One fastq file per line, do not include filepaths
+		This is useful for situations such as if you need to trim different files in different manners
 
 
 
