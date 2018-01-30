@@ -29,11 +29,11 @@ Command Line
 ========================================================================================================================
 
 Get a help message:
-	somaticCNVcalling.py preprocess -h
-	somaticCNVcalling.py preprocess --help
+	somaticCNVcalling preprocess -h
+	somaticCNVcalling preprocess --help
 	
 Options:
-	somaticCNVcalling.py preprocess [options] /path/to/fastq/files/
+	somaticCNVcalling preprocess [options] /path/to/fastq/files/
 	
 	-5/--trim5
 		Bases to trim from the 5' end of all reads (default=0)
@@ -45,7 +45,7 @@ Options:
 	-s/--samples
 		A text file containing a list of fastq to run preprocessing on
 		One fastq file per line, do not include filepaths
-		This is useful  if you need to trim different files in different manners
+		This is useful for situations such as if you need to trim different files in different manners
 		
 	
 
@@ -61,4 +61,4 @@ Notes
 		parallel processing of all files
 	Has been written
 	
-	No testing has been performed yet, there are almost certainly bugs to fix
+	No testing has been performed yet, there are almost certainly a few minor bugs to fix
