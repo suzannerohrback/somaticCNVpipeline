@@ -18,3 +18,17 @@ if __name__ == '__main__':
 	if objective == 'preprocess':
 		import runpreprocess
 		runpreprocess.runAll(args)
+		
+	elif objective == 'map':
+		import runmap
+		runmap.runAll(args)
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
