@@ -1,0 +1,70 @@
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+COUNTING
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+
+
+========================================================================================================================
+Purpose
+========================================================================================================================
+
+This code counts the number of unique sequencing reads in bins across the genome
+Generates a bincounts.txt file which will be used for identifying CNVs
+
+This code is nearly identical to that presented in the Baslan et al Nature Protocols paper (see URL below)
+	Two lines of code were added, as the original code was not counting reads in the final bin of the genome
+	This modification is indicated withing the bin/count/countfile.py script
+
+As for mapping, all reference files and assumptions about data format are interconnected!!!
+	The bin boundaries (varbin) files were generated for 36 bp sequencing reads
+		While they don't change dramatically for different read lengths, the do NOT remain the same
+	The 25,000 bins which span the genome in these files are equally sized in terms of mapping rate, NOT number of bases
+		So splitting or merging them for different resolution will NOT give valid results
+	YOU PROCEED AT YOUR OWN RISK IF ANY OF THE REFERENCE FILES ARE ALTERED
+	However, all of these references were generated using the strategy outlined here:
+		https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5069701/
+		So it is possible to create your own references if needed
+		Though in this case I still do not guarantee the CNV filtering reference applied later will remain optimal
+
+	
+	
+========================================================================================================================
+Command Line
+========================================================================================================================
+
+Get a help message:
+	somaticCNVcalling count -h
+	somaticCNVcalling count --help
+	
+Options:
+	somaticCNVcalling count [options] /path/to/unique.sam/files/ genome
+		Currently genome must be either hg38 or mm10
+
+ 	-o/--output
+		A filepath to the directory where you would like bincount.txt files saved
+			(default = same directory as where the Sam folder is located)
+	-s/--samples
+		A text file containing a list of unique.sam to run preprocessing on
+		One file per line, do not include filepaths, but do include the file extension
+ 
+
+
+========================================================================================================================
+Notes
+========================================================================================================================
+1/31/2018
+	All code for
+		Currently nothing...
+	Has been written
+	
+	Reference files have been uploaded for 
+		mm10 and hg38 
+		36 bp reads, 25000 bins
+		varbin files (both varbin.gc.content and varbin.fullRef)
+		chromosome size files
+	
+	No testing has been performed yet, there are almost certainly bugs to fix
