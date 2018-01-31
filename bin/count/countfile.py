@@ -200,3 +200,8 @@ def runOne(samFile, countDir, statsDir, species):
 	
 	printText = '\t\tFinished counting reads for ' + os.path.basename(samFile)
 	print(printText)
+
+	
+	
+	
+	
