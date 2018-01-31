@@ -10,39 +10,6 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir) 
 import common
 import config as cfg
-
-
-
-
-
-
-
-
-
-
-def getBowtieCmd(trim, index, infile, tempDir):
-	basename = os.path.basename(infile)
-	samfile = tempDir + '.'.join(basename.split('.')[:-1]) + '.sam'
-	cmd =	['bowtie',
-			 '-p 8',
-			 '-S', 
-			 '-t',
-			 '-n 2',
-			 '-e 70',
-			 '-m 1',
-			 '--phred33-quals',
-			 '--best',
-			 '--strata',
-			 '--chunkmbs 200',
-			 '-5', str(trim[0]),
-			 '-3', str(trim[1]),
-			 index,
-			 infile,
-			 samfile
-		  	]
-	
-	cmd = ' '.join(cmd)
-	return cmd
 	
 	
 	
@@ -94,7 +61,15 @@ def runOne(fastqFile, species, trim, statsDir, tempDir, samDir):
   
   
 	#run bowtie#
-	cmd = getBowtieCmd(trim, mapVars.indexDict[species], fastqFile, tempDir)
+	cmd =	mapVars.bowtieOptions +	\
+			[
+			'-5', str(trim[0]), 
+			'-3', str(trim[1]), 
+			mapVars.indexDict[species], 
+			fastqFile, 
+			tempDir + sampleName + '.sam'
+			]
+	cmd = ' '.join(cmd)
 	runCommand(cmd, outfile=statFile)
 	
 	
@@ -149,3 +124,5 @@ def runOne(fastqFile, species, trim, statsDir, tempDir, samDir):
 
 
 
+
+	
