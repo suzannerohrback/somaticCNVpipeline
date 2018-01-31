@@ -49,5 +49,5 @@ def runAll(args):
 		
 	
 	
-	print('Pre-processing complete\n\n\n')
+	print('\nPre-processing complete\n\n\n')
 
