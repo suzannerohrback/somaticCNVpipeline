@@ -90,6 +90,32 @@ def mapArgs():
 
 
 
+###interpret arguments needed to perform counting of unique.sam files###
+def countArgs():
+	
+	parser = argparse.ArgumentParser(description='Count the reads per genomic bin from unique sam files')
+
+	#required arguments#
+	parser.add_argument('SamDirectory', 
+		help = 'The path to the folder that contains unique.sam files to be processed')
+	parser.add_argument('species', choices=['hg38', 'mm10'], 
+		help = 'The genome build of the species being assessed')
+	
+	#optional arguments#
+	parser.add_arugment('-o', '--output', metavar='/path/to/output_directory/', default=False,
+		help = 'A filepath to the desired directory where you would like bincount.txt files saved, if not in the same parent directory as the sam files')
+	parser.add_argument('-s', '--samples', metavar='/path/to/sample_list.txt', default=False,
+		help='Path to a text file containing a list of unique.sam files to be processed')
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 def fullParser(input):
 
 	functionDict =	{ 
@@ -97,12 +123,29 @@ def fullParser(input):
 			'--help': parentArgs,
 			'preprocess': preprocessArgs, 
 			'map': mapArgs,
+			'count': countArgs,
 			}
 
+	
+	
 	if input == []:
 		parentArgs()
+		
+	if input not in functionDict.keys():
+		return input[0], False
 
+	
+	
 	parser = functionDict[input[0]]()
 	args = parser.parse_args(input[1:])
 
 	return input[0], args
+
+
+
+
+
+
+
+
+
