@@ -56,7 +56,7 @@ def runOne(fastqFile, species, trim, statsDir, tempDir, samDir):
 	
 	sampleName = os.path.basename(fastqFile)[:-6]
   
-	statFile = statsDir + sampleName + '.mapstats.txt'
+	statFile = statsDir + sampleName + '.map.stats.txt'
 
   
   
