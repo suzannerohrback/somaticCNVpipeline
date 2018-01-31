@@ -23,6 +23,19 @@ if __name__ == '__main__':
 		import runmap
 		runmap.runAll(args)
 		
+	elif objective == 'count':
+		import runcount
+		runcount.runAll(args)
+		
+		
+		
+		
+	else:
+		errorText = '\n\n\nERROR: specified function ' + objective + ' is not supported at this time\n'
+		errorText += 'Please try somaticCNVcalling -h for enumeration of existing functions\n\n\n'
+		print(errorText)
+		raise SystemExit
+		
 		
 		
 		
