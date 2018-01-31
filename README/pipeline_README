@@ -63,6 +63,7 @@ Get a help message:
 General usage (see function README files for further information):
 	somaticCNVcalling preprocess [options]
 	somaticCNVcalling map [options]
+	somaticCNVcalling count [options]
 	
 	
 	
