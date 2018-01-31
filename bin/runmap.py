@@ -62,7 +62,7 @@ def runAll(args):
   
   
 	
-  	print('Mapping complete\n\n\n')
+  	print('\nMapping complete\n\n\n')
 
 	
 	
