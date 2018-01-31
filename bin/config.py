@@ -5,10 +5,10 @@ import inspect
 
 """
 This code can be modified to suit your specific environment
-  Such as file locations
-  Execultable locations
+  Such as reference file locations
+  Software locations
   
-PLEASE DO NOT SEND ME PULL REQUESTS INCLUDING ANY MODIFICATIONS YOU MAKE TO THIS FILE, I WILL REJECT THEM
+PLEASE DO NOT SEND ME PULL REQUESTS INCLUDING ANY MODIFICATIONS YOU MAKE TO THIS FILE, I WILL ALMOST CERTAINLY REJECT THEM
   If I have missed adding in a specific reference, let me know by message
 """
 
@@ -28,14 +28,49 @@ class Map:
 		
 		self.indexDict =	{
 							'hg38': self.currentdir + '/reference/hg38_index/hg38.index',
-							'mm10': self.currentdir + '/referencemm10_index/mm10.index',
+							'mm10': self.currentdir + '/reference/mm10_index/mm10.index',
 							}
 		
+		#THIS MUST BE VERSION 0.1.19 OR THE PIPELINE MAY NOT WORK#
 		self.samtools = '/home/k4zhang/softwares/samtools-0.1.19/samtools'
-###		self.bowtie = 
+		
+		self.bowtieOptions =	[
+								'bowtie',
+								 '-p 8',
+								 '-S', 
+								 '-t',
+								 '-n 2',
+								 '-e 70',
+								 '-m 1',
+								 '--phred33-quals',
+								 '--best',
+								 '--strata',
+								 '--chunkmbs 200',
+								]
 
 
 
+
+		
+		
+		
+		
+		
+		
+class Count:
+	
+	def __init__(self):
+		self.currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+		
+		self.refDict =	{
+						'hg38': self.currentdir + '/reference/hg38.varbin.fullRef.25k.bowtie.k36.txt',
+						'mm10': self.currentdir + '/reference/mm10.varbin.fullRef.25k.bowtie.k36.txt',
+						}
+		
+		self.chromDict =	{
+							'hg38': self.currentdir + '/reference/hg38.chrom.sizes.txt',
+							'mm10': self.currentdir + '/reference/mm10.chrom.sizes.txt',
+							}
 
 
 
