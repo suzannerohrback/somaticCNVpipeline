@@ -112,7 +112,7 @@ def zipping(filepath, gunzip=True):
 		fixname = filepath + '.gz'
 	
 	cmd = shlex.split(cmd)
-	p = sub.popen(cmd)
+	p = sub.Popen(cmd)
 	p.wait()
 	
 	return fixname
