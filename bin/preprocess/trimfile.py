@@ -79,7 +79,7 @@ def trimOne(IN, OUT, trim, length):
 	IN.close()
 	OUT.close()
 	
-	printText = '\t\tMaintained ' + str(includeCount) + ' of ' + str(lineCount) + ' fastq reads for ' + file.split('/')[-1] 
+	printText = '\t\tMaintained ' + str(includeCount) + ' of ' + str(lineCount/4) + ' fastq reads from ' + file.split('/')[-1] 
 	print(printText)
 	
 	
