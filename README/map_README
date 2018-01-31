@@ -62,4 +62,9 @@ Notes
 		running samtools
 	Has been written
 	
+	HOWEVER
+		I am having issues uploading the bowtie mapping indexes
+		So some of the code is referencing files that do not exist!!!!
+		Need to figure out how to upload larger files
+	
 	No testing has been performed yet, there are almost certainly a few minor bugs to fix
