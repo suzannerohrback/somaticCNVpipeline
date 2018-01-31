@@ -2,7 +2,7 @@
 import os
 import shutil
 
-from map import mapfunctions
+from map import mapfile
 import common
 
 
@@ -51,7 +51,7 @@ def runAll(args):
 	#run multiprocessing of all mapping commands#
 	argList = [(x, args.species, args.trim, statsDir, tempDir, samDir) for x in fastqFiles]
 		
-	common.daemon(mapfunctions.runOne, argList, 'map fastq files', cpuPerProcess=8)
+	common.daemon(mapfile.runOne, argList, 'map fastq files', cpuPerProcess=8)
 
 	
 
