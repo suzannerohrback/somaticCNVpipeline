@@ -58,7 +58,9 @@ Notes
 ========================================================================================================================
 1/31/2018
 	All code for
-		Currently nothing...
+		Determining reference file location
+		Counting reads in unique sam files
+		Running processes in parallel
 	Has been written
 	
 	Reference files have been uploaded for 
@@ -68,3 +70,9 @@ Notes
 		chromosome size files
 	
 	No testing has been performed yet, there are almost certainly bugs to fix
+
+(Thought, it would be nice to add a function to common that adds a specified file extension to a list of sample names...
+	that way the samples.txt file for specifying a subset of samples to run would not need to have file extensions
+	which necessitates having separate files for every type of file generated during processing)
+
+
