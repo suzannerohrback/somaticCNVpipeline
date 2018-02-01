@@ -52,11 +52,6 @@ def importSampleList(infile):
 
 
 
-
-
-
-
-
 def getSampleList(folder, sampleArg, extension):
 	#to process all samples in the input folder#
 	fileList = [ x for x in os.listdir(folder) if extension in x.split('.') ]
