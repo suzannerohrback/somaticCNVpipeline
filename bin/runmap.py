@@ -34,28 +34,18 @@ def runAll(args):
 	tempDir = args.FastqDirectory + 'Temp/'
 	statsDir = args.FastqDirectory + 'MapStats/'
 	for i in [samDir, tempDir, statsDir]:
-		common.makeDir(i)
+		common.makeDir(i)		
 
-		
-
-	if not args.samples:
-		fastqFiles = [ x for x in os.listdir(args.FastqDirectory) if 'fastq' in x.split('.')[-2:] ]
-	else:
-		fastqFiles = common.importSampleList(args.samples)		
-	fastqFiles = [args.FastqDirectory + x for x in fastqFiles]	
+	fastqFiles = common.getSampleList(args.FastqDirectory, args.samples, 'fastq')
 	
 	
-	
-  
 
 	#run multiprocessing of all mapping commands#
 	argList = [(x, args.species, args.trim, statsDir, tempDir, samDir) for x in fastqFiles]
 		
 	common.daemon(mapfile.runOne, argList, 'map fastq files', cpuPerProcess=8)
 
-	
 
-	
 	
 	#remove all temporary files#
 	shutil.rmtree(tempDir[:-1])
