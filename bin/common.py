@@ -45,13 +45,35 @@ def importSampleList(infile):
 		errorText = '\nERROR: the specified sample name file does not exist, please fix\n\t' + infile + '\n'
 		print(errorText)
 		raise SystemExit
-	
-	if len(files) == 0:
-		errorText = '\nERROR: The sample name file does not contain any sample names, please fix\n'
-		print(errorText)
-		raise SystemExit
 		
 	return files
+
+
+
+
+
+
+
+
+
+
+def getSampleList(folder, sampleArg, extension):
+	#to process all samples in the input folder#
+	fileList = [ x for x in os.listdir(folder) if extension in x.split('.') ]
+
+	#to process a specific subset of samples#
+	if sampleArg:
+		sampleList = importSampleList(sampleArg)
+		fileList = [ x for x in fileList if any(y in x for y in sampleList) ]
+			
+		if len(sampleList) != len(fileList):
+			errorText = '\nERROR: ' + str(len(fileList)) + ' samples exist for processing, but '
+			errorText += str(len(sampleList)) + ' were specified in the sample list file, please fix any discrepancies\n'
+			print(errorText)
+			raise SystemExit
+
+	fileList = [folder + x for x in fileList]	
+	return fileList
 		
 		
 		
