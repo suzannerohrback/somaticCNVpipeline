@@ -47,10 +47,15 @@ Options:
  	-o/--output
 		A filepath to the directory where you would like bincount.txt files saved
 			(default = same directory as where the Sam folder is located)
+  	-x/--statsdir
+		A filepath to the directory where you would like mapping statistics files saved
+			(default = same directory as where the Fastq folder is located)
 	-s/--samples
-		A text file containing a list of unique.sam to run preprocessing on
+		A text file containing a list of samples to run preprocessing on
 		One file per line, do not include filepaths, but do include the file extension
- 
+ 			Also no need to include any sort of extension (.sam, .unique.sam.gz, _S5.unique.sam, etc)
+			The unique sample name is sufficient (ex dev036)
+
 
 
 ========================================================================================================================
@@ -71,8 +76,6 @@ Notes
 	
 	No testing has been performed yet, there are almost certainly bugs to fix
 
-(Thought, it would be nice to add a function to common that adds a specified file extension to a list of sample names...
-	that way the samples.txt file for specifying a subset of samples to run would not need to have file extensions
-	which necessitates having separate files for every type of file generated during processing)
+
 
 
