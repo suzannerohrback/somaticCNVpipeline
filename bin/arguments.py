@@ -52,7 +52,7 @@ def preprocessArgs():
 	parser.add_arugment('-r', '--remove', action='store_true'
 		help = 'Set this flag if you want to delete the full length fastq files')
 	parser.add_argument('-s', '--samples', metavar='/path/to/sample_list.txt', default=False,
-		help='Path to a text file containing a list of fastq files to be processed')
+		help='Path to a file containing a list of fastq files to be processed\n\tsample names only, no path or file extension needed')
 
 
 
@@ -80,7 +80,7 @@ def mapArgs():
 	parser.add_arugment('-o', '--output', metavar='/path/to/output_directory/', default=False,
 		help = 'A filepath to the desired directory where you would like sam files saved, if not in the same parent directory as the fastq files')
 	parser.add_argument('-s', '--samples', metavar='/path/to/sample_list.txt', default=False,
-		help='Path to a text file containing a list of fastq files to be processed')
+		help='Path to a file containing a list of fastq files to be processed\n\tsample names only, no path or file extension needed')
 	
 	
 
@@ -105,7 +105,7 @@ def countArgs():
 	parser.add_arugment('-o', '--output', metavar='/path/to/output_directory/', default=False,
 		help = 'A filepath to the desired directory where you would like bincount.txt files saved, if not in the same parent directory as the sam files')
 	parser.add_argument('-s', '--samples', metavar='/path/to/sample_list.txt', default=False,
-		help='Path to a text file containing a list of unique.sam files to be processed')
+		help='Path to a file containing a list of unique.sam files to be processed\n\tsample names only, no path or file extension needed')
 
 	
 	
