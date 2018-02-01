@@ -35,15 +35,9 @@ def runAll(args):
 	for i in [countDir, statsDir]:
 		common.makeDir(i)
 
+	samFiles = common.getSampleList(args.SamDirectory, args.samples, 'sam')
 		
-
-	if not args.samples:
-		samFiles = [ x for x in os.listdir(args.SamDirectory) if all(y in x.split('.') for y in ['unique', 'sam'])]
-	else:
-		samFiles = common.importSampleList(args.samples)		
-	samFiles = [args.SamDirectory + x for x in samFiles]	
-	
-	
+		
 	
 	#run multiprocessing of all mapping commands#	
 	argList = [(x, countDir, statsDir, args.species) for x in samFiles]
