@@ -13,6 +13,7 @@ Purpose
 ========================================================================================================================
 
 This code maps fastq files and removes PCR duplicates
+	Bowtie (1) is used for mapping and samtools (v0.1.19) for sam/bam manipulations
 Generates a unique.sam file for each sample which will be used in bin counting
 
 All bowtie-specific options, and the reference genome used are linked with the bin reference that is used in counting!
@@ -44,9 +45,14 @@ Options:
   	-o/--output
 		A filepath to the directory where you would like sam files saved
 			(default = same directory as where the Fastq folder is located)
+  	-x/--statsdir
+		A filepath to the directory where you would like mapping statistics files saved
+			(default = same directory as where the Fastq folder is located)
 	-s/--samples
-		A text file containing a list of fastq to run preprocessing on
+		A text file containing a list of fastqs to run preprocessing on
 		One fastq file per line, do not include filepaths
+			Also no need to include any sort of extension (.fastq, .fastq.gz, _S5.fastq, etc)
+			The unique sample name is sufficient (ex dev036)
 		This is useful for situations such as if you need to trim different files in different manners
 
 
