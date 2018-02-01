@@ -29,12 +29,7 @@ def runAll(args):
 	
 		
 	#get list of fastq files to process (depending on args.samples)
-	if not args.samples:
-		fastqFiles = [ x for x in os.listdir(args.FastqDirectory) if 'fastq' in x.split('.')[-2:] ]
-	else:
-		fastqFiles = common.importSampleList(args.samples)		
-	
-	fastqFiles = [args.FastqDirectory + x for x in fastqFiles]
+	fastqFiles = common.getSampleList(args.FastqDirectory, args.samples, 'fastq')
 	
 	
 	
