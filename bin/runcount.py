@@ -25,13 +25,14 @@ def runAll(args):
 	#set up environment#
 	args.SamDirectory = common.fixDirName(args.SamDirectory)
 	
-	if not args.output:
-		countDir = os.path.dirname(args.SamDirectory) + '/' + BinCounts + '/'
-	else:
+	countDir = os.path.dirname(args.SamDirectory[:-1]) + '/' + BinCounts + '/'
+	if args.output:
 		countDir = common.fixDirName(args.output)
 	
-	statsDir = args.SamDirectory + 'CountStats/'
-	
+	statsDir = os.path.dirname(args.SamDirectory[:-1]) + '/' + PipelineStats + '/'
+	if args.statdir:
+		statsDir = common.fixDirName(args.statdir)
+			
 	for i in [countDir, statsDir]:
 		common.makeDir(i)
 
