@@ -79,6 +79,8 @@ def mapArgs():
 		help = "Number of 5' and 3' bases to trim from fastq reads during mapping")
 	parser.add_arugment('-o', '--output', metavar='/path/to/output_directory/', default=False,
 		help = 'A filepath to the desired directory where you would like sam files saved, if not in the same parent directory as the fastq files')
+	parser.add_arugment('-x', '--statdir', metavar='/path/to/statistics_directory/', default=False,
+		help = 'A filepath to the desired directory where you would like mapping statistics saved, if not in the same parent directory as the fastq files')
 	parser.add_argument('-s', '--samples', metavar='/path/to/sample_list.txt', default=False,
 		help='Path to a file containing a list of fastq files to be processed\n\tsample names only, no path or file extension needed')
 	
@@ -104,6 +106,8 @@ def countArgs():
 	#optional arguments#
 	parser.add_arugment('-o', '--output', metavar='/path/to/output_directory/', default=False,
 		help = 'A filepath to the desired directory where you would like bincount.txt files saved, if not in the same parent directory as the sam files')
+	parser.add_arugment('-x', '--statdir', metavar='/path/to/statistics_directory/', default=False,
+		help = 'A filepath to the desired directory where you would like mapping statistics saved, if not in the same parent directory as the sam files')
 	parser.add_argument('-s', '--samples', metavar='/path/to/sample_list.txt', default=False,
 		help='Path to a file containing a list of unique.sam files to be processed\n\tsample names only, no path or file extension needed')
 
