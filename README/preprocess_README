@@ -43,7 +43,7 @@ Options:
 	-r/--remove
 		Delete the full length fastq files after trimming (default = transfer to a separate folder)
 	-s/--samples /path/to/file.txt
-		A text file containing a list of fastq to run preprocessing on
+		A text file containing a list of fastqs to run preprocessing on
 		One fastq file per line, do not include filepaths
 			Also no need to include any sort of extension (.fastq, .fastq.gz, _S5.fastq, etc)
 			The unique sample name is sufficient (ex dev036)
