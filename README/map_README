@@ -54,6 +54,7 @@ Options:
 			Also no need to include any sort of extension (.fastq, .fastq.gz, _S5.fastq, etc)
 			The unique sample name is sufficient (ex dev036)
 		This is useful for situations such as if you need to trim different files in different manners
+		(default = process all samples in the directory)
 
 
 
