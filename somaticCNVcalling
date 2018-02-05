@@ -27,7 +27,10 @@ if __name__ == '__main__':
 		import runcount
 		runcount.runAll(args)
 		
-		
+	elif objective == 'segment':
+		import runsegment
+		runsegment.runAll(args)
+				
 		
 		
 	else:
