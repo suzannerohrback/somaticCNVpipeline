@@ -1,0 +1,108 @@
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+SEGMENTING
+========================================================================================================================
+========================================================================================================================
+========================================================================================================================
+
+
+
+========================================================================================================================
+Purpose
+========================================================================================================================
+
+This code performs normalization and segmentation of the bincounts to identify [putative] CNVs
+Generates both a lowess.bincounts.txt file and a segments.txt file for each sample
+
+Normalization
+	GC-correction of each sample via lowess regression in 5% sliding windows
+	Normalization against an amplification method-specific single-cell reference
+		Generated automatically from the input data
+		Includes a correction for male/female sample effect on the X/Y chromosome
+		Requires at least 10 samples, otherwise only GC-correction is performed
+		IF ALL SAMPLES CONTAIN CONSTITUTIVE CNVs, THIS WILL ELIMINATE THEM
+			So it can be turned off
+	Normalization utilizes the statsmodels python module
+		The location of this package must be specified in the config.py file
+		
+Segmentation
+	Is performed by circular binary segmentation (CBS)
+		https://www.ncbi.nlm.nih.gov/pubmed/15475419
+	Is currently only implemented in Matlab, so you must have command line access to that software
+
+As for mapping and counting, all reference files and assumptions about data format are interconnected!!!
+	The bin boundaries (varbin) files were generated for 36 bp sequencing reads
+		While they don't change dramatically for different read lengths, the do NOT remain the same
+	The 25,000 bins which span the genome in these files are equally sized in terms of mapping rate, NOT number of bases
+		So splitting or merging them for different resolution will NOT give valid results
+	YOU PROCEED AT YOUR OWN RISK IF ANY OF THE REFERENCE FILES ARE ALTERED
+	However, all of these references were generated using the strategy outlined here:
+		https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5069701/
+		So it is possible to create your own references if needed
+		Though in this case I still do not guarantee the CNV filtering reference applied later will remain optimal
+
+	
+	
+========================================================================================================================
+Command Line
+========================================================================================================================
+
+Get a help message:
+	somaticCNVcalling segment -h
+	somaticCNVcalling segment --help
+	
+Options:
+	somaticCNVcalling segment [options] /path/to/bincounts.txt/files/ genome
+		Currently genome must be either hg38 or mm10
+
+ 	-o/--output
+		A filepath to the directory where you would like the lowess.bincounts.txt and segments.txt files saved
+			Each filetype will be saved in a separate directory
+			(default = same directory as where the Sam folder is located)
+	-i/--infofile
+		A filepath to a .txt file containing sample-specific information to inform correct normalization
+		This file must contain 
+			Unique sample name(s), amplification method(s), and number of cells collected for the sample
+		(default = assume all samples are from the same amplification method and generated from a single cell)
+	-c/--columns
+		The location of the columns to import from the infofile, if specified
+		Three numbers, zero-indexed
+		Order: name column, method column, cell number column
+		(default = 0 1 2)
+	-g/--gconly
+		Set this flag if you want normalization to only perform GC-correction on your samples
+		(default = perform GC and method normalization if at least 10 single cell samples are provided)
+	-n/--normalizeonly
+		Set this flag if you do not want CBS to be performed
+		Good for if you do not have Matlab
+		(default = perform both correction and CBS)
+ 	-s/--samples
+		A text file containing a list of samples to run preprocessing on
+		One file per line, do not include filepaths, but do include the file extension
+ 			Also no need to include any sort of extension (.sam, .unique.sam.gz, _S5.unique.sam, etc)
+			The unique sample name is sufficient (ex dev036)
+		(default = process all samples in the directory)
+
+
+
+========================================================================================================================
+Notes
+========================================================================================================================
+2/5/2018
+
+	All code for
+		...nothing yet...
+	Has been written
+	
+	Reference files were already uploaded for 
+		mm10 and hg38 
+		36 bp reads, 25000 bins
+		varbin files (both varbin.gc.content and varbin.fullRef)
+		chromosome size files
+	
+	No testing has been performed yet, there are almost certainly bugs to fix
+
+
+
+
