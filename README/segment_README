@@ -91,9 +91,16 @@ Notes
 ========================================================================================================================
 2/5/2018
 
-	All code for
-		...nothing yet...
+	Code for
+		Calling the function
+		Interpreting command line arguments
 	Has been written
+	
+	Outlined runsegmentation.py code
+		Still need to write
+	Still need to create code in /segment sub-package
+		One for normalize
+		One for CBS
 	
 	Reference files were already uploaded for 
 		mm10 and hg38 
