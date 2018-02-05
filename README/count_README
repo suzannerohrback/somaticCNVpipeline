@@ -55,6 +55,7 @@ Options:
 		One file per line, do not include filepaths, but do include the file extension
  			Also no need to include any sort of extension (.sam, .unique.sam.gz, _S5.unique.sam, etc)
 			The unique sample name is sufficient (ex dev036)
+		(default = process all samples in the directory)
 
 
 
