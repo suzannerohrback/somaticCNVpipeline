@@ -40,7 +40,7 @@ def runAll(args):
 		
 		
 	
-	#run multiprocessing of all mapping commands#	
+	#run multiprocessing of all bin counting commands#	
 	argList = [(x, countDir, statsDir, args.species) for x in samFiles]
 	common.daemon(countfile.runOne, argList, 'count sam files')
 	
