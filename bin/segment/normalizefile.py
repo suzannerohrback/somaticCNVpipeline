@@ -20,7 +20,7 @@ import config as cfg
 
 
 #Lowess regression to correct bin counts for gc-content bias#
-def runLowess(counts, gc, saveName):
+def runLowess(counts, gc):
 	counts = counts + 1
 	counts = counts / np.median(counts)
 	counts = np.log(counts)
@@ -31,8 +31,6 @@ def runLowess(counts, gc, saveName):
 	lowessData = np.exp(lowessData)
 	lowessData = np.log2(lowessData)
 	
-	np.savetxt(saveName, lowessData)
-
 	return lowessData
 
 
@@ -70,7 +68,7 @@ def adjustSexChroms(data, xLocs, yLocs, numSamples):
 
 
 #Make a bincount reference to use for normalizing single cell data#
-	#Sample must have at least 500,000 counted reads to be used
+	#There must be at least 10 samples with at least 500,000 counted reads to run
 def runMakeMethodRef(species, sampleList, methodName, lowessDir):
 	if len(sampleList) < 10:
 		return False
@@ -93,12 +91,28 @@ def runMakeMethodRef(species, sampleList, methodName, lowessDir):
 		mergeArray = mergeArray + data
 		sampleCount += 1
 	
+	if sampleCount < 10:
+		return False
+		
+	
+	
 	mergeArray, maleTest = adjustSexChroms(mergeArray, xLocs, yLocs, sampleCount)
 	
-	lowessData = runLowess(mergeArray, binArray['gc'], lowessDir + methodName + '.methodRef.lowess.txt')
+	lowessData = runLowess(mergeArray, binArray['gc'])
 	
 	if not maleTest:
 		lowessData[yLocs] = len(yLocs) * [0.]
+
+	np.savetxt(lowessDir + methodName + '.methodRef.lowess.txt', lowessData)
+	
+	
+	
+	printText = '\tAmplification method reference for ' + methodName + ' has been generated from ' + str(sampleCount) + ' samples '
+	if maleTest:
+		printText += 'which included at least one male\n'
+	else:
+		printText += 'with included no male samples\n'
+	print(printText)
 
 	return lowessData
 	
@@ -112,20 +126,19 @@ def runMakeMethodRef(species, sampleList, methodName, lowessDir):
 
 
 #Run normalization on a single bincount sample#
-def runNormalizeOne(species):
+def runNormalizeOne(species, infile, methodRef, outfile):
 	normVars = cfg.Segment()
 	
 	binArray = common.importInfoFile(normVars.binDict[species], [0, 2, 6], 'normref', skiprows=1)
 
-	return 0
-
-
-
-
-
-
-
-
+	data = np.loadtxt(infile, usecols=[3], dtype='int')
+	lowessData = runLowess(data, binArray['gc'])
+	
+	if methodRef:
+		lowessData = lowessData - methodRef
+		
+	np.savetxt(outfile, lowessData)
+	
 
 
 
