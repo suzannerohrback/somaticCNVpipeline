@@ -88,6 +88,9 @@ def importSampleInfo(infoFile, columns, useFunction):
 					'normalize': {'names': ('name', 'method', 'cells'), 'formats': ('S50', 'S50', 'int')},
 					}
 	
+	if not infoFile:
+		return functionDict[useFunction]
+	
 	data = np.loadtxt(infoFile, usecols=columns, dtype=functionDict[useFunction])
 	return data
 		
