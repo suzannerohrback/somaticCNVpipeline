@@ -83,7 +83,7 @@ def getSampleList(folder, sampleArg, extension):
 
 
 #Import information about samples from a reference .txt file#
-def importSampleInfoFile(infoFile, columns, useFunction):
+def importSampleInfo(infoFile, columns, useFunction):
 	functionDict =	{
 					'normalize': {'names': ('name', 'method', 'cells'), 'formats': ('S50', 'S50', 'int')},
 					}
