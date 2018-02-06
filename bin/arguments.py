@@ -143,7 +143,7 @@ def segmentArgs():
 	parser.add_arugment('-n', '--normalizeonly', action='store_true'
 		help = 'Set this flag if you do not want CBS to be performed')
 	parser.add_argument('-s', '--samples', metavar='/path/to/sample_list.txt', default=False,
-		help='Path to a file containing a list of unique.sam files to be processed\n\tsample names only, no path or file extension needed')
+		help='Path to a file containing a list of bincounts.txt files to be processed\n\tsample names only, no path or file extension needed')
 
 	
 	
