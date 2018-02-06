@@ -40,7 +40,10 @@ def importSampleList(infile):
 		files = []
 		with open(infile, 'r') as IN:
 			for x in IN:
-				files.append(x.rstrip())
+				if len(x.rstrip().split('\t')) > 1:
+					files.append(x.rstrip().split('\t')[0])
+				else:
+					files.append(x.rstrip())
 	else:
 		errorText = '\nERROR: the specified sample name file does not exist, please fix\n\t' + infile + '\n'
 		print(errorText)
