@@ -26,11 +26,11 @@ def runAll(args):
 	#set up environment#
 	args.FastqDirectory = common.fixDirName(args.FastqDirectory)
 	
-	samDir = os.path.dirname(args.FastqDirectory[:-1]) + '/' + Sam + '/'
+	samDir = os.path.dirname(args.FastqDirectory[:-1]) + '/Sam/'
 	if args.output:
 		samDir = common.fixDirName(args.output)
 	
-	statsDir = os.path.dirname(args.FastqDirectory[:-1]) + '/' + PipelineStats + '/'
+	statsDir = os.path.dirname(args.FastqDirectory[:-1]) + '/PipelineStats/'
 	if args.statdir:
 		statsDir = common.fixDirName(args.statdir)
 
