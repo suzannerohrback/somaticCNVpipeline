@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import os
+import numpy as np
 import multiprocessing as mp
 import subprocessing as sub
 import shlex
@@ -12,6 +13,7 @@ import shlex
 
 
 
+#Make sure a directory path contains a trailing /#
 def fixDirName(dirpath):
 	if dirpath[-1] != '/':
 		dirpath += '/'
@@ -21,6 +23,7 @@ def fixDirName(dirpath):
 
 
 
+#Check if a directory exists, make it if needed#
 def makeDir(dirpath):
 	if not os.path.exists(dirpath):
 		os.mkdir(dirpath)
@@ -35,6 +38,7 @@ def makeDir(dirpath):
 
 
 
+#Import sample names from a text file, if specifying a subset to process#
 def importSampleList(infile):
 	if os.path.exists(infile):
 		files = []
@@ -55,6 +59,7 @@ def importSampleList(infile):
 
 
 
+#Get a list of samples to run processing for a specific step of the pipeline on#
 def getSampleList(folder, sampleArg, extension):
 	#to process all samples in the input folder#
 	fileList = [ x for x in os.listdir(folder) if extension in x.split('.') ]
@@ -72,16 +77,29 @@ def getSampleList(folder, sampleArg, extension):
 
 	fileList = [folder + x for x in fileList]	
 	return fileList
+
+
+
+
+
+#Import information about samples from a reference .txt file#
+def importSampleInfoFile(infoFile, columns, useFunction):
+	functionDict =	{
+					'normalize': {'names': ('name', 'method', 'cells'), 'formats': ('S50', 'S50', 'int')},
+					}
+	
+	data = np.loadtxt(infoFile, usecols=columns, dtype=functionDict[useFunction])
+	return data
 		
 		
+
+
+
+
+
+
+
 		
-
-
-
-
-
-
-
 ###daemon to run multiprocessing and parallelize tasks###
 def daemon(target, argList, name, cpuPerProcess=1):
 	print( str( '\t' + str(len(argList)) + ' processes to run to ' + name ) )
