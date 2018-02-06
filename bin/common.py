@@ -83,7 +83,7 @@ def getSampleList(folder, sampleArg, extension):
 
 
 #Import information about samples from a reference .txt file#
-def importSampleInfo(infoFile, columns, useFunction):
+def importInfoFile(infoFile, columns, useFunction, skiprows=0):
 	functionDict =	{
 					'normalize': {'names': ('name', 'method', 'cells'), 'formats': ('S50', 'S50', 'int')},
 					}
@@ -91,7 +91,11 @@ def importSampleInfo(infoFile, columns, useFunction):
 	if not infoFile:
 		return functionDict[useFunction]
 	
-	data = np.loadtxt(infoFile, usecols=columns, dtype=functionDict[useFunction])
+	if skiprows == 0:
+		data = np.loadtxt(infoFile, usecols=columns, dtype=functionDict[useFunction])
+	else:
+		data = np.loadtxt(infoFile, usecols=columns, dtype=functionDict[useFunction], skiprows=skiprows)
+
 	return data
 		
 		
