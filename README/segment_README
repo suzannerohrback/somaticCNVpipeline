@@ -117,7 +117,11 @@ Notes
 		Performing GC-correction and amplification method normalization
 	Has been written
 	
-	No testing has been performed yet, there are almost certainly bugs to fix
+	Still need to write CBS segmentation code
+	
+
+
+No testing has been performed yet, there are almost certainly bugs to fix
 
 
 
