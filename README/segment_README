@@ -13,7 +13,7 @@ Purpose
 ========================================================================================================================
 
 This code performs normalization and segmentation of the bincounts to identify [putative] CNVs
-Generates both a lowess.bincounts.txt file and a segments.txt file for each sample
+Generates both a lowess.txt file and a segments.txt file for each sample
 
 Normalization
 	GC-correction of each sample via lowess regression in 5% sliding windows
@@ -58,7 +58,7 @@ Options:
 		Currently genome must be either hg38 or mm10
 
  	-o/--output
-		A filepath to the directory where you would like the lowess.bincounts.txt and segments.txt files saved
+		A filepath to the directory where you would like the lowess.txt and segments.txt files saved
 			Each filetype will be saved in a separate directory
 			(default = same directory as where the Sam folder is located)
 	-i/--infofile
@@ -108,6 +108,14 @@ Notes
 		36 bp reads, 25000 bins
 		varbin files (both varbin.gc.content and varbin.fullRef)
 		chromosome size files
+	
+	
+	
+2/6/2018
+
+	Code for
+		Performing GC-correction and amplification method normalization
+	Has been written
 	
 	No testing has been performed yet, there are almost certainly bugs to fix
 
