@@ -25,6 +25,7 @@ Normalization
 			So it can be turned off
 	Normalization utilizes the statsmodels python module
 		The location of this package must be specified in the config.py file
+		If already in your $PYTHONPATH, these lines can be removed from your config.py file
 		
 Segmentation
 	Is performed by circular binary segmentation (CBS)
