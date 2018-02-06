@@ -133,7 +133,7 @@ def segmentArgs():
 	
 	#optional arguments#
 	parser.add_arugment('-o', '--output', metavar='/path/to/output_directory/', default=False,
-		help = 'A filepath to the desired directory where you would like lowess.bincounts.txt and segments.txt files saved, if not in the same parent directory as the bincounts files')
+		help = 'A filepath to the desired PARENT directory where you would like lowess.bincounts.txt and segments.txt files saved, if not in the same parent directory as the bincounts files')
 	parser.add_argument('-i', '--infofile', metavar='/path/to/sample.info.txt', default=False,
 		help='Path to a .txt file containing information about the samples to be processed (unique name, amplification method, number of cells)\n\tIf not all are identical')
 	parser.add_argument('-c', '--columns', metavar='X X X', default=[0, 1, 2], type=int, nargs=3,
