@@ -135,7 +135,7 @@ def segmentArgs():
 	parser.add_arugment('-o', '--output', metavar='/path/to/output_directory/', default=False,
 		help = 'A filepath to the desired PARENT directory where you would like lowess.bincounts.txt and segments.txt files saved, if not in the same parent directory as the bincounts files')
 	parser.add_argument('-i', '--infofile', metavar='/path/to/sample.info.txt', default=False,
-		help='Path to a .txt file containing information about the samples to be processed (unique name, amplification method, number of cells)\n\tIf not all are identical')
+		help='Path to a .txt file containing information about the samples to be processed (unique name, amplification method, number of cells)\n\tIf not all are identical. This file should not have a header row')
 	parser.add_argument('-c', '--columns', metavar='X X X', default=[0, 1, 2], type=int, nargs=3,
 		help='The zero-indexed locations of the columns to import from the infofile in the order: name, method, cell number (if not the first 3 columns)')
 	parser.add_arugment('-g', '--gconly', action='store_true'
