@@ -118,15 +118,12 @@ Notes
 	Has been written
 	
 	Still need to write CBS segmentation code
-	
 
-
-No testing has been performed yet, there are almost certainly bugs to fix
 
 
 2/7/2018
 	NOTE
-		I am making some adjustments to the matlab script so it is more readable in this package
+		I made some adjustments to the matlab script so it is more readable in this package
 		I think character vectors are indicated using single quotes, so the 'writeMatlabScript' code will create these variables for the 
 			lowess bin count file
 			segments output file
@@ -136,6 +133,19 @@ No testing has been performed yet, there are almost certainly bugs to fix
 			Then those variables are referenced throughout
 		IF THIS DOESN'T WORK
 			There is an older version that does which I can adapt from my TSCC scripts
+
+
+	Code for
+		Running CBS segmentation (in Matlab) has been written
+	Has been written
+
+	Also updated Semgent config to contain CBS-relevant information
+	Created reference file that has sample-independent Matlab/CBS code to improve readability
+
+
+
+
+No testing has been performed yet, there are almost certainly bugs to fix
 
 
 
