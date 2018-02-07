@@ -32,6 +32,8 @@ def runAll(args):
 	
 	lowessDir = os.path.dirname(args.CountDirectory[:-1]) + '/LowessBinCounts/'
 	segmentDir = os.path.dirname(args.CountDirectory[:-1]) + '/Segments/'
+	tempDir = os.path.dirname(args.CountDirectory[:-1]) + '/Temp/'
+
 	if args.output:
 		lowessDir = common.fixDirName(args.output) + 'LowessBinCounts/'
 		segmentDir = common.fixDirName(args.output) + 'Segments/'
@@ -39,6 +41,7 @@ def runAll(args):
 	common.makeDir(lowessDir)
 	if not args.normalizeonly:
 		common.makeDir(segmentDir)
+		common.makeDir(tempDir)
 
 	sampleFiles = common.getSampleList(args.CountDirectory, args.samples, 'bincounts')
 		
@@ -46,8 +49,7 @@ def runAll(args):
 		
 		
 		
-	#Run normalization#
-	#use multiprocessing daemon to run for each sample in parallel
+	#Use multiprocessing daemon to run normalization for all samples#
 	
 	info = common.importInfoFile(args.infofile, args.columns, 'normalize')
 	
@@ -96,15 +98,20 @@ def runAll(args):
 		
 		
 		
+	#Run segmentation#
+	#write matlab script
+	#run matlab script
+	#run for all samples in parallel with multiprocessing daemon
+	
+	
+	
+	
+	
 	printText = '\nTHIS FUNCTION IS NOT YET COMPLETE, SORRY\n'
 	print(printText)
 	raise SystemExit
 	
 
-	#Run segmentation#
-	#write matlab script
-	#run matlab script
-	#run for all samples in parallel with multiprocessing daemon
 	
 	print('\nSegmentation complete\n\n\n')
 
