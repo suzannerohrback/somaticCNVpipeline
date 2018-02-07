@@ -99,6 +99,14 @@ class Segment:
 		self.statsmodelsLocation = '/home/srohrbac/research/packages/statsmodels-0.6.1'
 		sys.path.append(self.statsmodelsLocation)
 		
+		self.chromNumDict = {
+							'hg38': '25',
+							'mm10': '21',
+							}
+		
+		self.matlabBase = self.currentdir + '/reference/matlab.base.txt'
+		self.CBSalpha = 0.01
+		
 		
 		
 		
