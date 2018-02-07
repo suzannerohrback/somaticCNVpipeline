@@ -1,0 +1,75 @@
+sampleData = importdata(binFile);
+ref = importdata(refFile);
+
+chromX = chromNum - 1;
+chromY = chromNum;
+
+chroms = zeros(length(ref.textdata), 1);
+
+
+
+for i = 1:length(ref.textdata)
+	chrom = textscan(ref.textdata{i},'%s %s','delimiter','r');
+	chromName = chrom{2}{1};
+	switch chromName
+		case 'X'
+			chroms(i) = chromX;
+		case 'Y'
+			chroms(i) = chromY;
+		otherwise
+			chroms(i) = str2double(chromName);
+	end
+end
+
+bins = ref.data(:, 2);
+logLowess = sampleData;
+clear ref sampleData
+
+
+
+
+
+cbsInput = [chroms, bins, logLowess];
+cbsOutput = cghcbs(cbsInput, 'ALPHA', alpha, 'PERMUTATIONS', 10000, 'STOPPINGRULE', false, 'SHOWPLOT', false);
+
+numOfSegments = 0;
+for i = 1:length(cbsOutput.SegmentData)
+	for j = 1:length(cbsOutput.SegmentData(1, i).Mean)
+		numOfSegments = numOfSegments + 1;
+	end
+end
+
+
+
+segments = zeros(length(numOfSegments), 3);
+k = 0;
+for i = 1:length(cbsOutput.SegmentData)
+	for j = 1:length(cbsOutput.SegmentData(1, i).Mean)
+		k = k + 1;
+		segments(k, 1) = cbsOutput.SegmentData(1, i).Start(j);
+		segments(k, 2) = cbsOutput.SegmentData(1, i).End(j);
+		segments(k, 3) = cbsOutput.SegmentData(1, i).Mean(j);
+	end
+end
+
+
+
+for i = 2:length(segments)
+	segments((i-1), 2) = segments(i, 1) - 1;
+end
+
+
+
+fopen([saveFile], 'w');
+for i = 1:length(segments)
+	fprintf(segFile,'%d\t',segments(i,1));
+	fprintf(segFile,'%d\t',segments(i,2));
+	fprintf(segFile,'%.15f\\n',segments(i,3));
+end
+
+
+
+
+
+quit
+
