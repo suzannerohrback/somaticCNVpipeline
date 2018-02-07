@@ -90,12 +90,7 @@ class Segment:
 						'hg38': self.currentdir + '/reference/hg38.varbin.fullRef.25k.bowtie.k36.txt',
 						'mm10': self.currentdir + '/reference/mm10.varbin.fullRef.25k.bowtie.k36.txt',
 						}
-		
-	#	self.chromDict =	{
-	#						'hg38': self.currentdir + '/reference/hg38.chrom.sizes.txt',
-	#						'mm10': self.currentdir + '/reference/mm10.chrom.sizes.txt',
-	#						}
-	
+			
 		self.statsmodelsLocation = '/home/srohrbac/research/packages/statsmodels-0.6.1'
 		sys.path.append(self.statsmodelsLocation)
 		
