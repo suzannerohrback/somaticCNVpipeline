@@ -30,14 +30,19 @@ if __name__ == '__main__':
 	elif objective == 'segment':
 		import runsegment
 		runsegment.runAll(args)
+		
+	elif objective == 'interpret':
+		import runinterpret
+		runinterpret.runAll(args)
 				
 		
 		
 	else:
 		errorText = '\n\n\nERROR: specified function ' + objective + ' is not supported at this time\n'
-		errorText += 'Please try somaticCNVcalling -h for enumeration of existing functions\n\n\n'
+		errorText += 'Calling somaticCNVcalling -h for enumeration of existing functions...\n'
 		print(errorText)
-		raise SystemExit
+		arguments.fullParser('-h')
+#		raise SystemExit
 		
 		
 		
