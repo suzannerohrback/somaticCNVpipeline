@@ -65,6 +65,7 @@ General usage (see function README files for further information):
 	somaticCNVcalling map [options]
 	somaticCNVcalling count [options]
 	somaticCNVcalling segment [options]
+	somaticCNVcalling interpret [options]
 	
 	
 	
