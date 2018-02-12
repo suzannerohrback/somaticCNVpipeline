@@ -35,7 +35,7 @@ Filter unreliable CNVs (FUnC)
 	Generates a list of reliable CNV calls for each sample
 	
 Compile CNV data
-	Downstream analysis is generally easier to implement with one data file containing information for all samples
+	Downstream analysis is generally easier to implement with one data file summarizing measurements for all samples
 		Rather than separate files for each sample
 	Generates several summary files
 		CellStats.txt
@@ -75,22 +75,61 @@ As for mapping, counting, and segmenting, all reference files and assumptions ab
 Command Line
 ========================================================================================================================
 
-########NEEDS TO BE WRITTEN
-
-
 Get a help message:
 	somaticCNVcalling interpret -h
 	somaticCNVcalling interpret --help
 	
 Options:
+	somaticCNVcalling interpret [options] /path/to/analysis/directory/ genome
+		Default assumptions about the analysis directory
+			Contains separate folders with 
+				.lowess.txt files
+				.segments.txt files
+				.bincount.stats.txt files
+			Is the location where output folders/files will be saved
+			However, these can be specified with optional arguments too
+		Currently genome must be either hg38 or mm10
 
+	-f/--nofilter
+		Set this flag if you do not want to perform FUnC filtering on CNV calls
+		(default = perform FUnC to remove unreliable CNV calls)
+	-i/--infofile
+		A filepath to a .txt file containing sample-specific information to inform processing
+		This file must contain 
+			Unique sample name(s), the number of cells collected for the sample, and the sample group
+		(default = assume all samples agenerated from a single cell and in the same group)
+	-c/--columns
+		The location of the columns to import from the infofile, if specified
+		Three numbers, zero-indexed
+		Order: name column, cell number column, group column
+		(default = 0 1 2)
+	-l/--lowess
+		A filepath to the directory where the .lowess.txt files are saved
+			(default = .../analysis directory/Lowess/)
+	-g/--segments
+		A filepath to the directory where the .segments.txt files are saved
+			(default = .../analysis directory/Segments/)	
+	-r/--countstats
+		A filepath to the directory where the .bincounts.stats.txt files are saved
+			(default = .../analysis directory/PipelineStats/)			
+ 	-s/--samples
+		A text file containing a list of samples to run processing on
+		One file per line, do not include filepaths, but do include the file extension
+ 			Also no need to include any sort of extension (.sam, .unique.sam.gz, _S5.unique.sam, etc)
+			The unique sample name is sufficient (ex dev036)
+		(default = process all samples you have every data file for)
 
-
+			
+			
 ========================================================================================================================
 Notes
 ========================================================================================================================
 
 2/9/18
 	I have begun outlining the code
+	
+2/12/18
+	Finished outlining the README file
+	Added all command line arguments to the arguments.py function
 
 No testing has been performed yet, there are almost certainly bugs to fix
