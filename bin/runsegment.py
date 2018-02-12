@@ -88,6 +88,7 @@ def runAll(args):
 	print('\nNormalization complete\n\n\n')
 	
 	if args.normalizeonly:
+		shutil.rmtree(tempDir[:-1])
 		return 0
 		
 		
