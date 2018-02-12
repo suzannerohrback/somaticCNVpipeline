@@ -28,7 +28,6 @@ def runAll(args):
 
 
 	#Set up environment#
-	#make folders, get list of sample names, etc
 	args.CountDirectory = common.fixDirName(args.CountDirectory)
 	
 	lowessDir = os.path.dirname(args.CountDirectory[:-1]) + '/LowessBinCounts/'
@@ -65,9 +64,6 @@ def runAll(args):
 	
 	
 	#Run normalization for all samples#
-	
-		
-		
 	methodDict = {x: False for x in np.unique(refArray['method'])}	
 	methodDict['NA'] = False
 	sampleNormMethodDict = {x['name']: 'NA' for x in methodDict}
@@ -85,13 +81,9 @@ def runAll(args):
 		
 		
 		
-		
-		
 	#run multiprocessing for gc (+ method) correction
 	normArgs = [(args.species, sampleDict[x], methodDict[sampleNormMethodDict[x]], lowessDir + x + '.lowess.txt') for x in sampleDict.keys()]
 	common.daemon(normalizefile.runNormalizeOne, normArgs, 'normalize bincount files')
-
-	
 	
 	print('\nNormalization complete\n\n\n')
 	
