@@ -133,7 +133,7 @@ def segmentArgs():
 	
 	#optional arguments#
 	parser.add_arugment('-o', '--output', metavar='/path/to/output_directory/', default=False,
-		help = 'A filepath to the desired PARENT directory where you would like lowess.bincounts.txt and segments.txt files saved, if not in the same parent directory as the bincounts files')
+		help = 'A filepath to the desired PARENT directory where you would like lowess.txt and segments.txt files saved, if not in the same parent directory as the bincounts files')
 	parser.add_argument('-i', '--infofile', metavar='/path/to/sample.info.txt', default=False,
 		help='Path to a .txt file containing information about the samples to be processed (unique name, amplification method, number of cells)\n\tIf not all are identical. This file should not have a header row')
 	parser.add_argument('-c', '--columns', metavar='X X X', default=[0, 1, 2], type=int, nargs=3,
@@ -157,41 +157,38 @@ def segmentArgs():
 ###interpret arguments needed to perform QC and CNV analysis of each single cell sample###
 def interpretArgs():
 	
-	parser = argparse.ArgumentParser(description='Assess sample quality, filter unreliable CNVs, and generate user-friends output')
+	parser = argparse.ArgumentParser(description='Assess sample quality, filter unreliable CNVs, and generate user-friendly output')
 
-	errorText = 'THIS FUNCTION IS NOT YET COMPLETE, PLEASE TRY AGAIN LATER\n\n\n'
-	print(errorText)
-	raise SystemExit
-	
-	
-	###########all these arguments need to be updated, I am outlining what they should be in the interpret_README right now
-	
 	#required arguments#
-	parser.add_argument('CountDirectory', 
-		help = 'The path to the folder that contains bincounts.txt files to be processed')
+	parser.add_argument('AnalysisDirectory', 
+		help = 'The path to the folder to save output files')
 	parser.add_argument('species', choices=['hg38', 'mm10'], 
 		help = 'The genome build of the species being assessed')
 	
 	#optional arguments#
-	parser.add_arugment('-o', '--output', metavar='/path/to/output_directory/', default=False,
-		help = 'A filepath to the desired PARENT directory where you would like lowess.bincounts.txt and segments.txt files saved, if not in the same parent directory as the bincounts files')
+	parser.add_arugment('-f', '--nofilter', action='store_true'
+		help = 'Set this flag if you do not want to perform FUnC filtering of low-quality CNV calls')
 	parser.add_argument('-i', '--infofile', metavar='/path/to/sample.info.txt', default=False,
-		help='Path to a .txt file containing information about the samples to be processed (unique name, amplification method, number of cells)\n\tIf not all are identical. This file should not have a header row')
+		help='Path to a .txt file containing information about the samples to be processed (unique name, number of cells, group)\n\tIf not all are identical. This file should not have a header row')
 	parser.add_argument('-c', '--columns', metavar='X X X', default=[0, 1, 2], type=int, nargs=3,
-		help='The zero-indexed locations of the columns to import from the infofile in the order: name, method, cell number (if not the first 3 columns)')
-	parser.add_arugment('-g', '--gconly', action='store_true'
-		help = 'Set this flag if you only want GC-correction to be performed during normalization')
-	parser.add_arugment('-n', '--normalizeonly', action='store_true'
-		help = 'Set this flag if you do not want CBS to be performed')
+		help='The zero-indexed locations of the columns to import from the infofile in the order: name, cell number, group (if not the first 3 columns)')
+	parser.add_arugment('-l', '--lowess', metavar='/path/to/lowess.txt/files/', default=False,
+		help = 'A filepath to the desired directory where all lowess.txt files are saved, if not AnalysisDirectory/Lowess/')
+	parser.add_arugment('-l', '--lowess', metavar='/path/to/lowess.txt/files/', default=False,
+		help = 'A filepath to the desired directory where all lowess.txt files are saved, if not AnalysisDirectory/Lowess/')
+	parser.add_arugment('-g', '--segments', metavar='/path/to/segmentsd.txt/files/', default=False,
+		help = 'A filepath to the desired directory where all segments.txt files are saved, if not AnalysisDirectory/Segments/')
+	parser.add_arugment('-r', '--countstats', metavar='/path/to/bincounts.stats.txt/files/', default=False,
+		help = 'A filepath to the desired directory where all bincounts.stats.txt files are saved, if not AnalysisDirectory/PipelineStats/')	
 	parser.add_argument('-s', '--samples', metavar='/path/to/sample_list.txt', default=False,
-		help='Path to a file containing a list of bincounts.txt files to be processed\n\tsample names only, no path or file extension needed')
+		help='Path to a file containing a list of sample names to be processed\n\tno path or file extension needed')
 
 	
 	
 	
 	
 	
-	
+
 	
 	
 	
