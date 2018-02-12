@@ -49,7 +49,7 @@ Options:
 		A filepath to the directory where you would like mapping statistics files saved
 			(default = same directory as where the Fastq folder is located)
 	-s/--samples
-		A text file containing a list of fastqs to run preprocessing on
+		A text file containing a list of fastqs to run processing on
 		One fastq file per line, do not include filepaths
 			Also no need to include any sort of extension (.fastq, .fastq.gz, _S5.fastq, etc)
 			The unique sample name is sufficient (ex dev036)
