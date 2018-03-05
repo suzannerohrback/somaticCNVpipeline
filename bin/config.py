@@ -101,6 +101,33 @@ class Segment:
 		
 		self.matlabBase = self.currentdir + '/reference/matlab.base.txt'
 		self.CBSalpha = 0.01
+
+
+
+
+
+
+		
+		
+		
+class Interpret:
+	
+	def __init__(self):
+		self.currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+		
+		self.binDict =	{
+						'hg38': self.currentdir + '/reference/hg38.varbin.fullRef.25k.bowtie.k36.txt',
+						'mm10': self.currentdir + '/reference/mm10.varbin.fullRef.25k.bowtie.k36.txt',
+						}
+
+		self.cutoffFile = self.currentdir + '/reference/CNVthresholdCutoffs.25k.bowtie.k36.txt'
+		
+		self.QCdict =	{
+						'MAPD': 0.40, 
+						'CS': 0.80, 
+						'Reads': 600000,
+						}
+		
 		
 		
 		
