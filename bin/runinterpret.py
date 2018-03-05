@@ -55,6 +55,7 @@ def runAll(args):
 	#get list of samples to process 
 		#will involve checking infofile (if present) and whether required input files exist
 	sampleFiles = common.getSampleList(folderDict['Segments'], args.samples, 'segments')
+	sampleNames = [x.split('.')[0] for x in sampleFiles]
 
 	info = common.importInfoFile(args.infofile, args.columns, 'interpret')
 
@@ -63,27 +64,43 @@ def runAll(args):
 	else:
 		thisDtype = info
 		refArray = np.array(
-			[ (basename(x)[:-13], 1, 'unk',) for x in sampleFiles],
+			[ (x, 1, 'unk',) for x in sampleNames],
 			dtype=thisDtype)
 		
 
 	
 	
+	
+	#QC assessment#
+	argList = [(x, args.species, folderDict['PipelineStats'], folderDict['Lowess'], folderDict['Segments'], QCdir) for x in sampleNames]
+	common.daemon(qcfile.runQCone, argList, 'assess sample quality')
+
+	analysisSamples = []
+	
+	mergeQCfile = QCdir + 'ALL_SAMPLES.QC.txt'
+	OUT = open(mergeQCfile, 'w')
+	OUT.write('Name\tReads\tMAPD\tCS\tPloidy\tGender\tPASS\n')
+	
+	for i in sampleNames:
+		IN = open(QCdir + i + '.qcTEMP.txt', 'r')
+		data = IN.readline()	
+		OUT.write(data)
+		
+		if data[-4:] == 'TRUE':
+			analysisSamples.append(i)
+		
+		IN.close()
+		os.remove(QCdir + i + '.qcTEMP.txt')
+		
+	OUT.close()
+	
+
+	
+	
+	
 	errorText = 'SORRY, THIS FUNCTION IS STILL BEING WRITTEN, TRY AGAIN LATER\n\n\n'
 	print(errorText)
 	raise SystemExit
-	
-	
-	
-	#QC assessment#
-	
-	#will be in bin/interpret/qcfile.py
-	#read number, MAPD calculation, determine gender, ploidy, CS calculation
-	#ploidy determination plots made here
-	#save summary file and get a list of high quality samples
-	
-	
-	
 	
 	
 	
