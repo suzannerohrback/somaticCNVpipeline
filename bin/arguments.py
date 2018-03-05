@@ -174,7 +174,7 @@ def interpretArgs():
 		help='The zero-indexed locations of the columns to import from the infofile in the order: name, cell number, group (if not the first 3 columns)')
 	parser.add_arugment('-l', '--lowess', metavar='/path/to/lowess.txt/files/', default=False,
 		help = 'A filepath to the desired directory where all lowess.txt files are saved, if not AnalysisDirectory/Lowess/')
-	parser.add_arugment('-g', '--segments', metavar='/path/to/segmentsd.txt/files/', default=False,
+	parser.add_arugment('-g', '--segments', metavar='/path/to/segments.txt/files/', default=False,
 		help = 'A filepath to the desired directory where all segments.txt files are saved, if not AnalysisDirectory/Segments/')
 	parser.add_arugment('-r', '--countstats', metavar='/path/to/bincounts.stats.txt/files/', default=False,
 		help = 'A filepath to the desired directory where all bincounts.stats.txt files are saved, if not AnalysisDirectory/PipelineStats/')	
