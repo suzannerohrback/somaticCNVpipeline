@@ -133,4 +133,10 @@ Notes
 	Added all command line arguments to the arguments.py function
 	Began setting up environment in interpret.py function
 
+3/5/18
+	Created Interpret class in config script
+	Set up for finding/creating folders and determining samples for analysis
+
 No testing has been performed yet, there are almost certainly bugs to fix
+
+
