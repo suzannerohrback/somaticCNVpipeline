@@ -136,6 +136,14 @@ Notes
 3/5/18
 	Created Interpret class in config script
 	Set up for finding/creating folders and determining samples for analysis
+	QC check code has been written and integrated into the function!
+	
+	Need to write a function importSegData in common which reads through segments.txt files, removes NaN values, and merges adjacent (identical CN and chrom) regions
+		can take 'ploidy' as an argument and return CN state values
+		can return either a condensed list of segments or an array of CNs for every bin
+		Check runQCone for current thoughts on input argument structure
+
+
 
 No testing has been performed yet, there are almost certainly bugs to fix
 
