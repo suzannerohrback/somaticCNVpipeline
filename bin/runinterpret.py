@@ -19,21 +19,26 @@ def runAll(args):
 	print('\t\tIF USING ANY REFERENCES OTHER THAN THOSE I PROVIDE I CANNOT GUARANTEE RESULT ACCURACY')
 	print('\n')
 
-	errorText = 'SORRY, THIS FUNCTION IS STILL BEING WRITTEN, TRY AGAIN LATER\n\n\n'
-	print(errorText)
-	raise SystemExit
+
 	
 	
 	
 	#Set up environment#
 	args.AnalysisDirectory = common.fixDirName(args.AnalysisDirectory)
 	
-	for i, j in zip([args.lowess, args.segments. args.countstats], 
-					['Lowess/', 'Segments/', 'PipelineStats/']):
-		if not i:
-			i = args.AnalysisDirectory + j
+	
+	
+	folderDict = {'Lowess': args.lowess, 
+		    'Segments': args.segments, 
+		    'PipelineStats': args.countstats}
+	
+	for i in list(folderDict.keys()):
+		if not folderDict[i]:
+			folderDict[i] = args.AnalysisDirectory + i + '/'
 		else:
-			i = common.fixDirName(i)
+			folderDict[i] = common.fixDirName(folderDict[i])
+	
+	
 	
 	QCdir = args.AnalysisDirectory + 'QC/'
 	CNVdir = args.AnalysisDirectory + 'CNVlists/'
@@ -42,15 +47,32 @@ def runAll(args):
 	ChromPlotDir = args.AnalysisDirectory + 'ChromosomeCopyNumberPlots/'
 	summaryPlotDir = args.AnalysisDirectory + 'CombinedSamplesPlots/'
 	
-	for i in [QCdir, CNVdir, summaryDir, CNplotDir, ChromPlotDir, summaryPlotDir]:
+	for i in [args.AnalysisDirectory, QCdir, CNVdir, summaryDir, CNplotDir, ChromPlotDir, summaryPlotDir]:
 		common.makeDir(i)
 	
 	
 	
 	#get list of samples to process 
 		#will involve checking infofile (if present) and whether required input files exist
+	sampleFiles = common.getSampleList(folderDict['Segments'], args.samples, 'segments')
 
+	info = common.importInfoFile(args.infofile, args.columns, 'interpret')
 
+	if args.infofile:
+		refArray = info
+	else:
+		thisDtype = info
+		refArray = np.array(
+			[ (basename(x)[:-13], 1, 'unk',) for x in sampleFiles],
+			dtype=thisDtype)
+		
+
+	
+	
+	errorText = 'SORRY, THIS FUNCTION IS STILL BEING WRITTEN, TRY AGAIN LATER\n\n\n'
+	print(errorText)
+	raise SystemExit
+	
 	
 	
 	#QC assessment#
