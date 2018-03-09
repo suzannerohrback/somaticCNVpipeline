@@ -73,6 +73,10 @@ Notes
 		I am having issues uploading the bowtie mapping indexes
 		So some of the code is referencing files that do not exist!!!!
 		Need to figure out how to upload larger files
+		
+3/8/2018
+	I was able to use git lfs to upload the mapping index files for bowtie
+	ALL REFERENCE FILES ARE PRESENT AND ALL CODE IS WRITTEN
 	
 	No testing has been performed yet, there are almost certainly a few minor bugs to fix
 
