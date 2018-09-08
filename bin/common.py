@@ -85,7 +85,7 @@ def getSampleList(folder, sampleArg, extension):
 def importInfoFile(infoFile, columns, useFunction, skiprows=0):
 	functionDict =	{
 					'normalize': {'names': ('name', 'method', 'cells'), 'formats': ('S50', 'S50', 'int')},
-					'normref': {'names': ('chrom', 'abspos', 'gc'), 'formats': ('S10', int', 'float')},
+					'normref': {'names': ('chrom', 'abspos', 'size', 'gc'), 'formats': ('S10', 'int', 'int', 'float')},
 					'interpret': {'names': ('name', 'cells', 'group'), 'formats': ('S50', 'int', 'S50')}
 					}
 	
@@ -103,11 +103,33 @@ def importInfoFile(infoFile, columns, useFunction, skiprows=0):
 
 
 
+#import segment data and remove any nonsense lines#
+def importSegData(sample, segDir, binArray):
+	segDtype1 = {'names': ('start', 'end', 'logCN'), 'formats': ('int', 'int', 'float')}
+	segDtype2 = {'names': ('chrom', 'start', 'end', 'logCN'), 'formats': ('S10', 'int', 'int', 'float')}
+	
+	chromDict = {x['abspos']: x['chrom'] for x in binArray}
+	binDict = {y['abspos']: x for x,y in enumerate(binArray)}
+																						
+	segData = np.loadtxt(segDir + sample + '.segments.txt', dtype=segDtype1)
+	segDataGood = segData[segData['end'] > segData['start']]
 
+	segDataFix = np.zeros(len(segDataGood), dtype=segDtype2)
+	segDataFix['chrom'] = [chromDict[x] for x in segDataGood['start']]
+	segDataFix['start'] = segDataGood['start']
+	segDataFix['end'] = segDataGood['end']
+	segDataFix['logCN'] = [x if x != np.inf else 0 for x in segDataGood['logCN']]
+	
+	segArray = np.zeros(len(binArray))
+	for i in segDataFix:
+		segArray[binDict[i['start']]:] = len(segArray[binDict[i['start']]:]) * [i['logCN']]
+	
+	return segDataFix, segArray
 
 
 
 		
+																		
 ###daemon to run multiprocessing and parallelize tasks###
 def daemon(target, argList, name, cpuPerProcess=1):
 	print( str( '\t' + str(len(argList)) + ' processes to run to ' + name ) )
