@@ -42,7 +42,6 @@ if __name__ == '__main__':
 		errorText += 'Calling somaticCNVcalling -h for enumeration of existing functions...\n'
 		print(errorText)
 		arguments.fullParser('-h')
-#		raise SystemExit
 		
 		
 		
