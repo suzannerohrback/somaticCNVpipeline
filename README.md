@@ -21,14 +21,13 @@ Our paper has not yet been published, so currently cite as a URL:
 ========================================================================================================================
 DISCLAIMER
 ========================================================================================================================
-Not all of the code in this repository will work on all systems "out of the box"
-  That is because one purpose of this repository is to support continuity within the Jerold Chun lab
-  Portions of the code that are most likely to require modification or independent creation include
+Not all of the code in this repository will work on all systems "out of the box".
+  That is because one purpose of this repository is to support continuity within the Jerold Chun lab.
+  Portions of the code that are most likely to require modification or independent creation include:
     Mapping
     Bin location reference
     Segmentation
-  There are multiple strategies for each of these actions, and it is beyond the scope of this repo to be universally compatible
-This document will aim to indicate which portions of the code are less universal 
+  There are multiple strategies for each of these actions, and it is beyond the scope of this repo to be universally compatible.
 
 
 
