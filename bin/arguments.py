@@ -157,7 +157,7 @@ def segmentArgs():
 ###interpret arguments needed to perform QC and CNV analysis of each single cell sample###
 def interpretArgs():
 	
-	parser = argparse.ArgumentParser(description='Assess sample quality, filter unreliable CNVs, and generate user-friendly output')
+	parser = argparse.ArgumentParser(description='Assess sample quality, filter unreliable CNVs, and generate user-friendly output files')
 
 	#required arguments#
 	parser.add_argument('AnalysisDirectory', 
