@@ -106,7 +106,7 @@ def importInfoFile(infoFile, columns, useFunction, skiprows=0):
 #import segment data and remove any nonsense lines#
 def importSegData(sample, segDir, binArray):
 	segDtype1 = {'names': ('start', 'end', 'logCN'), 'formats': ('int', 'int', 'float')}
-	segDtype2 = {'names': ('chrom', 'start', 'end', 'logCN'), 'formats': ('S10', 'int', 'int', 'float')}
+	segDtype2 = {'names': ('chrom', 'start', 'end', 'CN'), 'formats': ('S10', 'int', 'int', 'float')}
 	
 	chromDict = {x['abspos']: x['chrom'] for x in binArray}
 	binDict = {y['abspos']: x for x,y in enumerate(binArray)}
@@ -118,7 +118,7 @@ def importSegData(sample, segDir, binArray):
 	segDataFix['chrom'] = [chromDict[x] for x in segDataGood['start']]
 	segDataFix['start'] = segDataGood['start']
 	segDataFix['end'] = segDataGood['end']
-	segDataFix['logCN'] = [x if x != np.inf else 0 for x in segDataGood['logCN']]
+	segDataFix['CN'] = [2 ** x if x != np.inf else 2 ** 0 for x in segDataGood['logCN']]
 	
 	segArray = np.zeros(len(binArray))
 	for i in segDataFix:
