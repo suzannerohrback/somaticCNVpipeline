@@ -136,7 +136,7 @@ def getGender(data, chroms, ploidy):
 def runQCone(sample, species, statsDir, lowessDir, segmentDir, QCdir):
 	#import config info#
 	interpretVars = cfg.Interpret()
-	binArray = common.importInfoFile(interpretVars.binDict[species], [0, 2, 6], 'normref', skiprows=1)
+	binArray = common.importInfoFile(interpretVars.binDict[species], [0, 2, 4, 5], 'normref', skiprows=1)
 
 	
 	
@@ -151,9 +151,8 @@ def runQCone(sample, species, statsDir, lowessDir, segmentDir, QCdir):
 	
 	
 	#determine the optimal ploidy value and CS#
-	segData = common.importSegData(sample, segmentDir, binArray['chrom'], returnArray=True)
-		###THIS FUNCTION NEEDS TO BE WRITTEN###
-	CS, ploidy = getPloidy(segData)
+	segData, segArray = common.importSegData(sample, segmentDir, binArray)
+	CS, ploidy = getPloidy(segArray)
 		
 	
 	
