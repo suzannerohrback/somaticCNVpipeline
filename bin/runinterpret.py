@@ -76,6 +76,8 @@ def runAll(args):
 	common.daemon(qcfile.runQCone, argList, 'assess sample quality')
 
 	analysisSamples = []
+	ploidyDict = {}
+	genderDict = {}
 	
 	mergeQCfile = QCdir + 'ALL_SAMPLES.QC.txt'
 	OUT = open(mergeQCfile, 'w')
@@ -86,8 +88,11 @@ def runAll(args):
 		data = IN.readline()	
 		OUT.write(data)
 		
-		if data[-4:] == 'TRUE':
+		x = data.rstrip().split('\t')
+		if x[-1] == 'TRUE':
 			analysisSamples.append(i)
+			ploidyDict[i] = float(data[4])
+			genderDict[i] = data[-2]
 		
 		IN.close()
 		os.remove(QCdir + i + '.qcTEMP.txt')
@@ -98,20 +103,23 @@ def runAll(args):
 	
 	
 	
+	#CNV filtering#
+	
+	
+	#will be in bin/interpret/funcfile.py, files will be saved in CNVdir
+	#for high quality samples, read through the segments.txt files
+	#caclulate size and int dist of each call
+	#merge adjacent segments with the same CN on the same chrom
+	#if not args.nofiler run full FUnC, otherwise remove CNVs if < 3 bins
+	#for each file save a CNV location summary file
+	
 	errorText = 'SORRY, THIS FUNCTION IS STILL BEING WRITTEN, TRY AGAIN LATER\n\n\n'
 	print(errorText)
 	raise SystemExit
 	
 	
 	
-	#CNV filtering#
-	
-	#will be in bin/interpret/funcfile.py
-	#for high quality samples, read through the segments.txt files
-	#caclulate size and int dist of each call
-	#merge adjacent segments with the same CN on the same chrom
-	#if not args.nofiler run full FUnC, otherwise remove CNVs if < 3 bins
-	#for each file save a CNV location summary file
+
 	
 	
 	
