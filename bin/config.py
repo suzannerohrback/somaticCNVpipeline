@@ -9,8 +9,8 @@ This code can be modified to suit your specific environment
   Such as reference file locations
   Software locations
   
-PLEASE DO NOT SEND ME PULL REQUESTS INCLUDING ANY MODIFICATIONS YOU MAKE TO THIS FILE, I WILL ALMOST CERTAINLY REJECT THEM
-  If I have missed adding in a specific reference, let me know by message
+PLEASE DO NOT SEND ME PULL REQUESTS INCLUDING ANY MODIFICATIONS MADE TO THIS FILE, I WILL ALMOST CERTAINLY REJECT THEM
+  If I have missed adding in a specific reference, create an Issue
 """
 
 
