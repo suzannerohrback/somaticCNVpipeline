@@ -56,8 +56,15 @@ def mergeCNinitial(dataDict):
 
 
 def FUnC(dataDict, refArray, cutoffDict, gender):
-	#make dict of ref array so can pull out bin #...make sure to add final entry for "end"
+	#make dict of ref array so I can calculate out bin number
+	binDict = {x: y for x,y in enumerate(refArray['abspos'])}
+	binDict[len(refArray)] = refArray[-1]['abspos'] + refArray[-1]['size']
+	
 	#for each entry, calc bin size, compare to cutoffDict
+	for i in dataDict:
+		normalCN = getNormalCN(i['chrom'], gender)
+		###I AM HERE###
+	
 	#if passes, keep CN, if not, convert to euploid (TAKE GENDER INTO ACCOUNT)
 	#return dict
 	
