@@ -14,9 +14,9 @@ Purpose
 
 This code 
 	Performs QC assessment of each sample
-	Filters low quality CNV calls
+	Runs FUnC to filter low quality CNV calls
 	Compiles CNV data from all samples into several files
-	Generates several plots
+	Generates several plots of the output
 
 QC assessment
 	Metrics
@@ -56,6 +56,7 @@ Generate plots
 	For all samples (can be sub-organized by sample groups)
 		Heatmap of CNV locations
 		Plot of genomic locus CNV frequency 
+		THESE ARE NOT YET IMPLEMENTED
 
 
 
@@ -143,6 +144,8 @@ Notes
 		can return either a condensed list of segments or an array of CNs for every bin
 		Check runQCone for current thoughts on input argument structure
 
+9/8/18
+	Began writing FUnC implementation
 
 
 No testing has been performed yet, there are almost certainly bugs to fix
