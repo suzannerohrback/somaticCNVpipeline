@@ -27,7 +27,6 @@ def fixDirName(dirpath):
 def makeDir(dirpath):
 	if not os.path.exists(dirpath):
 		os.mkdir(dirpath)
-	return 0
 
 
 
