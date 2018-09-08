@@ -85,6 +85,8 @@ def getPloidy(segData):
 
 
 
+
+
 def getGender(data, chroms, ploidy):
 	binCN = 2 ** data * ploidy
 	
