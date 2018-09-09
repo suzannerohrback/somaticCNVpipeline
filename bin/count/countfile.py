@@ -70,7 +70,7 @@ def fileToArray(inputFile, skipFirst):
 
 
 def countBins(samFile, countFile, statFile, sizeRef, binRef):
-	if samFile[-2:] = 'gz':
+	if samFile[-2:] == 'gz':
 		INFILE = gzip.open(samFile, "rb")
 	else:
 		INFILE = open(samFile, "r")
