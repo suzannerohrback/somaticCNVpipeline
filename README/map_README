@@ -91,5 +91,7 @@ Notes
 		Activation of the --samples option to run on a reduced set of fastq files
 		Activation of the --trim option
 	
+		Should probably also make the path to samtools more obvious that it needs user-specific updating, or make it a variable
+	
 
 
