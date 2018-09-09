@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import gzip
 import numpy as np
+import sys, os, inspect
 
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
