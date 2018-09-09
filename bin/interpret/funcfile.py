@@ -61,23 +61,83 @@ def FUnC(dataDict, refArray, cutoffDict, gender):
 	binDict[len(refArray)] = refArray[-1]['abspos'] + refArray[-1]['size']
 	
 	#for each entry, calc bin size, compare to cutoffDict
-	for i in dataDict:
-		normalCN = getNormalCN(i['chrom'], gender)
-		###I AM HERE###
+	for i in range(len(dataDict)):
+		normalCN = getNormalCN(dataDict[i]['chrom'], gender)
+		thisSize = bindDict[dataDict[i]['abspos'] + dataDict['abspos']['size']] - binDict[dataDict[i]['abspos']]
+		
+		if np.round(i['CN']) == normalCN:
+			dataDict[i]['pass'] = 'eup'
+		elif abs(np.round(dataDict[i]['CN']) - dataDict[i]['CN']) <= cutoffDict[thisSize]:
+			dataDict[i]['pass'] = 'cnv'
+		else:
+			dataDict[i]['pass'] = 'no'
+			
+	return dataDict
+
+
+
+
+
+def mergeCNfinal(dataDict, numBins, refArray, gender, outDir, sample):
+	#make dict of ref array so I can calculate out bin number
+	binDict = {x: y for x,y in enumerate(refArray['abspos'])}
+	binDict[len(refArray)] = refArray[-1]['abspos'] + refArray[-1]['size']
 	
-	#if passes, keep CN, if not, convert to euploid (TAKE GENDER INTO ACCOUNT)
-	#return dict
+	cnvList = []
 	
-	return 0
+	#go through every segment call
+	for i in range(len(dataDict)):
+		if dataDict['i']['chrom'] == 'chrY':
+			break		
+		normalCN = getNormalCN(dataDict[i]['chrom'], gender)
+			
+		#if CNV passes, check if it should be merged with previous segment
+		if dataDict[i]['pass'] == 'cnv':
+			if i == 0:
+				cnvList.append(dataDict[i])
+			elif np.round(dataDict[i]['CN']) == np.round(dataDict[i-1]['CN']) and dataDict[i]['chrom'] == dataDict[i-1]['chrom']:
+				cnvList[-1] = {'chrom': dataDict[i]['chrom'],
+							  'start': cnvList[-1]['start'],
+							  'end': dataDict[i]['end'],
+							  'cn': np.round(np.mean([dataDict[i]['CN'], dataDict[i-1]['CN']])),
+							  'pass': 'cnv'}
+			else:
+				cnvList.append(dataDict[i])
+				
+		#if a CNV doesn't pass
+		elif dataDict[i]['pass'] == 'no':
+			#if less than 25 bins...and 2 surrounding semgets on same chrom with same CN that pass, merge w/ them
+			if (binDict[dataDict[i]['abspos'] + dataDict[i]['size']] - binDict[dataDict[i]['abspos']] <= 25 and
+			   ((i == 0 or np.round(binDict[i-1]['CN']) == np.round(bindDict[i]['CN'])) and binDict[i-1]['chrom']) == np.round(bindDict[i]['chrom'])) and
+			   (np.round(binDict[i+1]['CN']) == np.round(bindDict[i]['CN'])) and binDict[i+1]['chrom']) == np.round(bindDict[i]['chrom']) and
+			   ((i == 0 or binDict[i-1]['pass'] == 'cnv') and binDict[i+1]['pass'] == 'cnv')
+			):
+				cnvList[-1] = {'chrom': dataDict[i]['chrom'],
+							  'start': cnvList[-1]['start'],
+							  'end': dataDict[i]['end'],
+							  'cn': np.round(np.mean([dataDict[i]['CN'], dataDict[i-1]['CN']])),
+							  'pass': 'cnv'}
+				
+			else:
+				
+			
+			#in any other situation (more than 25 bins, euploid call, lack of concordance), convert to euploid
+			else:
+				continue
 
-
-
-
-
-def mergeCNfinal():
-	#merging
-	#convert to np array at the end (condensed format)
-	return 0
+	outfile = outDir + sample + 'CNVlist.txt'
+	OUT = open(outfile, 'w')
+	OUT.write('Chromosome\tStart\tEnd\tCopyNumber\n')
+	for i in cnvList:
+		OUT.write(i['chrom'])
+		OUT.write('\t')
+		OUT.write(str(refArray[[i['abspos']]]['chrStart']))
+		OUT.write('\t')
+		OUT.write(str(refArray[i]['abspos']['chrStart'] + refArray[i]['size'] - 1))
+		OUT.write('\t')
+		OUT.write(str(np.round(i['CN'])))
+		OUT.write('\n')
+	OUT.close
 
 
 
@@ -87,7 +147,7 @@ def runFUNCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	
 	#import config info#
 	interpretVars = cfg.Interpret()
-	binArray = common.importInfoFile(interpretVars.binDict[species], [0, 2, 4, 5], 'normref', skiprows=1)
+	binArray = common.importInfoFile(interpretVars.binDict[species], [0, 1, 2, 4, 5], 'normref', skiprows=1)
 	cutoffArray = np.loadtxt(interpretVars.cutoffFile, skiprows=1, dtype={'names': ('bins', 'intD'), formats: ('int', 'float')})
 	cutoffDict = {x['bins']: x['intD'] for x in cutoffArray}
 	
@@ -100,14 +160,10 @@ def runFUNCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	mergeDataDict = mergeCNinitial(dataDict)
 	
 	#run FUnC#
+	funcDataDict = FUnC(mergeDataDict, binArray, cutoffDict, gender)
 	
-	
-	#second merge#
-	
-	
-	#write output file#
-	
-	
+	#second merge and write output file#
+	mergeCNfinal(funcDataDict, len(binArray), binArray, gender, CNVdir, sample)
 	
 	printText = '\t\tFinished performing FUnC on ' + sample
 	print(printText)
