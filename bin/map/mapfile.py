@@ -70,6 +70,7 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 			]
 	cmd = ' '.join(cmd)	
 	runCommand(cmd, outfile=statFile, overwrite=True)
+	print 'mapping done\n'
 	
 	
 	
@@ -81,20 +82,20 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 			]
 	cmd = ' '.join(cmd)
 	runCommand(cmd)
+	print 'sam converted to bam\n'
 	
 
 	
 	#sort bam#
 	cmd =	[
 			mapVars.samtools, 'sort', 
-		#	'-T', tempDir + sampleName + '.sorted',
-		#	'-o', tempDir + sampleName + '.sorted.bam',
 		 	tempDir + sampleName + '.bam', 
 			tempDir + sampleName + '.sorted'
 			]
 	
 	cmd = ' '.join(cmd)
 	runCommand(cmd)
+	print 'bam sorted\n'
 	
 	
 	
@@ -106,7 +107,7 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 			]
 	cmd = ' '.join(cmd)
 	runCommand(cmd, outfile=statFile)
-
+	print 'duplicates removed\n'
 	
 	
 	#bam to sam#
@@ -117,6 +118,7 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 			]
 	cmd = ' '.join(cmd)
 	runCommand(cmd)
+	print 'bam converted to sam\n'
 
 
 	
