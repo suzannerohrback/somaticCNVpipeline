@@ -89,7 +89,7 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 	#sort bam#
 	cmd =	[
 			mapVars.samtools, 'sort', 
-			'-T', tempDir + sampleName + '.sorted',
+		#	'-T', tempDir + sampleName + '.sorted',
 			'-o', tempDir + sampleName + '.sorted.bam',
 		 	tempDir + sampleName + '.bam'
 			]
