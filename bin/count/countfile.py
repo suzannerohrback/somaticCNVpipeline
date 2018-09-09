@@ -184,7 +184,7 @@ def runOne(samFile, countDir, statsDir, species):
 	#get environment prepared#
 	countVars = cfg.Count()
 
-	if samFile[-2:] = 'gz':
+	if samFile[-2:] == 'gz':
 		sampleName = os.path.basename(samFile)[:-13]
 	else:
 		sampleName = os.path.basename(samFile)[:-11]
