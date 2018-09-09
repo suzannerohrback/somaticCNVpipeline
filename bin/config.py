@@ -95,7 +95,7 @@ class Segment:
 		sys.path.append(self.statsmodelsLocation)
 		
 		self.chromNumDict = {
-							'hg38': '25',
+							'hg38': '24',
 							'mm10': '21',
 							}
 		
