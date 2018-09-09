@@ -104,27 +104,25 @@ def runAll(args):
 	
 	
 	#CNV filtering#
+	#sample, species, segmentDir, CNVdir, ploidy, gender
+	argList = [(x, args.species, folderDict['Segments'], CNVdir, ploidyDict[x], genderDict[x]) for x in sampleNames]
+	common.daemon(funcfile.runFUNCone, argList, ' remove unreliable CNV calls')
 	
 	
-	#will be in bin/interpret/funcfile.py, files will be saved in CNVdir
-	#for high quality samples, read through the segments.txt files
-	#caclulate size and int dist of each call
-	#merge adjacent segments with the same CN on the same chrom
-	#if not args.nofiler run full FUnC, otherwise remove CNVs if < 3 bins
-	#for each file save a CNV location summary file
+	
+	
+	
 	
 	errorText = 'SORRY, THIS FUNCTION IS STILL BEING WRITTEN, TRY AGAIN LATER\n\n\n'
 	print(errorText)
 	raise SystemExit
 	
-	
-	
 
 	
 	
 	
-	
 	#CNV analysis#
+
 	
 	#will be in bin/interpret/analyzefiles.py
 	#make CellStats, CNVstats, ChromosomeStats summary files
