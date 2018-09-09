@@ -197,6 +197,7 @@ def interpretArgs():
 def fullParser(input):
 
 	print input
+	print list(input)
 	
 	functionDict =	{ 
 			'-h': parentArgs,
@@ -213,7 +214,7 @@ def fullParser(input):
 	if input == []:
 		parentArgs()
 		
-	if input not in functionDict.keys():
+	if input[0] not in functionDict.keys():
 		return input[0], False
 
 	
