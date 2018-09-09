@@ -37,13 +37,13 @@ def runAll(args):
 	
 	
 	#use the daemon to and preprocessing code to trim all fastq files with parallel processing
+	
+	argList = [(x, args.trim5, args.length,) for x in fastqFiles]
 		
 	if args.remove:
-		argList = [(x, args.trim5, args.length, remove=True,) for x in fastqFiles]
 		kwargList = [{'remove': True} for x in fastqFiles]
 		common.daemon(trimfile.preprocessOne, argList, 'trim sequencing reads to desired length', cpuPerProcess=1, kwargs=kwargList)
 	else:
-		argList = [(x, args.trim5, args.length,) for x in fastqFiles]
 		common.daemon(trimfile.preprocessOne, argList, 'trim sequencing reads to desired length', cpuPerProcess=1)
 		
 	
