@@ -4,12 +4,12 @@ ref = importdata(refFile);
 chromX = chromNum - 1;
 chromY = chromNum;
 
-chroms = zeros(length(ref.textdata), 1);
+chroms = zeros(length(ref.textdata)-1, 1);
 
 
 
-for i = 1:length(ref.textdata)
-	chrom = textscan(ref.textdata{i},'%s %s','delimiter','r');
+for i = 1:length(ref.textdata)-1
+	chrom = textscan(ref.textdata{i+1},'%s %s','delimiter','r');
 	chromName = chrom{2}{1};
 	switch chromName
 		case 'X'
@@ -22,7 +22,7 @@ for i = 1:length(ref.textdata)
 end
 
 bins = ref.data(:, 2);
-logLowess = sampleData;
+logLowess = sampleData.data(:,4);
 clear ref sampleData
 
 
@@ -60,11 +60,11 @@ end
 
 
 
-fopen([saveFile], 'w');
+segFile = fopen([saveFile], 'w');
 for i = 1:length(segments)
 	fprintf(segFile,'%d\t',segments(i,1));
 	fprintf(segFile,'%d\t',segments(i,2));
-	fprintf(segFile,'%.15f\\n',segments(i,3));
+	fprintf(segFile,'%.15f\n',segments(i,3));
 end
 
 
