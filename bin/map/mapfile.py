@@ -36,7 +36,6 @@ def runCommand(cmd, outfile=False):
 		
 	p.wait()
 	
-	return 0
 
 
 
@@ -70,6 +69,9 @@ def runOne(fastqFile, species, trim, statsDir, tempDir, samDir):
 			tempDir + sampleName + '.sam'
 			]
 	cmd = ' '.join(cmd)
+	print cmd
+	raise SystemExit
+	
 	runCommand(cmd, outfile=statFile)
 	
 	
