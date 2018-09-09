@@ -76,8 +76,10 @@ def mapArgs():
 	#required arguments#
 	parser.add_argument('FastqDirectory', 
 		help = 'The path to the folder that contains fastq files to be processed')
-	parser.add_argument('species', choices=['hg38', 'mm10'], 
-		help = 'The genome build of the species being assessed')
+	parser.add_argument('MapIndex', 
+		help='The path to the bowtie (v1) mapping references, as you would input if running bowtie directly')
+#	parser.add_argument('species', choices=['hg38', 'mm10'], 
+#		help = 'The genome build of the species being assessed')
 	
 	#optional arguments#
 	parser.add_argument('-t', '--trim', metavar='X', nargs=2, type=int, default=[0, 0],
