@@ -94,9 +94,7 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 			]
 	
 	cmd = ' '.join(cmd)
-	print cmd
-	runCommand(cmd)
-	raise SystemExit
+#	runCommand(cmd)
 	
 	
 	
