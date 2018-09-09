@@ -25,15 +25,11 @@ def runAll(args):
 	args.FastqDirectory = common.fixDirName(args.FastqDirectory)
 	if not args.remove:
 		common.makeDir(args.FastqDirectory + '/FullLength/')
-
-	print args.FastqDirectory
 	
 		
 	#get list of fastq files to process (depending on args.samples)
 	fastqFiles = common.getSampleList(args.FastqDirectory, args.samples, 'fastq')
-	
-	print fastqFiles
-	raise SystemExit
+		
 	
 	
 	#use the daemon to and preprocessing code to trim all fastq files with parallel processing
