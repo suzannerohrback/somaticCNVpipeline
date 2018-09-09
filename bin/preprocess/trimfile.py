@@ -96,11 +96,11 @@ def preprocessOne(file, trim, length, remove=False):
 	trimOne(IN, OUT, trim, length)
 	
 	#remove or move full length fastq#
-	if remove:
-		os.remove(file)
-	else:
-		newLoc = os.path.dirname(file) + '/FullLength/' + os.path.basename(file)
-		os.rename(file, newLoc)
+#	if remove:
+#		os.remove(file)
+#	else:
+#		newLoc = os.path.dirname(file) + '/FullLength/' + os.path.basename(file)
+#		os.rename(file, newLoc)
 	
 	
 	
