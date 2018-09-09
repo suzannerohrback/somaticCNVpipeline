@@ -20,11 +20,11 @@ import config as cfg
 	
 	
 	
-def runCommand(cmd, outfile=False):
+def runCommand(cmd, outfile=False, overwrite=False):
 	cmd = shlex.split(cmd)
 	
 	if outfile:
-		if os.path.exists(outfile):
+		if os.path.exists(outfile) and not overwrite:
 			stdout = open(outfile, 'a')
 			stdout.flush()
 		else:
@@ -69,7 +69,7 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 			tempDir + sampleName + '.sam'
 			]
 	cmd = ' '.join(cmd)	
-#	runCommand(cmd, outfile=statFile)
+	runCommand(cmd, outfile=statFile, overwrite=True)
 	
 	
 	
@@ -80,7 +80,7 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 		 	tempDir + sampleName + '.sam'
 			]
 	cmd = ' '.join(cmd)
-#	runCommand(cmd)
+	runCommand(cmd)
 	
 
 	
@@ -94,7 +94,7 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 			]
 	
 	cmd = ' '.join(cmd)
-#	runCommand(cmd)
+	runCommand(cmd)
 	
 	
 	
@@ -105,7 +105,6 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 			tempDir + sampleName + '.unique.bam'
 			]
 	cmd = ' '.join(cmd)
-	print cmd
 	runCommand(cmd, outfile=statFile)
 
 	
@@ -117,7 +116,6 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 		 	tempDir + sampleName + '.unique.bam'
 			]
 	cmd = ' '.join(cmd)
-	print cmd
 	runCommand(cmd)
 
 
