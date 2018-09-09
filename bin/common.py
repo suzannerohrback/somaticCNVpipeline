@@ -85,7 +85,7 @@ def getSampleList(folder, sampleArg, extension):
 def importInfoFile(infoFile, columns, useFunction, skiprows=0):
 	functionDict =	{
 					'normalize': {'names': ('name', 'method', 'cells'), 'formats': ('S50', 'S50', 'int')},
-					'normref': {'names': ('chrom', 'abspos', 'size', 'gc'), 'formats': ('S10', 'int', 'int', 'float')},
+					'normref': {'names': ('chrom', 'chrStart', 'abspos', 'size', 'gc'), 'formats': ('S10', 'int', 'int', 'int', 'float')},
 					'interpret': {'names': ('name', 'cells', 'group'), 'formats': ('S50', 'int', 'S50')}
 					}
 	
