@@ -145,8 +145,12 @@ Notes
 		Check runQCone for current thoughts on input argument structure
 
 9/8/18
-	Began writing FUnC implementation
-
+	Began and finished writing FUnC implementation
+	Re-wrote some of the merging code from my original scripts to reduce complexity
+		Keep an eye on performance while debugging
+	Added function to make cell CN profile plot in analyzefiles.py
+	
+	BARE MINIMUM FOR PAER RELEASE IS UPLOADED, READY TO BEGIN DEBUGGING ALL SCRIPTS
 
 No testing has been performed yet, there are almost certainly bugs to fix
 
