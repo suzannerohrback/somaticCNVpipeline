@@ -1,5 +1,7 @@
 #!/usr/bin/python
 import sys
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+sys.path.insert(0,currentdir + '/bin')
 
 import arguments
 
