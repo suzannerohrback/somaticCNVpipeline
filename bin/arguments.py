@@ -138,7 +138,7 @@ def segmentArgs():
 		help='Path to a .txt file containing information about the samples to be processed (unique name, amplification method, number of cells)\n\tIf not all are identical. This file should not have a header row')
 	parser.add_argument('-c', '--columns', metavar='X X X', default=[0, 1, 2], type=int, nargs=3,
 		help='The zero-indexed locations of the columns to import from the infofile in the order: name, method, cell number (if not the first 3 columns)')
-	parser.add_arugment('-g', '--gconly', action='store_true'
+	parser.add_arugment('-g', '--gconly', action='store_true', 
 		help = 'Set this flag if you only want GC-correction to be performed during normalization')
 	parser.add_arugment('-n', '--normalizeonly', action='store_true'
 		help = 'Set this flag if you do not want CBS to be performed')
@@ -166,7 +166,7 @@ def interpretArgs():
 		help = 'The genome build of the species being assessed')
 	
 	#optional arguments#
-	parser.add_arugment('-f', '--nofilter', action='store_true'
+	parser.add_arugment('-f', '--nofilter', action='store_true', 
 		help = 'Set this flag if you do not want to perform FUnC filtering of low-quality CNV calls')
 	parser.add_argument('-i', '--infofile', metavar='/path/to/sample.info.txt', default=False,
 		help='Path to a .txt file containing information about the samples to be processed (unique name, number of cells, group)\n\tIf not all are identical. This file should not have a header row')
