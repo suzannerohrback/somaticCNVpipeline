@@ -35,8 +35,8 @@ Get a help message:
 	somaticCNVcalling map --help
 	
 Options:
-	somaticCNVcalling map [options] /path/to/fastq/files/ genome
-		Currently genome must be either hg38 or mm10
+	somaticCNVcalling map [options] /path/to/fastq/files/ /path/to/mapping/index/filePrefix
+		The mapping index MUST be either mm10 or hg38, and created with bowtie (v1)
 	
   	-t/--trim X X
 		Bases to trim from the 5' and 3' ends of all reads during mapping (default = 0 0)
@@ -80,6 +80,15 @@ Notes
 	
 	No testing has been performed yet, there are almost certainly a few minor bugs to fix
 
-
+9/9/2018
+	Updated mapping script to expect user-input mapping reference location, since I cannot get this to run with the files I (hackily) uploaded to this repo
+	Initital debugging is complete!
+		Confirmed that a single sample can be run successfully through this pipeline and produce all desired output files
+		
+	!!!More extensive testing is still warranted for
+		Activation of the --output and --statsdir folder options
+		Activation of the --samples option to run on a reduced set of fastq files
+		Activation of the --trim option
+	
 
 
