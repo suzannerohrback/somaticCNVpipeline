@@ -196,8 +196,8 @@ def interpretArgs():
 	
 def fullParser(input):
 
-	print input
-	print list(input)
+#	print input
+#	print list(input)
 	
 	functionDict =	{ 
 			'-h': parentArgs,
