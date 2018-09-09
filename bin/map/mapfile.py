@@ -46,7 +46,7 @@ def runCommand(cmd, outfile=False):
 
 
 
-def runOne(fastqFile, species, trim, statsDir, tempDir, samDir):
+def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
   
 	#get environment prepared#
 	mapVars = cfg.Map()
@@ -64,13 +64,13 @@ def runOne(fastqFile, species, trim, statsDir, tempDir, samDir):
 			[
 			'-5', str(trim[0]), 
 			'-3', str(trim[1]), 
-			mapVars.indexDict[species], 
+			mapIdx, 
 			fastqFile, 
 			tempDir + sampleName + '.sam'
 			]
 	cmd = ' '.join(cmd)
 	print cmd
-	raise SystemExit
+#	raise SystemExit
 	
 	runCommand(cmd, outfile=statFile)
 	
