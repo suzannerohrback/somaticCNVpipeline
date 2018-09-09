@@ -42,7 +42,7 @@ def openFiles(file, length):
 	
 	
 #do the trimming (and print out changes)#
-def trimOne(IN, OUT, trim, length):
+def trimOne(IN, OUT, trim, length, smp):
 	lineCount = 0
 	includeCount = 0
 	includeTest = True
@@ -79,7 +79,7 @@ def trimOne(IN, OUT, trim, length):
 	IN.close()
 	OUT.close()
 	
-	printText = '\t\tMaintained ' + str(includeCount) + ' of ' + str(lineCount/4) + ' fastq reads from ' + file.split('/')[-1] 
+	printText = '\t\tMaintained ' + str(includeCount) + ' of ' + str(lineCount/4) + ' fastq reads from ' + smp
 	print(printText)
 	
 	
@@ -93,7 +93,7 @@ def trimOne(IN, OUT, trim, length):
 	
 def preprocessOne(file, trim, length, remove=False):
 	IN, OUT = openFiles(file, length)
-	trimOne(IN, OUT, trim, length)
+	trimOne(IN, OUT, trim, length, file.split('/')[-1])
 	
 	#remove or move full length fastq#
 #	if remove:
