@@ -12,7 +12,7 @@ import gzip
 
 
 #open input and output files#
-def openFiles(file):
+def openFiles(file, length):
 	
 	if file[-5:] == 'fastq':
 		IN = open(file, 'r')
@@ -92,7 +92,7 @@ def trimOne(IN, OUT, trim, length):
 	
 	
 def preprocessOne(file, trim, length, remove=False):
-	IN, OUT = openFiles(file)
+	IN, OUT = openFiles(file, length)
 	trimOne(IN, OUT, trim, length)
 	
 	#remove or move full length fastq#
