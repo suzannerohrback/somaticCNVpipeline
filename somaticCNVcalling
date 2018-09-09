@@ -15,7 +15,7 @@ import arguments
 
 
 if __name__ == '__main__':
-	objective, args=arguments.fullParser(sys.argv[1:])
+	objective, args=arguments.fullParser(list(sys.argv[1:]))
 	
 	if objective == 'preprocess':
 		import runpreprocess
