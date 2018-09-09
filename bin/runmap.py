@@ -45,13 +45,13 @@ def runAll(args):
 
 	#run multiprocessing of all mapping commands#
 	argList = [(x, args.species, args.trim, statsDir, tempDir, samDir) for x in fastqFiles]
-		
-	common.daemon(mapfile.runOne, argList, 'map fastq files', cpuPerProcess=8)
+	mapfile.runOne(x, args.species, args.trim, statsDir, tempDir, samDir)
+#	common.daemon(mapfile.runOne, argList, 'map fastq files', cpuPerProcess=8)
 
 
 	
 	#remove all temporary files#
-	shutil.rmtree(tempDir[:-1])
+#	shutil.rmtree(tempDir[:-1])
   
   
 	
