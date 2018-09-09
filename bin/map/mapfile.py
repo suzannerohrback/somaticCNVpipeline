@@ -69,10 +69,9 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 			tempDir + sampleName + '.sam'
 			]
 	cmd = ' '.join(cmd)
-	print cmd
-#	raise SystemExit
-	
-	runCommand(cmd, outfile=statFile)
+#	print cmd
+#	raise SystemExit	
+#	runCommand(cmd, outfile=statFile)
 	
 	
 	
@@ -83,7 +82,7 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 		 	tempDir + sampleName + '.sam'
 			]
 	cmd = ' '.join(cmd)
-	runCommand(cmd)
+#	runCommand(cmd)
 	
 
 	
@@ -95,6 +94,8 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 		 	tempDir + sampleName + '.bam'
 			]
 	cmd = ' '.join(cmd)
+	print cmd
+	raise SystemExit
 	runCommand(cmd)
 	
 	
@@ -106,6 +107,7 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 			tempDir + sampleName + '.unique.bam'
 			]
 	cmd = ' '.join(cmd)
+	print cmd
 	runCommand(cmd, outfile=statFile)
 
 	
@@ -117,6 +119,7 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 		 	tempDir + sampleName + '.unique.bam'
 			]
 	cmd = ' '.join(cmd)
+	print cmd
 	runCommand(cmd)
 
 
