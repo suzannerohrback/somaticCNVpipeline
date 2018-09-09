@@ -81,7 +81,8 @@ Notes
 	No testing has been performed yet, there are almost certainly a few minor bugs to fix
 
 9/9/2018
-	Updated mapping script to expect user-input mapping reference location, since I cannot get this to run with the files I (hackily) uploaded to this repo
+	Updated mapping script to expect user-input mapping reference location, 
+		I cannot get this to run with the files I (hackily) uploaded to this repo on 3/8/18, users will need to provide their own
 	Initital debugging is complete!
 		Confirmed that a single sample can be run successfully through this pipeline and produce all desired output files
 		
