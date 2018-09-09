@@ -76,6 +76,14 @@ Notes
 		chromosome size files
 	
 	No testing has been performed yet, there are almost certainly bugs to fix
+	
+9/9/2018
+	Initial debugging is complete!
+		Confirmed a single sample can be run through successfully
+	
+	!!!More extensive testing is still warrented to confirm
+		Activating --output and --statsdir options to specify differnt output locations
+		Activating the --samples option and running on a subset of all samples
 
 
 
