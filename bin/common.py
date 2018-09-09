@@ -131,14 +131,17 @@ def importSegData(sample, segDir, binArray):
 		
 																		
 ###daemon to run multiprocessing and parallelize tasks###
-def daemon(target, argList, name, cpuPerProcess=1):
+def daemon(target, argList, name, cpuPerProcess=1, kwargs=False):
 	print( str( '\t' + str(len(argList)) + ' processes to run to ' + name ) )
 	numCPU = mp.cpu_count()
 	numWorkers = min( [int(numCPU / cpuPerProcess), len(argList)] )
 
 
 	pool = mp.Pool(numWorkers)
-	processes = [pool.apply_async(target, args=x) for x in argList]
+	if not kwargs:
+		processes = [pool.apply_async(target, args=x) for x in argList]
+	else:
+		processes = [pool.apply_async(target, args=x, kwargs=kwargs) for x in argList]
 	pool.close()
 
 	for i,j in enumerate(processes):
@@ -152,8 +155,6 @@ def daemon(target, argList, name, cpuPerProcess=1):
 			p = mp.Process(target=target, args=argList[i])
 			p.start()
 			p.join()
-	#	else:
-	#		print( str( '\t\t' + str(i+1) + ' of ' + str(len(argList)) + ' processes complete' ) )
 
 	print( str( '\tAll processing to ' + name + ' complete\n' ) )
 
