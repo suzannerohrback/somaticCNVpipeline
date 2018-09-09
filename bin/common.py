@@ -2,7 +2,7 @@
 import os
 import numpy as np
 import multiprocessing as mp
-import subprocessing as sub
+import subprocess as sub
 import shlex
 
 
