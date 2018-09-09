@@ -70,10 +70,10 @@ Notes
 	Basic debugging has been performed on this function
 	Confirmed it can successfully trim 5' bases to a specified length for a single file
 	
-	!!!More extensive testing is warrented to confirm there aren't issues with!!!
+	!!!More extensive testing is warrented to confirm there aren't issues with
 		Running multiple samples
 		Activating the --remove option
-		Activating the --samples option to trim only a select set of samples
+		Activating the --samples option to trim only a select set of fastq files
 		
 
 
