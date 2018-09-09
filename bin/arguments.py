@@ -20,7 +20,11 @@ def parentArgs():
 
 	You must specify a function to perform:
 	  *preprocess (trim fastq reads to the appropriate length)
-	  *[More functions coming soon]
+	  *map (map fastq files to the hg38 or mm10 genome)
+	  *count (count number of reads in 25,000 genomic bins)
+	  *segment (run CBS -- requires Matlab!)
+	  *interpret (perform QC assessment and removal of low-quality CNV calls)
+	  [More functions coming soon...]
 		''')
 
 	parser.print_help()
@@ -140,7 +144,7 @@ def segmentArgs():
 		help='The zero-indexed locations of the columns to import from the infofile in the order: name, method, cell number (if not the first 3 columns)')
 	parser.add_arugment('-g', '--gconly', action='store_true', 
 		help = 'Set this flag if you only want GC-correction to be performed during normalization')
-	parser.add_arugment('-n', '--normalizeonly', action='store_true'
+	parser.add_arugment('-n', '--normalizeonly', action='store_true', 
 		help = 'Set this flag if you do not want CBS to be performed')
 	parser.add_argument('-s', '--samples', metavar='/path/to/sample_list.txt', default=False,
 		help='Path to a file containing a list of bincounts.txt files to be processed\n\tsample names only, no path or file extension needed')
