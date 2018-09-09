@@ -44,7 +44,7 @@ def runAll(args):
 	
 
 	#run multiprocessing of all mapping commands#
-	argList = [(x, args.MapIndex, args.trim, statsDir, tempDir, samDir) for x in fastqFiles]
+#	argList = [(x, args.MapIndex, args.trim, statsDir, tempDir, samDir) for x in fastqFiles]
 	mapfile.runOne(x, args.MapIndex, args.trim, statsDir, tempDir, samDir)
 #	common.daemon(mapfile.runOne, argList, 'map fastq files', cpuPerProcess=8)
 
