@@ -44,10 +44,10 @@ def runAll(args):
 	CNVdir = args.AnalysisDirectory + 'CNVlists/'
 	summaryDir = args.AnalysisDirectory + 'CNVsummary/'
 	CNplotDir = args.AnalysisDirectory + 'CopyNumberProfilePlots/'
-	ChromPlotDir = args.AnalysisDirectory + 'ChromosomeCopyNumberPlots/'
-	summaryPlotDir = args.AnalysisDirectory + 'CombinedSamplesPlots/'
+	#ChromPlotDir = args.AnalysisDirectory + 'ChromosomeCopyNumberPlots/'
+	#summaryPlotDir = args.AnalysisDirectory + 'CombinedSamplesPlots/'
 	
-	for i in [args.AnalysisDirectory, QCdir, CNVdir, summaryDir, CNplotDir, ChromPlotDir, summaryPlotDir]:
+	for i in [args.AnalysisDirectory, QCdir, CNVdir, summaryDir, CNplotDir]#, ChromPlotDir]#, summaryPlotDir]:
 		common.makeDir(i)
 	
 	
@@ -105,52 +105,19 @@ def runAll(args):
 	
 	#CNV filtering#
 	#sample, species, segmentDir, CNVdir, ploidy, gender
-	argList = [(x, args.species, folderDict['Segments'], CNVdir, ploidyDict[x], genderDict[x]) for x in sampleNames]
+	argList = [(x, args.species, folderDict['Segments'], CNVdir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
 	common.daemon(funcfile.runFUNCone, argList, ' remove unreliable CNV calls')
 	
 	
 	
 	
-	
-	
-	errorText = 'SORRY, THIS FUNCTION IS STILL BEING WRITTEN, TRY AGAIN LATER\n\n\n'
-	print(errorText)
-	raise SystemExit
-	
-
-	
-	
-	
 	#CNV analysis#
-
+	argList = [(x, folderDict['Segments'], folderDict['Lowess'], CNplotDir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
+	common.daemon(analyzefiles.analyzeOne, argList, ' create summary file(s)')
 	
-	#will be in bin/interpret/analyzefiles.py
-	#make CellStats, CNVstats, ChromosomeStats summary files
-	#make Copy number profile plot and Chromosome copy number plot for each sample
-	#make Heatmap of CNV locations and plot of genomic locus CNV frequency for all samples (group separation)
-	#any sort of statistical testing????? (aneuploidy, CNVs/cell, ampVdel, DNA altered, CNV size...?)
-	
-	
+	#there really was more I indented to add, but, seriously, if you've gotten far enough to find this message you could code it yourself, and I have a real job now#
 	
 	print('\nCNV analysis complete\n\n\n')
-
-	
-	
-	############
-#	parser.add_argument('species', choices=['hg38', 'mm10'], 
-#		help = 'The genome build of the species being assessed')
-#	
-#	#optional arguments#
-#	parser.add_arugment('-f', '--nofilter', action='store_true'
-#		help = 'Set this flag if you do not want to perform FUnC filtering of low-quality CNV calls')
-#	parser.add_argument('-i', '--infofile', metavar='/path/to/sample.info.txt', default=False,
-#		help='Path to a .txt file containing information about the samples to be processed (unique name, number of cells, group)\n\tIf not all are identical. This file should not have a header row')
-#	parser.add_argument('-c', '--columns', metavar='X X X', default=[0, 1, 2], type=int, nargs=3,
-#		help='The zero-indexed locations of the columns to import from the infofile in the order: name, cell number, group (if not the first 3 columns)')
-#	parser.add_argument('-s', '--samples', metavar='/path/to/sample_list.txt', default=False,
-#		help='Path to a file containing a list of sample names to be processed\n\tno path or file extension needed')
-
-	
 	
 	
 	
