@@ -27,10 +27,10 @@ class Map:
 	def __init__(self):
 		self.currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 		
-		self.indexDict =	{
-							'hg38': self.currentdir + '/reference/hg38_index/hg38.index',
-							'mm10': self.currentdir + '/reference/mm10_index/mm10.index',
-							}
+	#	self.indexDict =	{
+	#						'hg38': self.currentdir + '/reference/hg38_index/hg38.index',
+	#						'mm10': self.currentdir + '/reference/mm10_index/mm10.index',
+	#						}
 		
 		#THIS MUST BE VERSION 0.1.19 OR THE PIPELINE MAY NOT WORK#
 		self.samtools = '/home/k4zhang/softwares/samtools-0.1.19/samtools'
