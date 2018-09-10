@@ -134,7 +134,7 @@ def runNormalizeOne(species, infile, methodRef, outfile):
 	data = np.loadtxt(infile, usecols=[3], dtype='int')
 	lowessData = runLowess(data, binArray['gc'])
 	
-	if methodRef:
+	if methodRef[0] != False:
 		lowessData = lowessData - methodRef
 		
 	np.savetxt(outfile, lowessData)
