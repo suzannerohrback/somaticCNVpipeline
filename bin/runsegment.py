@@ -65,18 +65,19 @@ def runAll(args):
 	
 	#Run normalization for all samples#
 	methodDict = {x: False for x in np.unique(refArray['method'])}	
-	methodDict['NA'] = False
-	print methodDict
+#	methodDict['NA'] = False
 	sampleNormMethodDict = {x: 'NA' for x in methodDict}
-	print sampleNormMethodDict
 	
 	if not args.gconly:
 		for i in methodDict:
 			refSlice = refArray[(refArray['method'] == i) & (refArray['cells'] == 1)]
+			print refSlice
 			methodSamples = [sampleDict[x] for x in refSlice['name']]
+			print methodSamples
 			
 			methodDict[i] = normalizefile.runMakeMethodRef(args.species, methodSamples, i, lowessDir)
-		
+			print methodDict
+			
 			if methodDict[i] != False:
 				for j in refSlice['name']:
 					sampleNormMethodDict[j] = i
