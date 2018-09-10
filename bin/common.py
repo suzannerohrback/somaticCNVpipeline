@@ -89,7 +89,7 @@ def importInfoFile(infoFile, columns, useFunction, skiprows=0):
 								'formats': ('S10', 'int64', 'int64', 'int64', 'np.float64')},
 					'interpret': {'names': ('name', 'cells', 'group'), 'formats': ('S50', 'int', 'S50')}
 					}
-	
+	print infoFile
 	if not infoFile:
 		return functionDict[useFunction]
 	
