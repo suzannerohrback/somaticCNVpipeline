@@ -67,7 +67,7 @@ def runAll(args):
 	methodDict = {x: [False,] for x in np.unique(refArray['method'])}	
 #	methodDict['NA'] = False
 	sampleNormMethodDict = {x: False for x in refArray['name']}
-	sampleNormMethoDict[False] = [False]
+	sampleNormMethodDict[False] = [False]
 	
 	if not args.gconly:
 		for i in methodDict:
