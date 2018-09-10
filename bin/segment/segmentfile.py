@@ -72,6 +72,7 @@ def segmentOne(sample, species, tempDir, lowessDir, segmentDir):
 	#write matlab script
 	scriptName = writeMatlabScript(sample, species, tempDir, lowessDir, segmentDir)
 	
+	os.chdir(tempDir)
 	print os.getcwd()
 	
 	#run matlab script
