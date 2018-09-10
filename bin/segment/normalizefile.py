@@ -11,7 +11,8 @@ import common
 import config as cfg
 
 normVars = cfg.Segment()
-import statsmodels
+#import statsmodels
+from statsmodels.nonparametric.smoothers_lowess import lowess as lowess
 
 
 
@@ -27,7 +28,8 @@ def runLowess(counts, gc):
 	counts = counts / np.median(counts)
 	counts = np.log(counts)
 	
-	lowessModel = statsmodels.nonparametric.smoothers_lowess.lowess(counts, gc, frac=0.05, return_sorted=False)
+#	lowessModel = statsmodels.nonparametric.smoothers_lowess.lowess(counts, gc, frac=0.05, return_sorted=False)
+	lowessModel = lowess(counts, gc, frac=0.05, return_sorted=False)
 
 	lowessData = counts - lowessModel
 	lowessData = np.exp(lowessData)
