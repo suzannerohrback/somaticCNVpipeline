@@ -4,7 +4,7 @@ ref = importdata(refFile);
 chromX = chromNum - 1;
 chromY = chromNum;
 
-chroms = zeros(length(ref.textdata)-1, 1);
+chroms = zeros(length(ref.textdata), 1);
 
 
 
@@ -22,7 +22,7 @@ for i = 1:length(ref.textdata)-1
 end
 
 bins = ref.data(:, 2);
-logLowess = sampleData.data(:,4);
+logLowess = sampleData;
 clear ref sampleData
 
 
