@@ -59,9 +59,6 @@ def runAll(args):
 		
 	sampleDict = {x: [y for y in sampleFiles if x == os.path.basename(y)[:len(x)]][0] for x in refArray['name']}
 
-	print refArray
-	print sampleDict
-	raise SystemExit
 	
 	
 	
@@ -90,17 +87,18 @@ def runAll(args):
 	
 	print('\nNormalization complete\n\n\n')
 	
-	if args.normalizeonly:
-		shutil.rmtree(tempDir[:-1])
-		return 0
+#	if args.normalizeonly:
+#		shutil.rmtree(tempDir[:-1])
+#		return 0
 		
 		
 		
 		
 		
 	#Run CBS for all samples#
-	segArgs = [(x, args.species, tempDir, lowessDir, segmentDir) for x in refArray['name']]
-	common.daemon(segmentfile.segmentOne, segArgs, 'segment bincount data')
+	if not args.normalizeonly:
+		segArgs = [(x, args.species, tempDir, lowessDir, segmentDir) for x in refArray['name']]
+		common.daemon(segmentfile.segmentOne, segArgs, 'segment bincount data')
 	
 	shutil.rmtree(tempDir[:-1])
 
