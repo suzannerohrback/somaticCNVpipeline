@@ -66,6 +66,7 @@ def runAll(args):
 	#Run normalization for all samples#
 	methodDict = {x: False for x in np.unique(refArray['method'])}	
 	methodDict['NA'] = False
+	print methodDict
 	sampleNormMethodDict = {x['name']: 'NA' for x in methodDict}
 	
 	if not args.gconly:
