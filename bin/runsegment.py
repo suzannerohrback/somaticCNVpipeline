@@ -71,14 +71,14 @@ def runAll(args):
 	if not args.gconly:
 		for i in methodDict:
 			refSlice = refArray[(refArray['method'] == i) & (refArray['cells'] == 1)]
-			print refSlice
 			methodSamples = [sampleDict[x] for x in refSlice['name']]
-			print methodSamples
-			
+
 			methodDict[i] = normalizefile.runMakeMethodRef(args.species, methodSamples, i, lowessDir)
 			print methodDict
 			
-			if methodDict[i] != False:
+			if methodDict[i] == False:
+				continue
+			else:
 				for j in refSlice['name']:
 					sampleNormMethodDict[j] = i
 		
