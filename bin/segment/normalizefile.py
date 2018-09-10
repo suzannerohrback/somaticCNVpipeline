@@ -127,8 +127,7 @@ def runMakeMethodRef(species, sampleList, methodName, lowessDir):
 
 #Run normalization on a single bincount sample#
 def runNormalizeOne(species, infile, methodRef, outfile):
-#	normVars = cfg.Segment()
-	
+		
 	binArray = common.importInfoFile(normVars.binDict[species], [0, 1, 2, 4, 5], 'normref', skiprows=1)
 
 	data = np.loadtxt(infile, usecols=[3], dtype='int')
