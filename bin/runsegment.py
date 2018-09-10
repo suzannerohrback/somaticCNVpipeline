@@ -78,7 +78,7 @@ def runAll(args):
 			if methodDict[i][0] != False:
 				for j in refSlice['name']:
 					sampleNormMethodDict[j] = i
-		
+	print sampleNormMethodDict	
 
 		
 	#run multiprocessing for gc (+ method) correction
