@@ -72,6 +72,8 @@ def segmentOne(sample, species, tempDir, lowessDir, segmentDir):
 	#write matlab script
 	scriptName = writeMatlabScript(sample, species, tempDir, lowessDir, segmentDir)
 	
+	print os.getcwd()
+	
 	#run matlab script
 	stdoutFile = tempDir + sample + '.stderr.txt'
 	stdout = open(stdoutFile, 'w')
