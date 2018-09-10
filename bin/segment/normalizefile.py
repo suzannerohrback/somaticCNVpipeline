@@ -10,6 +10,8 @@ sys.path.insert(0,parentdir)
 import common
 import config as cfg
 
+normVars = cfg.Segment()
+import statsmodels
 
 
 
@@ -73,8 +75,7 @@ def runMakeMethodRef(species, sampleList, methodName, lowessDir):
 	if len(sampleList) < 10:
 		return False
 		
-	normVars = cfg.Segment()
-	import statsmodels
+
 	
 	binArray = common.importInfoFile(normVars.binDict[species], [0, 1, 2, 4, 5], 'normref', skiprows=1)
 	xLocs = [x for x,y in enumerate(binArray['chrom']) if y == 'chrX']
@@ -128,7 +129,7 @@ def runMakeMethodRef(species, sampleList, methodName, lowessDir):
 
 #Run normalization on a single bincount sample#
 def runNormalizeOne(species, infile, methodRef, outfile):
-	normVars = cfg.Segment()
+#	normVars = cfg.Segment()
 	
 	binArray = common.importInfoFile(normVars.binDict[species], [0, 2, 6], 'normref', skiprows=1)
 
