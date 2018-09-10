@@ -74,15 +74,12 @@ def runAll(args):
 			methodSamples = [sampleDict[x] for x in refSlice['name']]
 
 			methodDict[i] = normalizefile.runMakeMethodRef(args.species, methodSamples, i, lowessDir)
-			print methodDict
 			
 			if methodDict[i][0] != False:
 				for j in refSlice['name']:
 					sampleNormMethodDict[j] = i
 		
-	print methodDict
-	print sampleNormMethodDict
-	raise SystemExit
+
 		
 	#run multiprocessing for gc (+ method) correction
 	normArgs = [(args.species, sampleDict[x], methodDict[sampleNormMethodDict[x]], lowessDir + x + '.lowess.txt') for x in sampleDict.keys()]
