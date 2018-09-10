@@ -75,7 +75,7 @@ def runMakeMethodRef(species, sampleList, methodName, lowessDir):
 	if len(sampleList) < 10:
 		return [False]
 		
-	binArray = common.importInfoFile(normVars.binDict[species], [0, 1, 2, 4, 5], 'normref', skiprows=0)
+	binArray = common.importInfoFile(normVars.binDict[species], [0, 1, 2, 4, 6], 'normref', skiprows=0)
 	xLocs = [x for x,y in enumerate(binArray['chrom']) if y == 'chrX']
 	yLocs = [x for x,y in enumerate(binArray['chrom']) if y == 'chrY']
 	
@@ -128,7 +128,7 @@ def runMakeMethodRef(species, sampleList, methodName, lowessDir):
 #Run normalization on a single bincount sample#
 def runNormalizeOne(species, infile, methodRef, outfile):
 		
-	binArray = common.importInfoFile(normVars.binDict[species], [0, 1, 2, 4, 5], 'normref', skiprows=0)
+	binArray = common.importInfoFile(normVars.binDict[species], [0, 1, 2, 4, 6], 'normref', skiprows=0)
 
 	data = np.loadtxt(infile, usecols=[3], dtype='int')
 	lowessData = runLowess(data, binArray['gc'])
