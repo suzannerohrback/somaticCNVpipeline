@@ -79,7 +79,9 @@ def runAll(args):
 				for j in refSlice['name']:
 					sampleNormMethodDict[j] = i
 		
-		
+	print methodDict
+	print sampleNormMethodDict
+	raise SystemExit
 		
 	#run multiprocessing for gc (+ method) correction
 	normArgs = [(args.species, sampleDict[x], methodDict[sampleNormMethodDict[x]], lowessDir + x + '.lowess.txt') for x in sampleDict.keys()]
