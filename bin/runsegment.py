@@ -54,7 +54,7 @@ def runAll(args):
 	else:
 		thisDtype = info
 		refArray = np.array(
-			[ (shutil.basename(x)[:-14], 'unk', 1,) for x in sampleFiles],
+			[ (os.basename(x)[:-14], 'unk', 1,) for x in sampleFiles],
 			dtype=thisDtype)
 		
 	sampleDict = {x: [y for y in sampleFiles if x == os.path.basename(y)[:len(x)]][0] for x in refArray['name']}
