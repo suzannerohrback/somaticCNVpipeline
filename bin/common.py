@@ -86,10 +86,12 @@ def importInfoFile(infoFile, columns, useFunction, skiprows=0):
 	functionDict =	{
 					'normalize': {'names': ('name', 'method', 'cells'), 'formats': ('S50', 'S50', 'int')},
 					'normref': {'names': ('chrom', 'chrStart', 'abspos', 'size', 'gc'), 
-								'formats': ('S10', 'int', 'int', 'int', 'np.float')},
+								'formats': ('S10', 'int', 'int', 'int', 'float64')},
 					'interpret': {'names': ('name', 'cells', 'group'), 'formats': ('S50', 'int', 'S50')}
 					}
 	print infoFile
+	print columns
+	print functionDict[useFunction]
 	if not infoFile:
 		return functionDict[useFunction]
 	
