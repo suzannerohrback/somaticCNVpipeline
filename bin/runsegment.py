@@ -59,6 +59,9 @@ def runAll(args):
 		
 	sampleDict = {x: [y for y in sampleFiles if x == os.path.basename(y)[:len(x)]][0] for x in refArray['name']}
 
+	print refArray
+	print sampleDict
+	raise SystemExit
 	
 	
 	
