@@ -73,7 +73,7 @@ def adjustSexChroms(data, xLocs, yLocs, numSamples):
 	#There must be at least 10 samples with at least 500,000 counted reads to run
 def runMakeMethodRef(species, sampleList, methodName, lowessDir):
 	if len(sampleList) < 10:
-		return False
+		return [False]
 		
 	binArray = common.importInfoFile(normVars.binDict[species], [0, 1, 2, 4, 5], 'normref', skiprows=1)
 	xLocs = [x for x,y in enumerate(binArray['chrom']) if y == 'chrX']
@@ -92,7 +92,7 @@ def runMakeMethodRef(species, sampleList, methodName, lowessDir):
 		sampleCount += 1
 	
 	if sampleCount < 10:
-		return False
+		return [False]
 		
 	
 	
