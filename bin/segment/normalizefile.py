@@ -74,6 +74,7 @@ def runMakeMethodRef(species, sampleList, methodName, lowessDir):
 		return False
 		
 	normVars = cfg.Segment()
+	sys.path.append(normVars.statsmodelsLocation)
 	
 	binArray = common.importInfoFile(normVars.binDict[species], [0, 1, 2, 4, 5], 'normref', skiprows=1)
 	xLocs = [x for x,y in enumerate(binArray['chrom']) if y == 'chrX']
