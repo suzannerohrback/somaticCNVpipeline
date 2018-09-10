@@ -86,7 +86,7 @@ def importInfoFile(infoFile, columns, useFunction, skiprows=0):
 	functionDict =	{
 					'normalize': {'names': ('name', 'method', 'cells'), 'formats': ('S50', 'S50', 'int')},
 					'normref': {'names': ('chrom', 'chrStart', 'abspos', 'size', 'gc'), 
-								'formats': ('S10', 'int64', 'int64', 'int64', 'np.float64')},
+								'formats': ('S10', 'int', 'int', 'int', 'np.float')},
 					'interpret': {'names': ('name', 'cells', 'group'), 'formats': ('S50', 'int', 'S50')}
 					}
 	print infoFile
