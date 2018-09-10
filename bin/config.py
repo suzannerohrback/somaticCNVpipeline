@@ -87,8 +87,8 @@ class Segment:
 		self.currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 		
 		self.binDict =	{
-						'hg38': self.currentdir + '/reference/hg38.varbin.fullRef.25k.bowtie.k36.txt',
-						'mm10': self.currentdir + '/reference/mm10.varbin.fullRef.25k.bowtie.k36.txt',
+						'hg38': self.currentdir + '/reference/hg38.varbin.gc.content.25k.bowtie.k36.txt',
+						'mm10': self.currentdir + '/reference/mm10.varbin.gc.content.25k.bowtie.k36.txt',
 						}
 			
 		self.statsmodelsLocation = '/home/srohrbac/research/packages/statsmodels-0.6.1'
