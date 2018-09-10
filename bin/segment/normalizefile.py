@@ -11,7 +11,6 @@ import common
 import config as cfg
 
 normVars = cfg.Segment()
-#import statsmodels
 from statsmodels.nonparametric.smoothers_lowess import lowess as lowess
 
 
@@ -28,7 +27,6 @@ def runLowess(counts, gc):
 	counts = counts / np.median(counts)
 	counts = np.log(counts)
 	
-#	lowessModel = statsmodels.nonparametric.smoothers_lowess.lowess(counts, gc, frac=0.05, return_sorted=False)
 	lowessModel = lowess(counts, gc, frac=0.05, return_sorted=False)
 
 	lowessData = counts - lowessModel
@@ -77,8 +75,6 @@ def runMakeMethodRef(species, sampleList, methodName, lowessDir):
 	if len(sampleList) < 10:
 		return False
 		
-
-	
 	binArray = common.importInfoFile(normVars.binDict[species], [0, 1, 2, 4, 5], 'normref', skiprows=1)
 	xLocs = [x for x,y in enumerate(binArray['chrom']) if y == 'chrX']
 	yLocs = [x for x,y in enumerate(binArray['chrom']) if y == 'chrY']
