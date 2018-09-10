@@ -78,7 +78,6 @@ def runAll(args):
 			if methodDict[i][0] != False:
 				for j in refSlice['name']:
 					sampleNormMethodDict[j] = i
-	print sampleNormMethodDict	
 
 		
 	#run multiprocessing for gc (+ method) correction
@@ -87,11 +86,6 @@ def runAll(args):
 	
 	print('\nNormalization complete\n\n\n')
 	
-#	if args.normalizeonly:
-#		shutil.rmtree(tempDir[:-1])
-#		return 0
-		
-		
 		
 		
 		
