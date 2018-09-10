@@ -87,10 +87,6 @@ def segmentOne(sample, species, tempDir, lowessDir, segmentDir):
 	
 	stdout.close()
 	
-	#delete intermediate files
-#	os.remove(tempDir + scriptName + '.m')
-#	os.remove(stdoutFile)
-	#THIS SHOULD BE DONE IN runsegment.py WITH SHUTIL, LIKE FOR runmap.py
 	
 	
 	
