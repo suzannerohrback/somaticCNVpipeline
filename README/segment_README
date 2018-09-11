@@ -148,5 +148,16 @@ Notes
 No testing has been performed yet, there are almost certainly bugs to fix
 
 
-
-
+9/10/2018
+	INITIAL DEBUGGING SUCCESSFULLY COMPLETED!
+		Confirmed a single sample can run through GC-correction and segmentation
+		Also confirmed that multiple samples can go through the single-cell-method normalization
+			Though they were all the same sample, so not a full performance test
+	!!!Additional testing is still warranted with
+		Activating the --output option for custom saving location
+		Activating the infofile option for further specification of normalization approach (multiple methods used or some samples are bulk)
+			Likewise, activating the columns option with this
+		Activating the gconly option to skip method-normalization (with more than 10 samples)
+		Activating the normalizeonly option to skip CBS (as if the user wants to run segmentation independently)
+		Activating the samples option to run on only a specific subset of samples
+		
