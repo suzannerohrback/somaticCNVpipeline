@@ -21,6 +21,11 @@ for i = 1:length(ref.textdata)-1
 	end
 end
 
+%NO CLUE WHY THIS FIX IS BEING NEEDED, I'VE NEVER HAD THIS ISSUE BEFORE
+if chroms(length(chroms)) == 0
+	chroms(length(chroms)) = chroms(length(chroms)-1)
+end
+
 bins = ref.data(:, 2);
 logLowess = sampleData;
 clear ref sampleData
