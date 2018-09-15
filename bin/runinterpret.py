@@ -30,7 +30,7 @@ def runAll(args):
 	print args
 	raise SystemExit
 	
-	folderDict = {'Lowess': args.lowess, 
+	folderDict = {'LowessBinCounts': args.lowess, 
 		    'Segments': args.segments, 
 		    'PipelineStats': args.countstats}
 	
@@ -74,7 +74,7 @@ def runAll(args):
 	
 	
 	#QC assessment#
-	qcfile.runQCone(sampleNames[0], args.species, folderDict['PipelineStats'], folderDict['Lowess'], folderDict['Segments'], QCdir)
+	qcfile.runQCone(sampleNames[0], args.species, folderDict['PipelineStats'], folderDict['LowessBinCounts'], folderDict['Segments'], QCdir)
 	
 #	argList = [(x, args.species, folderDict['PipelineStats'], folderDict['Lowess'], folderDict['Segments'], QCdir) for x in sampleNames]
 	#print argList
@@ -116,7 +116,7 @@ def runAll(args):
 	
 	
 	#CNV analysis#
-	argList = [(x, folderDict['Segments'], folderDict['Lowess'], CNplotDir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
+	argList = [(x, folderDict['Segments'], folderDict['LowessBinCounts'], CNplotDir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
 	common.daemon(analyzefiles.analyzeOne, argList, ' create summary file(s)')
 	
 	#there really was more I indented to add, but, seriously, if you've gotten far enough to find this message you could code it yourself, and I have a real job now#
