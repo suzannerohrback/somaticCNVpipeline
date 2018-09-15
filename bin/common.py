@@ -57,9 +57,6 @@ def findInfile(sample, dirpath, ext=False):
 
 
 
-
-
-
 #Import sample names from a text file, if specifying a subset to process#
 def importSampleList(infile):
 	if os.path.exists(infile):
@@ -135,7 +132,7 @@ def importSegData(sample, segDir, binArray):
 	chromDict = {x['abspos']: x['chrom'] for x in binArray}
 	binDict = {y['abspos']: x for x,y in enumerate(binArray)}
 																						
-	segData = np.loadtxt(segDir + sample + '.segments.txt', dtype=segDtype1)
+	segData = np.loadtxt(segDir +findInfile(sample, segDir), dtype=segDtype1)
 	segDataGood = segData[segData['end'] > segData['start']]
 
 	segDataFix = np.zeros(len(segDataGood), dtype=segDtype2)
