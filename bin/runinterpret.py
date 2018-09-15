@@ -1,5 +1,6 @@
 #!usr/bin/python
 import os
+import numpy as np
 
 import common
 from interpret import qcfile, funcfile, analyzefiles
