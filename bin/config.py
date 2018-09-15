@@ -33,7 +33,8 @@ class Map:
 	#						}
 		
 		#THIS MUST BE VERSION 0.1.19 OR THE PIPELINE MAY NOT WORK#
-		self.samtools = '/home/k4zhang/softwares/samtools-0.1.19/samtools'
+		#commenting out because I added an option for specifying this when the mapping function is called
+	#	self.samtools = '/home/k4zhang/softwares/samtools-0.1.19/samtools'
 		
 		self.bowtieOptions =	[
 								'bowtie',
@@ -91,8 +92,10 @@ class Segment:
 						'mm10': self.currentdir + '/reference/mm10.varbin.gc.content.25k.bowtie.k36.txt',
 						}
 			
-		self.statsmodelsLocation = '/home/srohrbac/research/packages/statsmodels-0.6.1'
-		sys.path.append(self.statsmodelsLocation)
+		#Commenting this out because I don't think it's the best for other users
+			#I will put a note about needing to have this module in Installation instructions
+	#	self.statsmodelsLocation = '/home/srohrbac/research/packages/statsmodels-0.6.1'
+	#	sys.path.append(self.statsmodelsLocation)
 		
 		self.chromNumDict = {
 							'hg38': '24',
