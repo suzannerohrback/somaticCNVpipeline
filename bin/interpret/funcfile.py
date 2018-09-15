@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import os,sys,inspect
 import numpy as np
 
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
