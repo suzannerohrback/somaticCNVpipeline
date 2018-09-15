@@ -27,8 +27,31 @@ def fixDirName(dirpath):
 def makeDir(dirpath):
 	if not os.path.exists(dirpath):
 		os.mkdir(dirpath)
+		
+		
 
-
+		
+		
+		
+		
+		
+		
+		
+#find actual file that for a sample#
+def findInfile(sample, dirpath, ext=False):
+	fullList = os.listdir(dirpath)
+	thisMatch = [x for x in fullList if x[:len(sample)] == sample]
+	if len(thisMatch) == 1:
+		return thisMatch[0]
+	elif ext:
+		thisMatch = [x for x in thisMatch if x[-len(ext):] == ext]
+		if len(thisMatch) == 1:
+			return thisMatch[0]
+	else:
+		errorText = 'ERROR: amgibious sample name is matching multiple files: '
+		errorText += '\n\t' + ', '.join(newMatch)
+		print(errorText)
+		raise SystemExit
 
 
 
