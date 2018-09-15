@@ -25,11 +25,7 @@ def calcReads(sample, statsDir):
 		readCount = data.rstrip().split('\t')[1]
 
 	return int(readCount)
-	
-	
-	
-	
-	
+
 	
 	
 	
@@ -40,13 +36,8 @@ def calcMAPD(sample, lowessDir):
 	
 	data = np.loadtxt(infile)
 	MAPD = np.median(abs(data[1:] - data[:-1]))
-	print MAPD
+
 	return MAPD, data
-	
-	
-	
-	
-	
 	
 	
 	
@@ -55,11 +46,6 @@ def calcMAPD(sample, lowessDir):
 def calcCS(data):
 	CS = 1 - ( 2 * np.median( abs( data - np.round(data) ) ) )
 	return CS
-	
-	
-	
-	
-	
 	
 	
 	
@@ -81,7 +67,7 @@ def getPloidy(segData):
 
 	#DO I WANT THIS FUNCTION? DOESN'T YET EXIST#
 #	thisPlots.makeQCplot(ploidyTestValues, CSarray, CScutoff, peakCS, peakPloidy)
-	print peakCS, peakPloidy
+
 	return peakCS, peakPloidy
 
 
