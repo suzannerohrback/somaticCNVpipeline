@@ -18,13 +18,12 @@ import config as cfg
 
 
 def calcReads(sample, statsDir):
-#	infile = statsDir + sample + '.bincount.stats.txt'
 	infile = statsDir + common.findInfile(sample, statsDir, ext='.bincount.stats.txt')
 	
 	with open(infile, 'r') as IN:
 		data = IN.readline()
 		readCount = data.rstrip().split('\t')[1]
-	print readCount	
+
 	return int(readCount)
 	
 	
@@ -37,7 +36,7 @@ def calcReads(sample, statsDir):
 	
 	
 def calcMAPD(sample, lowessDir):
-	infile = lowessDir + sample + '.lowess.txt'
+	infile = statsDir + common.findInfile(sample, lowessDir)
 	
 	data = np.loadtxt(infile)
 	MAPD = np.median(abs(data[1:] - data[:-1]))
