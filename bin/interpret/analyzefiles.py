@@ -75,7 +75,7 @@ def analyzeOne(sample, segDir, lowessDir, outDir, ploidy, gender):
 		cnvData[xBins] = len(xBins) * [1.]
 
 	#THIS NUMBER ALMOST CERTAINLY NEEDS TO BE SMALLER
-    listDtype = {'names': ('chrom', 'start', 'end', 'CN', 'type'), 'formats': ('S10', 'int', 'int', 'int', 'S10')}
+   	listDtype = {'names': ('chrom', 'start', 'end', 'CN', 'type'), 'formats': ('S10', 'int', 'int', 'int', 'S10')}
 	if os.stat(listFile).st_size > 47:
 		cnvs = np.loadtxt(listFile, skiprows=1, dtype=listDtype)
 		cnvs = np.atleast_1d(cnvs)
