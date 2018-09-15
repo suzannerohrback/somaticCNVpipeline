@@ -18,7 +18,9 @@ def runAll(args):
 	
 	print('\n\n\nYou have requested to map fastq files')
 	print('\tWARNING:')
-	print('\t\tIF USING ANY REFERENCES OTHER THAN THOSE I PROVIDE I CANNOT GUARANTEE RESULT ACCURACY')
+	print('\t\tPLEASE MAKE SURE YOU ARE USING')
+	print('\t\t\tBowtie v1 and Samtools v0.1.19')
+	print('\t\t\tBowtie v1 mapping indexes for either mm10 or hg38')
 	print('\n')
 
 	
@@ -44,7 +46,7 @@ def runAll(args):
 	
 
 	#run multiprocessing of all mapping commands#
-	argList = [(x, args.MapIndex, args.trim, statsDir, tempDir, samDir) for x in fastqFiles]
+	argList = [(x, args.MapIndex, args.trim, statsDir, tempDir, samDir, args.bowtie, args.samtools) for x in fastqFiles]
 	common.daemon(mapfile.runOne, argList, 'map fastq files', cpuPerProcess=8)
 
 
