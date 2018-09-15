@@ -47,7 +47,7 @@ def runAll(args):
 	#ChromPlotDir = args.AnalysisDirectory + 'ChromosomeCopyNumberPlots/'
 	#summaryPlotDir = args.AnalysisDirectory + 'CombinedSamplesPlots/'
 	
-	for i in [args.AnalysisDirectory, QCdir, CNVdir, summaryDir, CNplotDir]#, ChromPlotDir]#, summaryPlotDir]:
+	for i in [args.AnalysisDirectory, QCdir, CNVdir, summaryDir, CNplotDir]:#, ChromPlotDir]#, summaryPlotDir]:
 		common.makeDir(i)
 	
 	
