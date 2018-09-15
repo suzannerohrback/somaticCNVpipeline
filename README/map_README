@@ -100,4 +100,4 @@ Notes
 	
 9/15/18
 	Added optional arguments for specifying the binary locations of bowtie and samtools so they are not required to be in a user's PATH
-
+	!!!WARNING: I have not tested that this works
