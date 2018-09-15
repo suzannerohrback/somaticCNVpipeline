@@ -27,8 +27,7 @@ def runAll(args):
 	#Set up environment#
 	args.AnalysisDirectory = common.fixDirName(args.AnalysisDirectory)
 	
-#	print args
-#	raise SystemExit
+	
 	
 	folderDict = {'LowessBinCounts': args.lowess, 
 		    'Segments': args.segments, 
@@ -74,11 +73,9 @@ def runAll(args):
 	
 	
 	#QC assessment#
-	qcfile.runQCone(sampleNames[0], args.species, folderDict['PipelineStats'], folderDict['LowessBinCounts'], folderDict['Segments'], QCdir)
-	
-#	argList = [(x, args.species, folderDict['PipelineStats'], folderDict['Lowess'], folderDict['Segments'], QCdir) for x in sampleNames]
-	#print argList
-#	common.daemon(qcfile.runQCone, argList, 'assess sample quality')
+#	qcfile.runQCone(sampleNames[0], args.species, folderDict['PipelineStats'], folderDict['LowessBinCounts'], folderDict['Segments'], QCdir)	
+	argList = [(x, args.species, folderDict['PipelineStats'], folderDict['Lowess'], folderDict['Segments'], QCdir) for x in sampleNames]
+	common.daemon(qcfile.runQCone, argList, 'assess sample quality')
 
 	analysisSamples = []
 	ploidyDict = {}
@@ -100,7 +97,7 @@ def runAll(args):
 			genderDict[i] = data[-2]
 		
 		IN.close()
-		os.remove(QCdir + i + '.qcTEMP.txt')
+		#os.remove(QCdir + i + '.qcTEMP.txt')
 		
 	OUT.close()
 	raise SystemExit
