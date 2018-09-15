@@ -96,6 +96,7 @@ def runAll(args):
 			genderDict[i] = data[-2]
 		
 		IN.close()
+		os.remove(QCdir + i + '.qcTEMP.txt')
 		
 	OUT.close()
 	
