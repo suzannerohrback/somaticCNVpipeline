@@ -143,10 +143,6 @@ def importSegData(sample, segDir, binArray):
 	
 	segArray = np.zeros(len(binArray))
 	for i in segDataFix:
-		print i['start']
-		print binDict[i['start']]
-		print i['CN']
-		print len(segArray[binDict[i['start']]:])
 		segArray[binDict[i['start']]:] = len(segArray[binDict[i['start']]:]) * [i['CN']]
 	
 	return segDataFix, segArray
