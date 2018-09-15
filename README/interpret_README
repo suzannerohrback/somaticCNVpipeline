@@ -106,7 +106,7 @@ Options:
 		(default = 0 1 2)
 	-l/--lowess
 		A filepath to the directory where the .lowess.txt files are saved
-			(default = .../analysis directory/Lowess/)
+			(default = .../analysis directory/LowessBinCounts/)
 	-g/--segments
 		A filepath to the directory where the .segments.txt files are saved
 			(default = .../analysis directory/Segments/)	
@@ -126,15 +126,15 @@ Options:
 Notes
 ========================================================================================================================
 
-2/9/18
+2/9/2018
 	I have begun outlining the code
 	
-2/12/18
+2/12/2018
 	Finished outlining the README file
 	Added all command line arguments to the arguments.py function
 	Began setting up environment in interpret.py function
 
-3/5/18
+3/5/2018
 	Created Interpret class in config script
 	Set up for finding/creating folders and determining samples for analysis
 	QC check code has been written and integrated into the function!
@@ -144,7 +144,7 @@ Notes
 		can return either a condensed list of segments or an array of CNs for every bin
 		Check runQCone for current thoughts on input argument structure
 
-9/8/18
+9/8/2018
 	Began and finished writing FUnC implementation
 	Re-wrote some of the merging code from my original scripts to reduce complexity
 		Keep an eye on performance while debugging
@@ -152,6 +152,11 @@ Notes
 	
 	BARE MINIMUM FOR PAER RELEASE IS UPLOADED, READY TO BEGIN DEBUGGING ALL SCRIPTS
 
-No testing has been performed yet, there are almost certainly bugs to fix
+9/15/2018
+	The QC section of the code has been debugged!
+		Since the test I am running is on a single sample and method-normalization isn't performed
+			The metrics are a little lower quality than I've gotten previously for the test sample
+			Will need to double check that they improve when ready to run a full test.
+
 
 
