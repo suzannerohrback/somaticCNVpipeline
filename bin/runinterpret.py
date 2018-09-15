@@ -74,6 +74,7 @@ def runAll(args):
 	
 	#QC assessment#
 	argList = [(x, args.species, folderDict['PipelineStats'], folderDict['Lowess'], folderDict['Segments'], QCdir) for x in sampleNames]
+	print argList
 	common.daemon(qcfile.runQCone, argList, 'assess sample quality')
 
 	analysisSamples = []
@@ -99,12 +100,11 @@ def runAll(args):
 		os.remove(QCdir + i + '.qcTEMP.txt')
 		
 	OUT.close()
-	
-
-	
+	raise SystemExit
 	
 	
-	#CNV filtering#
+	
+	#FUnC: CNV filtering#
 	#sample, species, segmentDir, CNVdir, ploidy, gender
 	argList = [(x, args.species, folderDict['Segments'], CNVdir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
 	common.daemon(funcfile.runFUNCone, argList, ' remove unreliable CNV calls')
