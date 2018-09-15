@@ -104,26 +104,46 @@ def mergeCNfinal(dataDict, numBins, refArray, gender, outDir, sample):
 			else:
 				cnvList.append(dataDict[i])
 				
+
+		###THIS REQUIRES MORE REWORKING, ITS CREATING SYNTAX ERRORS AND IS WRITTEN WAY TO COMPLICATEDLY
+			#As a placeholder, I'm just skipping over it for now
 		#if a CNV doesn't pass
 		elif dataDict[i]['pass'] == 'no':
-			#if less than 25 bins...and 2 surrounding semgets on same chrom with same CN that pass, merge w/ them
-			if (binDict[dataDict[i]['abspos'] + dataDict[i]['size']] - binDict[dataDict[i]['abspos']] <= 25 and \
-			   ((i == 0 or np.round(binDict[i-1]['CN']) == np.round(binDict[i]['CN'])) and binDict[i-1]['chrom']) == np.round(binDict[i]['chrom'])) and \
-			   (np.round(binDict[i+1]['CN']) == np.round(binDict[i]['CN'])) and binDict[i+1]['chrom']) == np.round(binDict[i]['chrom']) and \
-			   ((i == 0 or binDict[i-1]['pass'] == 'cnv') and binDict[i+1]['pass'] == 'cnv') \
-			):
+			mergeTest = False
+			
+			#if less than 25 bins
+			thisSize = binDict[dataDict[i]['abspos'] + dataDict[i]['size']] - binDict[dataDict[i]['abspos']]
+			if thisSize <= 25:
+				pass
+				#and both surrounding segments on same chrom 
+					#with same CN that pass, merge w/ them (do they need to be large too?)
+				
+				#and prior seg on same chrom, next seg on diff chrom
+					#with same CN that pass, merge w/ it
+				
+				#and prior seg on diff chrom, next seg on same chrom
+					#with same CN that pass, merge w/ it
+				
+				
+				
+		#	if (binDict[dataDict[i]['abspos'] + dataDict[i]['size']] - binDict[dataDict[i]['abspos']] <= 25 and \
+ 		#	((i == 0 or np.round(binDict[i-1]['CN']) == np.round(binDict[i]['CN'])) and binDict[i-1]['chrom']) == np.round(binDict[i]['chrom'])) and \
+		#	   (np.round(binDict[i+1]['CN']) == np.round(binDict[i]['CN'])) and binDict[i+1]['chrom']) == np.round(binDict[i]['chrom']) and \
+		#	   ((i == 0 or binDict[i-1]['pass'] == 'cnv') and binDict[i+1]['pass'] == 'cnv') \
+		#	):
+				
+			if mergeTest:
 				cnvList[-1] = {'chrom': dataDict[i]['chrom'],
 							  'start': cnvList[-1]['start'],
 							  'end': dataDict[i]['end'],
 							  'cn': np.round(np.mean([dataDict[i]['CN'], dataDict[i-1]['CN']])),
 							  'pass': 'cnv'}
+	#			mergeTest = False
 				
-			else:
 				
-			
 			#in any other situation (more than 25 bins, euploid call, lack of concordance), convert to euploid
 			else:
-				continue
+				continue #Wait, this isn't doing any sort of conversion...is that fine? I think so...
 
 	outfile = outDir + sample + 'CNVlist.txt'
 	OUT = open(outfile, 'w')
