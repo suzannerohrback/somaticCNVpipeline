@@ -1,6 +1,8 @@
-/#!/usr/bin/python
-###I know there's something I need for matplotlib to run in the background
+#!/usr/bin/python
+import os,sys,inspect
+
 import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -51,7 +53,9 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	plt.close()
 
 
+#function to create cell summary file (one row per sample)
 
+#function to creat CNV summary file (one line per CNV)
 	
 	
 def analyzeOne(sample, segDir, lowessDir, outDir, ploidy, gender):
