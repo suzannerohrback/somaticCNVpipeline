@@ -74,7 +74,7 @@ def runAll(args):
 	
 	#QC assessment#
 #	qcfile.runQCone(sampleNames[0], args.species, folderDict['PipelineStats'], folderDict['LowessBinCounts'], folderDict['Segments'], QCdir)	
-	argList = [(x, args.species, folderDict['PipelineStats'], folderDict['Lowess'], folderDict['Segments'], QCdir) for x in sampleNames]
+	argList = [(x, args.species, folderDict['PipelineStats'], folderDict['LowessBinCounts'], folderDict['Segments'], QCdir) for x in sampleNames]
 	common.daemon(qcfile.runQCone, argList, 'assess sample quality')
 
 	analysisSamples = []
