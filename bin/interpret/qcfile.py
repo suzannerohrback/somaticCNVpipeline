@@ -24,7 +24,7 @@ def calcReads(sample, statsDir):
 	with open(infile, 'r') as IN:
 		data = IN.readline()
 		readCount = data.rstrip().split('\t')[1]
-		
+	print readCount	
 	return int(readCount)
 	
 	
