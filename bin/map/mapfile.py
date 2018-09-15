@@ -46,7 +46,7 @@ def runCommand(cmd, outfile=False, overwrite=False):
 
 
 
-def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
+def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir, bowtie, samtools):
   
 	#get environment prepared#
 	mapVars = cfg.Map()
@@ -60,7 +60,8 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
   
   
 	#run bowtie#
-	cmd =	mapVars.bowtieOptions +	\
+	cmd =	[bowtie] + \
+			mapVars.bowtieOptions +	\
 			[
 			'-5', str(trim[0]), 
 			'-3', str(trim[1]), 
@@ -76,7 +77,7 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 	
 	#sam to bam#
 	cmd =	[
-			mapVars.samtools, 'view', '-bS', 
+			samtools, 'view', '-bS', 
 		  	'-o', tempDir + sampleName + '.bam',
 		 	tempDir + sampleName + '.sam'
 			]
@@ -88,7 +89,7 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 	
 	#sort bam#
 	cmd =	[
-			mapVars.samtools, 'sort', 
+			samtools, 'sort', 
 		 	tempDir + sampleName + '.bam', 
 			tempDir + sampleName + '.sorted'
 			]
@@ -101,7 +102,7 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 	
 	#remove duplicates#
 	cmd =	[
-			mapVars.samtools, 'rmdup', '-s', 
+			samtools, 'rmdup', '-s', 
 			tempDir + sampleName + '.sorted.bam',
 			tempDir + sampleName + '.unique.bam'
 			]
@@ -112,7 +113,7 @@ def runOne(fastqFile, mapIdx, trim, statsDir, tempDir, samDir):
 	
 	#bam to sam#
 	cmd =	[
-			mapVars.samtools, 'view', '-h', 
+			samtools, 'view', '-h', 
 		  	'-o', samDir + sampleName + '.unique.sam',
 		 	tempDir + sampleName + '.unique.bam'
 			]
