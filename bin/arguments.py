@@ -90,6 +90,10 @@ def mapArgs():
 		help = 'A filepath to the desired directory where you would like mapping statistics saved, if not in the same parent directory as the fastq files')
 	parser.add_argument('-s', '--samples', metavar='/path/to/sample_list.txt', default=False,
 		help='Path to a file containing a list of fastq files to be processed\n\tsample names only, no path or file extension needed')
+	parser.add_argument('-b', '--bowtie', metavar='/path/to/bowtie1', default='bowtie,
+		help='Path to the bowtie binary, if not in your PATH variable')
+	parser.add_argument('-m', '--samtools', metavar='/path/to/samtools0.1.19', default='samtools',
+		help='Path to the samtools (v0.1.19) binary, if not in your PATH variable')
 	
 	return parser
 
