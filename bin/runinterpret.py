@@ -56,7 +56,7 @@ def runAll(args):
 	#get list of samples to process 
 		#will involve checking infofile (if present) and whether required input files exist
 	sampleFiles = common.getSampleList(folderDict['Segments'], args.samples, 'segments')
-	sampleNames = [x.split('.')[0] for x in sampleFiles]
+	sampleNames = [x.split('/')[-1].split('.')[0] for x in sampleFiles]
 
 	info = common.importInfoFile(args.infofile, args.columns, 'interpret')
 
