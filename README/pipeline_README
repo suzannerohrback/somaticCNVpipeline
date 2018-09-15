@@ -29,7 +29,24 @@ All fastq files for a single sample must already be concatenated
 
 
 
-	
+========================================================================================================================
+Command Line
+========================================================================================================================
+
+Get a help message:
+	somaticCNVcalling -h
+	somaticCNVcalling --help
+
+General usage (see function README files for further information):
+	somaticCNVcalling preprocess [options]
+	somaticCNVcalling map [options]
+	somaticCNVcalling count [options]
+	somaticCNVcalling segment [options]
+	somaticCNVcalling interpret [options]
+
+
+
+###THESE INSTRUCTIONS ARE OLD AND WILL BE REMOVED WHEN I HAVE CONFIREMED SUCCESS WITH THOSE GIVEN IN THE MAIN README FILE###
 ========================================================================================================================
 Installation
 ========================================================================================================================
@@ -52,20 +69,6 @@ Individual users are responsible for ensuring all dependencies are met
 
 
 
-========================================================================================================================
-Command Line
-========================================================================================================================
-
-Get a help message:
-	somaticCNVcalling -h
-	somaticCNVcalling --help
-
-General usage (see function README files for further information):
-	somaticCNVcalling preprocess [options]
-	somaticCNVcalling map [options]
-	somaticCNVcalling count [options]
-	somaticCNVcalling segment [options]
-	somaticCNVcalling interpret [options]
 	
 	
 	
