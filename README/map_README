@@ -36,7 +36,7 @@ Get a help message:
 	
 Options:
 	somaticCNVcalling map [options] /path/to/fastq/files/ /path/to/mapping/index/filePrefix
-		The mapping index MUST be either mm10 or hg38, and created with bowtie (v1)
+		The mapping index MUST be in either mm10 or hg38, and created with bowtie (v1)
 	
   	-t/--trim X X
 		Bases to trim from the 5' and 3' ends of all reads during mapping (default = 0 0)
@@ -55,6 +55,11 @@ Options:
 			The unique sample name is sufficient (ex dev036)
 		This is useful for situations such as if you need to trim different files in different manners
 		(default = process all samples in the directory)
+	-b/--bowtie /path/to/bowtie1
+		Location of the the bowtie (1) binary, if it is not in your PATH variable
+
+	-m/--samtools /path/to/samtools0.1.19
+		Location of the samtools (v0.1.19) binary, if it is not in your PATH variable
 
 
 
@@ -93,5 +98,6 @@ Notes
 	
 		Should probably also make the path to samtools more obvious that it needs user-specific updating, or make it a variable
 	
-
+9/15/18
+	Added optional arguments for specifying the binary locations of bowtie and samtools so they are not required to be in a user's PATH
 
