@@ -145,9 +145,9 @@ def importSegData(sample, segDir, binArray):
 	for i in segDataFix:
 		print i['start']
 		print binDict[i['start']]
-		print i['logCN']
+		print i['CN']
 		print len(segArray[binDict[i['start']]:])
-		segArray[binDict[i['start']]:] = len(segArray[binDict[i['start']]:]) * [i['logCN']]
+		segArray[binDict[i['start']]:] = len(segArray[binDict[i['start']]:]) * [i['CN']]
 	
 	return segDataFix, segArray
 
