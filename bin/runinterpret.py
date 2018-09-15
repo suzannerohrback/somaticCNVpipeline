@@ -27,8 +27,8 @@ def runAll(args):
 	#Set up environment#
 	args.AnalysisDirectory = common.fixDirName(args.AnalysisDirectory)
 	
-	print args
-	raise SystemExit
+#	print args
+#	raise SystemExit
 	
 	folderDict = {'LowessBinCounts': args.lowess, 
 		    'Segments': args.segments, 
