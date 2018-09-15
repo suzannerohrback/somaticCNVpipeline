@@ -73,9 +73,11 @@ def runAll(args):
 	
 	
 	#QC assessment#
-	argList = [(x, args.species, folderDict['PipelineStats'], folderDict['Lowess'], folderDict['Segments'], QCdir) for x in sampleNames]
-	print argList
-	common.daemon(qcfile.runQCone, argList, 'assess sample quality')
+	qcfile.runQCone(sampleNames[0], args.species, folderDict['PipelineStats'], folderDict['Lowess'], folderDict['Segments'], QCdir)
+	
+#	argList = [(x, args.species, folderDict['PipelineStats'], folderDict['Lowess'], folderDict['Segments'], QCdir) for x in sampleNames]
+	#print argList
+#	common.daemon(qcfile.runQCone, argList, 'assess sample quality')
 
 	analysisSamples = []
 	ploidyDict = {}
