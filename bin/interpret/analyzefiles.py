@@ -15,12 +15,12 @@ import config as cfg
 
 
 def plotProfile(sample, outDir, lowessData, cnvData, refArray):
-    xVals = [x['abspos'] + (x['size']/2) for x in refArray]
+	xVals = [x['abspos'] + (x['size']/2) for x in refArray]
 
-    chromStarts = [min([y['start'] for y in refArray[refArray['chrom'] == x]]) for x in np.unique(refArray['chrom'])]
-    chromEnds = [max([y['start'] + y['size'] for y in refArray[refArray['chrom'] == x]]) for x in np.unique(refArray['chrom'])]
-    chromEdges = chromEnds[:-1]
-    xTicks = [np.mean([chromStarts[x], chromEnds[x]]) for x,y in enumerate(np.unique(refArray['chrom'])[:-1])]
+	chromStarts = [min([y['start'] for y in refArray[refArray['chrom'] == x]]) for x in np.unique(refArray['chrom'])]
+	chromEnds = [max([y['start'] + y['size'] for y in refArray[refArray['chrom'] == x]]) for x in np.unique(refArray['chrom'])]
+	chromEdges = chromEnds[:-1]
+	xTicks = [np.mean([chromStarts[x], chromEnds[x]]) for x,y in enumerate(np.unique(refArray['chrom'])[:-1])]
 
 	fig, ax = plt.subplots()
 
@@ -87,6 +87,6 @@ def analyzeOne(sample, segDir, lowessDir, outDir, ploidy, gender):
 
 
 
-##
+
 
 
