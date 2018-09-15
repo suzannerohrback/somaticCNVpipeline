@@ -27,6 +27,7 @@ class Map:
 	def __init__(self):
 		self.currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 		
+		#Commented out because this doesn't seem to work
 	#	self.indexDict =	{
 	#						'hg38': self.currentdir + '/reference/hg38_index/hg38.index',
 	#						'mm10': self.currentdir + '/reference/mm10_index/mm10.index',
@@ -37,7 +38,7 @@ class Map:
 	#	self.samtools = '/home/k4zhang/softwares/samtools-0.1.19/samtools'
 		
 		self.bowtieOptions =	[
-								'bowtie',
+							#	'bowtie',
 								 '-p 8',
 								 '-S', 
 								 '-t',
