@@ -108,8 +108,8 @@ def mergeCNfinal(dataDict, numBins, refArray, gender, outDir, sample):
 		elif dataDict[i]['pass'] == 'no':
 			#if less than 25 bins...and 2 surrounding semgets on same chrom with same CN that pass, merge w/ them
 			if (binDict[dataDict[i]['abspos'] + dataDict[i]['size']] - binDict[dataDict[i]['abspos']] <= 25 and \
-			   ((i == 0 or np.round(binDict[i-1]['CN']) == np.round(bindDict[i]['CN'])) and binDict[i-1]['chrom']) == np.round(bindDict[i]['chrom'])) and \
-			   (np.round(binDict[i+1]['CN']) == np.round(bindDict[i]['CN'])) and binDict[i+1]['chrom']) == np.round(bindDict[i]['chrom']) and \
+			   ((i == 0 or np.round(binDict[i-1]['CN']) == np.round(binDict[i]['CN'])) and binDict[i-1]['chrom']) == np.round(binDict[i]['chrom'])) and \
+			   (np.round(binDict[i+1]['CN']) == np.round(binDict[i]['CN'])) and binDict[i+1]['chrom']) == np.round(binDict[i]['chrom']) and \
 			   ((i == 0 or binDict[i-1]['pass'] == 'cnv') and binDict[i+1]['pass'] == 'cnv') \
 			):
 				cnvList[-1] = {'chrom': dataDict[i]['chrom'],
