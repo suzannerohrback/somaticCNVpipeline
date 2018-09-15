@@ -18,7 +18,8 @@ import config as cfg
 
 
 def calcReads(sample, statsDir):
-	infile = statsDir + sample + '.bincount.stats.txt'
+#	infile = statsDir + sample + '.bincount.stats.txt'
+	infile = statsDir + common.findInfile(sample, statsDir, ext='.bincount.stats.txt')
 	
 	with open(infile, 'r') as IN:
 		data = IN.readline()
