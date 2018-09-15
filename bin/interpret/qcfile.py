@@ -36,7 +36,7 @@ def calcReads(sample, statsDir):
 	
 	
 def calcMAPD(sample, lowessDir):
-	infile = statsDir + common.findInfile(sample, lowessDir)
+	infile = lowessDir + common.findInfile(sample, lowessDir)
 	
 	data = np.loadtxt(infile)
 	MAPD = np.median(abs(data[1:] - data[:-1]))
