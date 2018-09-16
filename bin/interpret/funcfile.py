@@ -164,7 +164,7 @@ def mergeCNfinal(dataDict, numBins, refArray, gender, outDir, sample):
 
 
 
-def runFUNCone(sample, species, segmentDir, CNVdir, ploidy, gender):
+def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	
 	#import config info#
 	interpretVars = cfg.Interpret()
