@@ -89,15 +89,12 @@ def runAll(args):
 		data = IN.readline()	
 		OUT.write(data)
 		
-		x = data.rstrip().split('\t')
-		if x[-1] == 'True':
-			print 'found 1!'
+		data = data.rstrip().split('\t')
+		print x
+		if data[-1] == 'True':
 			analysisSamples.append(i)
 			ploidyDict[i] = float(data[4])
 			genderDict[i] = data[-2]
-		else:
-			print x
-			print data
 		
 		IN.close()
 		os.remove(QCdir + i + '.qcTEMP.txt')
