@@ -95,6 +95,9 @@ def runAll(args):
 			analysisSamples.append(i)
 			ploidyDict[i] = float(data[4])
 			genderDict[i] = data[-2]
+		else:
+			print x
+			print data
 		
 		IN.close()
 		os.remove(QCdir + i + '.qcTEMP.txt')
