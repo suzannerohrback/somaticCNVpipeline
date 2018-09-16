@@ -169,7 +169,7 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	#import config info#
 	interpretVars = cfg.Interpret()
 	binArray = common.importInfoFile(interpretVars.binDict[species], [0, 1, 2, 4, 5], 'normref', skiprows=1)
-	cutoffArray = np.loadtxt(interpretVars.cutoffFile, skiprows=1, dtype={'names': ('bins', 'intD'), formats: ('int', 'float')})
+	cutoffArray = np.loadtxt(interpretVars.cutoffFile, skiprows=1, dtype={'names': ('bins', 'intD'), 'formats': ('int', 'float')})
 	cutoffDict = {x['bins']: x['intD'] for x in cutoffArray}
 	
 	#load segment data#
