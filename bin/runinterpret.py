@@ -91,6 +91,7 @@ def runAll(args):
 		
 		x = data.rstrip().split('\t')
 		if x[-1] == 'TRUE':
+			print 'found 1!'
 			analysisSamples.append(i)
 			ploidyDict[i] = float(data[4])
 			genderDict[i] = data[-2]
@@ -100,6 +101,9 @@ def runAll(args):
 		
 	OUT.close()
 	
+	print analysisSamples
+	print ploidyDict
+	print genderDict
 	
 	
 	#FUnC: CNV filtering#
