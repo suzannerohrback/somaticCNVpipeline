@@ -90,7 +90,7 @@ def runAll(args):
 		OUT.write(data)
 		
 		x = data.rstrip().split('\t')
-		if x[-1] == 'TRUE':
+		if x[-1] == 'True':
 			print 'found 1!'
 			analysisSamples.append(i)
 			ploidyDict[i] = float(data[4])
