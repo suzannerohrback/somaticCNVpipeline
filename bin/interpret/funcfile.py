@@ -180,7 +180,7 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	dataDict = [ {y: x[y] for y in segData.dtype.names} for x in segData ]
 
 	#merge adjacent segments that have the same copy number, when merging improves intD#
-	mergeDataDict = mergeCNinitial(dataDict)
+	mergeDataDict = mergeCNinitial(dataDict, gender)
 	raise SystemExit
 	
 	#run FUnC#
