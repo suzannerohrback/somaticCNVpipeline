@@ -83,7 +83,7 @@ def FUnC(dataDict, refArray, cutoffDict, gender):
 			dataDict[i]['pass'] = 'no'
 			
 	for i in dataDict:
-		print i['chrom'], i['start'], i['end'], i['CN'], i['size'], i['pass']
+		print i['chrom'], i['start'], i['end'], i['CN'], i['bins'], i['pass']
 
 	return dataDict
 
