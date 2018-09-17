@@ -175,11 +175,13 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	#load segment data#
 	segData, segArray = common.importSegData(sample, segmentDir, binArray)
 	segData['CN'] = segData['CN'] * ploidy
-	print segData.dtype
-	dataDict = [ {y: x[y] for y in segData.dtype['names']} for x in segData ]
+	dataDict = [ {y: x[y] for y in segData.dtype.names} for x in segData ]
+	print dataDict
 
 	#merge adjacent segments that have the same copy number, when merging improves intD#
 	mergeDataDict = mergeCNinitial(dataDict)
+	print mergeDataDict
+	raise SystemExit
 	
 	#run FUnC#
 	funcDataDict = FUnC(mergeDataDict, binArray, cutoffDict, gender)
