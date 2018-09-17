@@ -194,8 +194,8 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	
 	#run FUnC#
 	funcDataDict = FUnC(mergeDataDict, binArray, cutoffDict, gender)
-	numFail = list(funcDataDict['pass']).count('no')
-	numPass = list(funcDataDict['pass']).count('cnv')
+	numFail = [x['pass'] for x in funcDataDict].count('no')
+	numPass = [x['pass'] for x in funcDataDict].count('cnv')
 	printText = '\t\tFinished performing FUnC on ' + sample + ' removed ' + str(numFail) + ' of ' + str(numFail + numPass) + ' CNV calls'
 	print(printText)
 	raise SystemExit
