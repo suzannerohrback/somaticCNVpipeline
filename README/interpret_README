@@ -158,5 +158,23 @@ Notes
 			The metrics are a little lower quality than I've gotten previously for the test sample
 			Will need to double check that they improve when ready to run a full test.
 
+9/16/2018
+	Debugging mostly complete for runfunc
+		Initial merging of adjacent segments with matching CN estimates (if this doesn't obscure likely CNV calls)
+		Comparing to FUnC reference and marking calls as euploid, cnv, or fail
+	Still need to work through final merge and writing output file
+		First, CNV calls < 3 bins are combined with the most similar neighbor (euploid or CNV)
+		Second, adjacent passing CNVs with the same copy number (on same chrom) are combined into one call
+		Third, small segments (<= 25 bins) that fail as CNV calls are either
+			Combined with neighboring CNVs IF 
+				Both are on the same chromosome
+				Both have the same copy number
+				Both pass FUnC
+				Both are > 25 bins
+				(because this indicates the baseline CN in this locus is not euploid)
+			Otherwise, converted to euploid
+		Euploid regions obviously stay euploid
+		Large segments (>25 bins) are automatically treated as euploid too
+		
 
 
