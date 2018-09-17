@@ -65,9 +65,12 @@ def FUnC(dataDict, refArray, cutoffDict, gender):
 	#make dict of ref array so I can calculate out bin number
 	binDict = {y:x for x,y in enumerate(refArray['abspos'])}
 	binDict[refArray[-1]['abspos'] + refArray[-1]['size']] = len(refArray)
-	print max(binDict.keys())
-	print refArray[-5:]
-	print binDict[refArray[-1]['abspos']]
+#	print max(binDict.keys())
+#	print refArray[-5:]
+#	print binDict[refArray[-1]['abspos']]
+	
+	#fix for last bin not having the correct end position#
+	dataDict[-1]['end'] = max(binDict.keys())
 	
 	#for each entry, calc bin size, compare to cutoffDict
 	for i in range(len(dataDict)):
