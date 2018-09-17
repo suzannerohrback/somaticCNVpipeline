@@ -42,7 +42,7 @@ def mergeCNinitial(dataDict, gender):
 
 			#previously was <=
 			if mergeIntdist < weightedAverageIntdist or np.round(i['CN']) == getNormalCN(i['chrom'], gender):
-				print 'passed', weightedAverageIntdist, mergeIntdist
+			#	print 'passed', weightedAverageIntdist, mergeIntdist
 				prevMerge = newData.pop()
 				addData =	{
 					'chrom': i['chrom'], 
@@ -50,13 +50,11 @@ def mergeCNinitial(dataDict, gender):
 					'end': i['end'], 
 					'CN': weightedAverageCN
 					}
-			else:
-				print 'failed', weightedAverageIntdist, mergeIntdist
+			#else:
+			#	print 'failed', weightedAverageIntdist, mergeIntdist
 
 		newData.append(addData)
 
-	for i in newData:
-		print i['chrom'], i['start'], i['end'], i['CN']
 	return newData
 
 
@@ -72,6 +70,7 @@ def FUnC(dataDict, refArray, cutoffDict, gender):
 	for i in range(len(dataDict)):
 		normalCN = getNormalCN(dataDict[i]['chrom'], gender)
 		thisSize = bindDict[dataDict[i]['abspos'] + dataDict['abspos']['size']] - binDict[dataDict[i]['abspos']]
+		dataDict['bins'] = thisSize
 		
 		if np.round(i['CN']) == normalCN:
 			dataDict[i]['pass'] = 'eup'
@@ -80,6 +79,9 @@ def FUnC(dataDict, refArray, cutoffDict, gender):
 		else:
 			dataDict[i]['pass'] = 'no'
 			
+	for i in dataDict:
+		print i['chrom'], i['start'], i['end'], i['CN'], i['size'], i['pass']
+
 	return dataDict
 
 
@@ -186,10 +188,10 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 
 	#merge adjacent segments that have the same copy number, when merging improves intD#
 	mergeDataDict = mergeCNinitial(dataDict, gender)
-	raise SystemExit
 	
 	#run FUnC#
 	funcDataDict = FUnC(mergeDataDict, binArray, cutoffDict, gender)
+	raise SystemExit
 	
 	#second merge and write output file#
 	mergeCNfinal(funcDataDict, len(binArray), binArray, gender, CNVdir, sample)
