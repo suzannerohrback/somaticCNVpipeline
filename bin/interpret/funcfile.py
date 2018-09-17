@@ -69,7 +69,7 @@ def FUnC(dataDict, refArray, cutoffDict, gender):
 	#for each entry, calc bin size, compare to cutoffDict
 	for i in range(len(dataDict)):
 		normalCN = getNormalCN(dataDict[i]['chrom'], gender)
-		thisSize = binDict[dataDict[i]['abspos'] + dataDict['abspos']['size']] - binDict[dataDict[i]['abspos']]
+		thisSize = binDict[dataDict[i]['end'] - binDict[dataDict[i]['end'] + 1]
 		dataDict['bins'] = thisSize
 		
 		if np.round(i['CN']) == normalCN:
