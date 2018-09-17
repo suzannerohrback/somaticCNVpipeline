@@ -25,7 +25,7 @@ ref = importdata(refFile);
 %end
 
 chroms = ref(:, 1);
-bins = ref(:, 2);
+bins = ref(:, 3);
 logLowess = sampleData;
 clear ref sampleData
 
