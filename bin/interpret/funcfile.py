@@ -70,7 +70,7 @@ def FUnC(dataDict, refArray, cutoffDict, gender):
 #	print binDict[refArray[-1]['abspos']]
 	
 	#fix for last bin not having the correct end position#
-	dataDict[-1]['end'] = max(binDict.keys())
+	dataDict[-1]['end'] = max(binDict.keys()-1)
 	
 	#for each entry, calc bin size, compare to cutoffDict
 	for i in range(len(dataDict)):
