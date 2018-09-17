@@ -1,31 +1,30 @@
 sampleData = importdata(binFile);
 ref = importdata(refFile);
 
-chromX = chromNum - 1;
-chromY = chromNum;
+%chromX = chromNum - 1;
+%chromY = chromNum;
 
-chroms = zeros(length(ref.textdata), 1);
-
-
-
-for i = 1:length(ref.textdata)-1
-	chrom = textscan(ref.textdata{i+1},'%s %s','delimiter','r');
-	chromName = chrom{2}{1};
-	switch chromName
-		case 'X'
-			chroms(i) = chromX;
-		case 'Y'
-			chroms(i) = chromY;
-		otherwise
-			chroms(i) = str2double(chromName);
-	end
-end
-
+%chroms = zeros(length(ref.textdata), 1);
+%
+%for i = 1:length(ref.textdata)-1
+%	chrom = textscan(ref.textdata{i+1},'%s %s','delimiter','r');
+%	chromName = chrom{2}{1};
+%	switch chromName
+%		case 'X'
+%			chroms(i) = chromX;
+%		case 'Y'
+%			chroms(i) = chromY;
+%		otherwise
+%			chroms(i) = str2double(chromName);
+%	end
+%end
+%
 %NO CLUE WHY THIS FIX IS BEING NEEDED, I'VE NEVER HAD THIS ISSUE BEFORE
-if chroms(length(chroms)) == 0
-	chroms(length(chroms)) = chroms(length(chroms)-1);
-end
+%if chroms(length(chroms)) == 0
+%	chroms(length(chroms)) = chroms(length(chroms)-1);
+%end
 
+chroms = ref.data(:, 1);
 bins = ref.data(:, 2);
 logLowess = sampleData;
 clear ref sampleData
