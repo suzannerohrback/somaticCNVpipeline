@@ -33,7 +33,7 @@ def writeMatlabScript(sample, species, tempDir, lowessDir, segmentDir):
 	OUT.write(str("refFile = '" + segVars.binDict[species] + "';\n"))
 	OUT.write(str("binFile = '" + lowessDir + sample + ".lowess.txt';\n"))
 	OUT.write(str("saveFile = '" + segmentDir + sample + ".segments.txt';\n"))
-%	OUT.write(str("chromNum = " + str(segVars.chromNumDict[species]) + ";\n"))
+#	OUT.write(str("chromNum = " + str(segVars.chromNumDict[species]) + ";\n"))
 	OUT.write(str("alpha = " + str(segVars.CBSalpha) + ";\n"))
 
 	OUT.write('\n\n\n\n\n%Generic processing code\n')
