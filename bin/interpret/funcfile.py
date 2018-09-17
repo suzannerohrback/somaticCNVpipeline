@@ -24,7 +24,7 @@ def getNormalCN(chrom, gender):
 
 
 
-def mergeCNinitial(dataDict):
+def mergeCNinitial(dataDict, gender):
 	newData = [dataDict[0]]
 
 	for i in dataDict[1:]:
@@ -40,7 +40,7 @@ def mergeCNinitial(dataDict):
 			nextIntdist = abs(np.round(i['CN']) - i['CN'])
 			weightedAverageIntdist = np.average([currentIntdist, nextIntdist], weights = [currentWeight, nextWeight])
 
-			if mergeIntdist <= weightedAverageIntdist:
+			if mergeIntdist <= weightedAverageIntdist or np.round(i['CN']) == getNormalCN(i['chrom'], gender):
 				prevMerge = newData.pop()
 				addData =	{
 					'chrom': i['chrom'], 
