@@ -41,6 +41,7 @@ def mergeCNinitial(dataDict, gender):
 			weightedAverageIntdist = np.average([currentIntdist, nextIntdist], weights = [currentWeight, nextWeight])
 
 			if mergeIntdist <= weightedAverageIntdist or np.round(i['CN']) == getNormalCN(i['chrom'], gender):
+				print weightedAverageIntdist, mergeIntdist
 				prevMerge = newData.pop()
 				addData =	{
 					'chrom': i['chrom'], 
