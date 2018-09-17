@@ -89,8 +89,8 @@ class Segment:
 		self.currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 		
 		self.binDict =	{
-						'hg38': self.currentdir + '/reference/hg38.varbin.gc.content.25k.bowtie.k36.txt',
-						'mm10': self.currentdir + '/reference/mm10.varbin.gc.content.25k.bowtie.k36.txt',
+						'hg38': self.currentdir + '/reference/hg38.matlab_reference.25k.bowtie.k36.txt',
+						'mm10': self.currentdir + '/reference/mm10.matlab_reference.25k.bowtie.k36.txt',
 						}
 			
 		#Commenting this out because I don't think it's the best for other users
