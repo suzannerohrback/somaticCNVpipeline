@@ -64,13 +64,10 @@ def mergeCNinitial(dataDict, gender):
 def FUnC(dataDict, refArray, cutoffDict, gender):
 	#make dict of ref array so I can calculate out bin number
 	binDict = {y:x for x,y in enumerate(refArray['abspos'])}
-	binDict[refArray[-1]['abspos'] + refArray[-1]['size']+1] = len(refArray)
-#	print max(binDict.keys())
-#	print refArray[-5:]
-#	print binDict[refArray[-1]['abspos']]
-	
+
 	#fix for last bin not having the correct end position#
-	dataDict[-1]['end'] = max(binDict.keys()-1)
+	binDict[refArray[-1]['abspos'] + refArray[-1]['size']+1] = len(refArray)
+	dataDict[-1]['end'] = max(binDict.keys())-1
 	
 	#for each entry, calc bin size, compare to cutoffDict
 	for i in range(len(dataDict)):
