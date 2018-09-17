@@ -194,12 +194,16 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	
 	#run FUnC#
 	funcDataDict = FUnC(mergeDataDict, binArray, cutoffDict, gender)
+	numFail = list(funcDataDict['pass']).count('no')
+	numPass = list(funcDataDict['pass']).count('cnv')
+	printText = '\t\tFinished performing FUnC on ' + sample + ' removed ' + str(numFail) + ' of ' + str(numFail + numPass) + ' CNV calls'
+	print(printText)
 	raise SystemExit
 	
 	#second merge and write output file#
 	mergeCNfinal(funcDataDict, len(binArray), binArray, gender, CNVdir, sample)
 	
-	printText = '\t\tFinished performing FUnC on ' + sample
+	printText = '\t\tFinished performing FUnC on ' + sample + ' removed ' + str(numFail) + ' of ' + str(numFail + numPass) + ' CNV calls'
 	print(printText)
 
 	
