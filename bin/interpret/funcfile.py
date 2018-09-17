@@ -50,6 +50,8 @@ def mergeCNinitial(dataDict):
 					}
 		newData.append(addData)
 
+	for i in newData:
+		print i['chrom'], i['start'], i['end'], i['CN']
 	return newData
 
 
