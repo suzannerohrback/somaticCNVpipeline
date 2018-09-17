@@ -66,6 +66,7 @@ def FUnC(dataDict, refArray, cutoffDict, gender):
 	binDict = {y:x for x,y in enumerate(refArray['abspos'])}
 	binDict[refArray[-1]['abspos'] + refArray[-1]['size']] = len(refArray)
 	print max(binDict.keys())
+	print refArray[-10:]
 	
 	#for each entry, calc bin size, compare to cutoffDict
 	for i in range(len(dataDict)):
