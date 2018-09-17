@@ -161,3 +161,7 @@ No testing has been performed yet, there are almost certainly bugs to fix
 		Activating the normalizeonly option to skip CBS (as if the user wants to run segmentation independently)
 		Activating the samples option to run on only a specific subset of samples
 		
+9/16/2018
+	Additional Matlab code debugging performed
+		Generated a simpler refernce so converting chromosomes to numbers isn't an issue in the first place
+		
