@@ -70,7 +70,7 @@ def FUnC(dataDict, refArray, cutoffDict, gender):
 	for i in range(len(dataDict)):
 		normalCN = getNormalCN(dataDict[i]['chrom'], gender)
 		thisSize = binDict[dataDict[i]['end'] - binDict[dataDict[i]['end'] + 1]
-		dataDict['bins'] = thisSize
+		dataDict[i]['bins'] = thisSize
 		
 		if np.round(i['CN']) == normalCN:
 			dataDict[i]['pass'] = 'eup'
