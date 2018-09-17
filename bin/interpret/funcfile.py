@@ -82,8 +82,8 @@ def FUnC(dataDict, refArray, cutoffDict, gender):
 		else:
 			dataDict[i]['pass'] = 'no'
 			
-	for i in dataDict:
-		print i['chrom'], i['start'], i['end'], i['CN'], i['bins'], i['pass']
+#	for i in dataDict:
+#		print i['chrom'], i['start'], i['end'], i['CN'], i['bins'], i['pass']
 
 	return dataDict
 
@@ -196,14 +196,12 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	funcDataDict = FUnC(mergeDataDict, binArray, cutoffDict, gender)
 	numFail = [x['pass'] for x in funcDataDict].count('no')
 	numPass = [x['pass'] for x in funcDataDict].count('cnv')
-	printText = '\t\tFinished performing FUnC on ' + sample + ' removed ' + str(numFail) + ' of ' + str(numFail + numPass) + ' CNV calls'
-	print(printText)
 	raise SystemExit
 	
 	#second merge and write output file#
 	mergeCNfinal(funcDataDict, len(binArray), binArray, gender, CNVdir, sample)
 	
-	printText = '\t\tFinished performing FUnC on ' + sample + ' removed ' + str(numFail) + ' of ' + str(numFail + numPass) + ' CNV calls'
+	printText = '\t\tFinished performing FUnC on ' + sample + ', removed ' + str(numFail) + ' of ' + str(numFail + numPass) + ' CNV calls'
 	print(printText)
 
 	
