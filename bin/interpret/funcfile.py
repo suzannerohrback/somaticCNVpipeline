@@ -72,7 +72,7 @@ def FUnC(dataDict, refArray, cutoffDict, gender):
 		thisSize = binDict[dataDict[i]['end']+1] - binDict[dataDict[i]['start']]
 		dataDict[i]['bins'] = thisSize
 		
-		if np.round(datDict[i]['CN']) == normalCN:
+		if np.round(dataDict[i]['CN']) == normalCN:
 			dataDict[i]['pass'] = 'eup'
 		elif abs(np.round(dataDict[i]['CN']) - dataDict[i]['CN']) <= cutoffDict[thisSize]:
 			dataDict[i]['pass'] = 'cnv'
