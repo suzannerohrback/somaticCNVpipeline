@@ -126,6 +126,7 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 	#pass 1: merge passing CNVs if same CN and same chrom#
 	merge1 = [funcDict[0]]
 	for i, j in enumerate(funcDict[1:]):
+		thisEntry = j
 		if j['pass'] == funcDict[i]['pass'] == 'cnv': #both entries passed FUnC
 			if j['chrom'] == funcDict[i]['chrom']: #both entries on the same chromosome
 				if np.round(j['CN']) == np.round(funcDict[i]['CN']): #both entries have the same copy number
@@ -133,7 +134,9 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 					print merge1[-1]
 					print j
 					raise SystemExit
-					#####################33
+					#thisEntry = ?
+					#####################
+		merge1.append(thisEntry)
 				
 	
 	
@@ -197,7 +200,7 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	numFail = [x['pass'] for x in funcDataDict].count('no')
 	numPass = [x['pass'] for x in funcDataDict].count('cnv')
 	
-	print funcDataDict[:2]
+
 	
 	#second merge and write output file#
 	mergeCNfinal(funcDataDict, len(refArray), binDict, gender, CNVdir, sample)
