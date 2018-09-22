@@ -133,6 +133,18 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 					print 'NEED TO MERGE'
 					print merge1[-1]
 					print j
+					
+					prev = merge1.pop()
+					new = {
+						'chrom': j['chrom'],
+						'start': prev['start'], 
+						'end': j['end'],
+						'CN': mergeSegCN(prev, j),
+						'bins': prev['bins'] + j['bins'],
+						'pass': 'cnv'
+					}
+					print new
+					
 					raise SystemExit
 					#thisEntry = ?
 					#####################
