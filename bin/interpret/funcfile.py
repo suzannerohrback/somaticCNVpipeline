@@ -132,7 +132,7 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 						'bins': prev['bins'] + j['bins'],
 						'pass': 'cnv'
 					}
-					print new
+					print thisEntry
 		merge1.append(thisEntry)
 				
 	for i in merge1:
