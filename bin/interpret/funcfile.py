@@ -98,7 +98,7 @@ def FUnC(dataDict, binDict, cutoffDict, gender):
 
 
 def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
-"""		
+	"""		
 	First, CNV calls < 3 bins are combined with the most similar neighbor (euploid or CNV)
 	Second, adjacent passing CNVs with the same copy number (on same chrom) are combined into one call
 	Third, small segments (<= 25 bins) that fail as CNV calls are either
@@ -111,7 +111,7 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 		Otherwise, converted to euploid
 	Euploid regions obviously stay euploid
 	Large segments (>25 bins) are automatically treated as euploid too
-"""
+	"""
 	
 	#pass 1: merge passing CNVs if same CN and same chrom#
 	merge1 = [funcDict[0]]
