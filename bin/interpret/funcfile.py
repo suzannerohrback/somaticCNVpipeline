@@ -24,11 +24,21 @@ def getNormalCN(chrom, gender):
 
 
 
-def mergeSegCN(seg1, seg2):
+def mergeSegCN(seg1, seg2, intD=False):
 	currentWeight = seg1['end'] - seg1['start']
 	nextWeight = seg2['end'] - seg2['start']
 	weightedAverageCN = np.average([seg1['CN'], seg2['CN']], weights = [currentWeight, nextWeight])
-	return weightedAverageCN
+	
+	if intD:
+		currentIntdist = abs(np.round(seg1['CN']) - seg1['CN'])
+		nextIntdist = abs(np.round(seg2['CN']) - seg2['CN'])
+		weightedAverageIntdist = np.average([currentIntdist, nextIntdist], weights = [currentWeight, nextWeight])
+		mergeIntdist = abs(np.round(weightedAverageCN) - weightedAverageCN)
+		
+		return weightedAverageCN, weightedAverageIntdist, mergeIntdist
+
+	else:
+		return weightedAverageCN
 	
 	
 	
@@ -44,12 +54,12 @@ def mergeCNinitial(dataDict, gender):
 	#		currentWeight = newData[-1]['end'] - newData[-1]['start']
 	#		nextWeight = i['end'] - i['start']
 	#		weightedAverageCN = np.average([newData[-1]['CN'], i['CN']], weights = [currentWeight, nextWeight])
-			weightedAverageCN = mergeSegCN(newData[-1], i)
-			mergeIntdist = abs(np.round(weightedAverageCN) - weightedAverageCN)
+			weightedAverageCN, weightedAverageIntdist, mergeIntdist = mergeSegCN(newData[-1], i, intD=True)
+	#		mergeIntdist = abs(np.round(weightedAverageCN) - weightedAverageCN)
 
-			currentIntdist = abs(np.round(newData[-1]['CN']) - newData[-1]['CN'])
-			nextIntdist = abs(np.round(i['CN']) - i['CN'])
-			weightedAverageIntdist = np.average([currentIntdist, nextIntdist], weights = [currentWeight, nextWeight])
+	#		currentIntdist = abs(np.round(newData[-1]['CN']) - newData[-1]['CN'])
+	#		nextIntdist = abs(np.round(i['CN']) - i['CN'])
+	#		weightedAverageIntdist = np.average([currentIntdist, nextIntdist], weights = [currentWeight, nextWeight])
 
 			#previously was <=
 			if mergeIntdist < weightedAverageIntdist or np.round(i['CN']) == getNormalCN(i['chrom'], gender):
