@@ -196,6 +196,8 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	funcDataDict = FUnC(mergeDataDict, binArray, cutoffDict, gender)
 	numFail = [x['pass'] for x in funcDataDict].count('no')
 	numPass = [x['pass'] for x in funcDataDict].count('cnv')
+	
+	print funcDataDict
 	raise SystemExit
 	
 	#second merge and write output file#
