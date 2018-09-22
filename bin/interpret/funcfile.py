@@ -171,7 +171,7 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	
 	
 	#load segment data#
-	segData, segArray = common.importSegData(sample, segmentDir, binArray)
+	segData, segArray = common.importSegData(sample, segmentDir, refArray)
 	segData['CN'] = segData['CN'] * ploidy
 	dataDict = [ {y: x[y] for y in segData.dtype.names} for x in segData ]
 
