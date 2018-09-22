@@ -51,17 +51,9 @@ def mergeCNinitial(dataDict, gender):
 		addData = i
 
 		if newData[-1]['chrom'] == i['chrom'] and np.round(newData[-1]['CN']) == np.round(i['CN']):
-	#		currentWeight = newData[-1]['end'] - newData[-1]['start']
-	#		nextWeight = i['end'] - i['start']
-	#		weightedAverageCN = np.average([newData[-1]['CN'], i['CN']], weights = [currentWeight, nextWeight])
 			weightedAverageCN, weightedAverageIntdist, mergeIntdist = mergeSegCN(newData[-1], i, intD=True)
-	#		mergeIntdist = abs(np.round(weightedAverageCN) - weightedAverageCN)
 
-	#		currentIntdist = abs(np.round(newData[-1]['CN']) - newData[-1]['CN'])
-	#		nextIntdist = abs(np.round(i['CN']) - i['CN'])
-	#		weightedAverageIntdist = np.average([currentIntdist, nextIntdist], weights = [currentWeight, nextWeight])
-
-			#previously was <=
+			#previously was <= but that's stupid b/c it can really only improve
 			if mergeIntdist < weightedAverageIntdist or np.round(i['CN']) == getNormalCN(i['chrom'], gender):
 			#	print 'passed', weightedAverageIntdist, mergeIntdist
 				prevMerge = newData.pop()
@@ -98,9 +90,6 @@ def FUnC(dataDict, binDict, cutoffDict, gender):
 		else:
 			dataDict[i]['pass'] = 'no'
 			
-#	for i in dataDict:
-#		print i['chrom'], i['start'], i['end'], i['CN'], i['bins'], i['pass']
-
 	return dataDict
 
 
@@ -135,7 +124,7 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 					print j
 					
 					prev = merge1.pop()
-					new = {
+					thisEntry = {
 						'chrom': j['chrom'],
 						'start': prev['start'], 
 						'end': j['end'],
@@ -144,13 +133,11 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 						'pass': 'cnv'
 					}
 					print new
-					
-					raise SystemExit
-					#thisEntry = ?
-					#####################
 		merge1.append(thisEntry)
 				
-	
+	for i in merge1:
+		print i['chrom'], i['start'], i['end'], i['CN'], i['bins'], i['pass']
+	raise SystemExit
 	
 	cnvList = []
 	
