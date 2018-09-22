@@ -200,7 +200,7 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	print funcDataDict[:2]
 	
 	#second merge and write output file#
-	mergeCNfinal(funcDataDict, len(binArray), binArray, gender, CNVdir, sample)
+	mergeCNfinal(funcDataDict, len(refArray), binDict, gender, CNVdir, sample)
 	raise SystemExit
 	
 	printText = '\t\tFinished performing FUnC on ' + sample + ', removed ' + str(numFail) + ' of ' + str(numFail + numPass) + ' CNV calls'
@@ -274,17 +274,3 @@ def junk(dataDict, numBins, binDict, gender, outDir, sample):
 				continue #Wait, this isn't doing any sort of conversion...is that fine? I think so...
 
 	raise SystemExit
-	
-	outfile = outDir + sample + 'CNVlist.txt'
-	OUT = open(outfile, 'w')
-	OUT.write('Chromosome\tStart\tEnd\tCopyNumber\n')
-	for i in cnvList:
-		OUT.write(i['chrom'])
-		OUT.write('\t')
-		OUT.write(str(refArray[[i['abspos']]]['chrStart']))
-		OUT.write('\t')
-		OUT.write(str(refArray[i]['abspos']['chrStart'] + refArray[i]['size'] - 1))
-		OUT.write('\t')
-		OUT.write(str(np.round(i['CN'])))
-		OUT.write('\n')
-	OUT.close
