@@ -69,7 +69,7 @@ def analyzeOne(sample, segDir, lowessDir, outDir, ploidy, gender):
 
 	
 	
-	listFile = './data/' + i + '.CNVlist.txt'
+	listFile = './data/' + i + '.CNVlist.bed'
 	cnvData = np.array( len(refData) * [2], dtype='int' )
 	if genderDict[i] == 'M':
 		cnvData[xBins] = len(xBins) * [1.]
