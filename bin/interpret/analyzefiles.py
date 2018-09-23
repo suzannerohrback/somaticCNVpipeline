@@ -75,11 +75,22 @@ def getSummaryStats(cnvs, gender, chromList, chromSizes):
 		if i['CN'] < normalCN:
 			cellStats['delCount'] += 1
 			cellStats['delMB'] += float(abs(normalCN - i['CN']) * (i['end'] - i['start'] + 1)) / 1e6
+			chromDel[i['chrom']] += float(i['end'] - i['start'] + 1)
 		else:
 			cellStats['ampCount'] += 1
 			cellStats['ampMB'] += float(abs(normalCN - i['CN']) * (i['end'] - i['start'] + 1)) / 1e6
+			chromAmp[i['chrom']] += float(i['end'] - i['start'] + 1)
 			
 	print cellStats
+	print chromAmp
+	print chromDel
+	
+	print chromSizes
+	chromAmp = {y: (100. * chromAmp[y]) / float(chromSizes[x]) for x,y in enumerate(chromList)}
+	chromDel = {y: (100. * chromDel[y]) / float(chromSizes[x]) for x,y in enumerate(chromList)}
+	print chromAmp
+	print chromDel	
+	
 	raise SystemExit
 	
 	
