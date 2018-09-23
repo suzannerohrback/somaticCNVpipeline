@@ -26,13 +26,12 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	chromEdges = chromEnds[:-1]
 	xTicks = [np.mean([chromStarts[x], chromEnds[x]]) for x in range(len(chromList))]
 
-	print xTicks
 	
 	
 	fig, ax = plt.subplots()
 
 	#ideally make these prettier colors like were used in the paper#
-	ax.scatter(xVals, binData, color='b', marker='d', s=3, linewidths=0)
+	ax.scatter(xVals, lowess, color='b', marker='d', s=3, linewidths=0)
 	ax.plot(xVals, cnvData, color='r', lw=1, ls='steps')
 
 	for j in chromEdges:
