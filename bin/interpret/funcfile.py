@@ -255,7 +255,7 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 						print thisEntry, '\n'
 
 			else: #segment in middle of chromosome#
-				if baselineMerge[-1]['pass'] == remergePass[i+1]['pass']: #both are passing CNVs#
+				if baselineMerge[-1]['pass'] == remergePass[i+1]['pass'] == 'cnv': #both are passing CNVs#
 					if np.round(baselineMerge[-1]['CN']) == np.round(remergePass[i+1]['CN']): #both are the same CN#
 						if baselineMerge[-1]['bins'] > 25 and remergePass[i+1]['pass'] > 25: #both are more than 25 bins#
 							print 'Inside of a chromosome and follows baseline copy number shift expectations'
