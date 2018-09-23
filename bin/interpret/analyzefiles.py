@@ -26,13 +26,13 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	chromEdges = chromEnds[:-1]
 	xTicks = [np.mean([chromStarts[x], chromEnds[x]]) for x in range(len(chromList))]
 
-	print np.unique(cnvData)
+
 	
 	fig, ax = plt.subplots()
 
 	#ideally make these prettier colors like were used in the paper#
 	ax.scatter(xVals, lowessData, color='#247afd', marker='d', s=3)
-	ax.plot(xVals, cnvData, color='#980002', lw=2, ls='steps')
+	ax.plot(xVals, cnvData, color='#980002', lw=1, ls='steps')
 
 	for j in chromEdges:
 		ax.plot([j, j], [-1, 5], lw=1, ls='-', color='#6b7c85', zorder=0)
@@ -91,7 +91,6 @@ def analyzeOne(sample, species, cnvDir, lowessDir, plotDir, ploidy, gender):
 		cnvs = np.loadtxt(listFile, skiprows=1, dtype=listDtype)
 		cnvs = np.atleast_1d(cnvs)
 		for j in cnvs:
-			print j
 			startBin = [x for x,y in enumerate(binArray) if y['chrom'] == j['chrom'] and y['chrStart'] == j['start']][0]
 			endBin = [x for x,y in enumerate(binArray) if y['chrom'] == j['chrom'] and y['chrStart'] + y['size'] - 1 == j['end']][0]
 			cnvData[startBin:endBin] = j['CN']
