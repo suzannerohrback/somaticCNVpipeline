@@ -93,7 +93,7 @@ def analyzeOne(sample, species, cnvDir, lowessDir, plotDir, ploidy, gender):
 		for j in cnvs:
 			print j
 			startBin = [x for x,y in enumerate(binArray) if y['chrom'] == j['chrom'] and y['chrStart'] == j['start']][0]
-			endBin = [x for x,y in enumerate(binArray) if y['chrom'] == j['chrom'] and y['chrStart'] + y['size'] - 1 == j['end'][0]]
+			endBin = [x for x,y in enumerate(binArray) if y['chrom'] == j['chrom'] and y['chrStart'] + y['size'] - 1 == j['end']][0]
 			cnvData[startBin:endBin] = j['CN']
 			
 			
