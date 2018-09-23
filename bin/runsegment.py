@@ -30,13 +30,13 @@ def runAll(args):
 	#Set up environment#
 	args.AnalysisDirectory = common.fixDirName(args.AnalysisDirectory)
 
-	CountDir = args.AnalysisDirectory + '/BinCounts/' #args.CountDirectory = common.fixDirName(args.CountDirectory)
+	CountDir = args.AnalysisDirectory + 'BinCounts/' #args.CountDirectory = common.fixDirName(args.CountDirectory)
 	if args.bincountdir:
 		CountDir = common.fixDirName(args.bincountdir)
 		
-	lowessDir = args.AnalysisDirectory + '/LowessBinCounts/' #os.path.dirname(args.CountDirectory[:-1]) + '/LowessBinCounts/'
-	segmentDir = args.AnalysisDirectory + '/Segments/ '#os.path.dirname(args.CountDirectory[:-1]) + '/Segments/'
-	tempDir = args.AnalysisDirectory  + '/Temp/' #os.path.dirname(args.CountDirectory[:-1]) + '/Temp/'
+	lowessDir = args.AnalysisDirectory + 'LowessBinCounts/' #os.path.dirname(args.CountDirectory[:-1]) + '/LowessBinCounts/'
+	segmentDir = args.AnalysisDirectory + 'Segments/ '#os.path.dirname(args.CountDirectory[:-1]) + '/Segments/'
+	tempDir = args.AnalysisDirectory  + 'Temp/' #os.path.dirname(args.CountDirectory[:-1]) + '/Temp/'
 
 	common.makeDir(lowessDir)
 	if not args.normalizeonly:
