@@ -102,7 +102,7 @@ def getPloidy(segData, plotDir, cutoff):
 
 
 
-def getGender(data, chroms, ploidy):
+def getGender(data, sample, chroms, ploidy):
 	binCN = 2 ** data * ploidy
 	
 	xData = [y for x,y in enumerate(binCN) if chroms[x] == 'chrX']
@@ -167,7 +167,7 @@ def runQCone(sample, species, statsDir, lowessDir, segmentDir, QCdir, plotDir):
 	
 	#determine the optimal ploidy value and CS#
 	segData, segArray = common.importSegData(sample, segmentDir, binArray)
-	CS, ploidy = getPloidy(segArray, plotDir, interpretVars.QCdict['CS'])
+	CS, ploidy = getPloidy(segArray, sample, plotDir, interpretVars.QCdict['CS'])
 		
 	
 	
