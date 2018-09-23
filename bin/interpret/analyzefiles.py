@@ -19,13 +19,13 @@ import common
 def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	xVals = [x['abspos'] + (x['size']/2) for x in refArray]
 
-	chromList = ['chr1'] + [y for x,y in enumerate(refArray['chrom'][1:]) if y != refArray['chrom'][x]]
-	chromStarts = [refArray[refArray['chrom'] == x]['abspos'][0] for x in chromList]
-	chromEnds = [refArray[refArray['chrom'] == x]['abspos'][-1] + refArray[refArray['chrom'] == x]['size'][-1] for x in chromList]
-
-	chromEdges = chromEnds[:-1]
-	xTicks = [np.mean([chromStarts[x], chromEnds[x]]) for x in range(len(chromList))]
-
+#	chromList = ['chr1'] + [y for x,y in enumerate(refArray['chrom'][1:]) if y != refArray['chrom'][x]]
+#	chromStarts = [refArray[refArray['chrom'] == x]['abspos'][0] for x in chromList]
+#	chromEnds = [refArray[refArray['chrom'] == x]['abspos'][-1] + refArray[refArray['chrom'] == x]['size'][-1] for x in chromList]
+#
+#	chromEdges = chromEnds[:-1]
+#	xTicks = [np.mean([chromStarts[x], chromEnds[x]]) for x in range(len(chromList))]
+#
 	print xVals[:10]
 	print lowessData[:10]
 	print np.unique(cnvData)
@@ -33,21 +33,20 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	fig, ax = plt.subplots()
 
 	#ideally make these prettier colors like were used in the paper#
-	ax.scatter(xVals, lowessData, color='#247afd', marker='d', s=3, linewidths=0)
-	ax.plot(xVals, cnvData, color='#980002', lw=1, ls='steps')
+	ax.scatter(xVals, lowessData, color='#247afd', marker='d')#s=3)
+#	ax.plot(xVals, cnvData, color='#980002', lw=1, ls='steps')
 
-	for j in chromEdges:
-		ax.plot([j, j], [-1, 5], lw=1, ls='-', color='gray', zorder=0)
+#	for j in chromEdges:
+#		ax.plot([j, j], [-1, 5], lw=1, ls='-', color='gray', zorder=0)
 
-	ax.set_xticks(xTicks)
-	ax.set_xticklabels(chromList, rotation=45)
-#	ax.set_xlabel('Genome Location (Chrom)', fontsize=pFonts.fontSizeDict['axis'], fontname=fontType, labelpad=1)
+#	ax.set_xticks(xTicks)
+#	ax.set_xticklabels(chromList, rotation=45)
 #	ax.set_xlim(0, xVals[-1])
 
-	yTicks = [0, 1, 2, 3, 4]
-	ax.set_yticks(yTicks)
-	ax.set_yticklabels(yTicks)
-	ax.set_ylabel('Copy Number', labelpad=1)
+#	yTicks = [0, 1, 2, 3, 4]
+#	ax.set_yticks(yTicks)
+#	ax.set_yticklabels(yTicks)
+#	ax.set_ylabel('Copy Number', labelpad=1)
 #	ax.set_ylim(-0.1, 4.6)
 
 	ax.tick_params(direction='out', which='both', pad=0., length=3, top='off', right='off')
@@ -89,7 +88,7 @@ def analyzeOne(sample, species, cnvDir, lowessDir, plotDir, ploidy, gender):
 		cnvData[yBins] = len(yBins) * [1]
 	else:
 		cnvData[yBins] = len(yBins) * [0]
-	print np.unique(cnvData)
+	print np.unique(cnvData, return_counts=True)
 
 	listFile = cnvDir + common.findInfile(sample, cnvDir)
    	listDtype = {'names': ('chrom', 'start', 'end', 'CN'), 'formats': ('S10', 'int', 'int', 'int')}
