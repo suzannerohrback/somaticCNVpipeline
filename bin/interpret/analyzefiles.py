@@ -85,7 +85,7 @@ def analyzeOne(sample, species, cnvDir, lowessDir, outDir, ploidy, gender):
 		cnvData[yBins] = len(yBins) * [0]
 
 	listFile = cnvDir + common.findInfile(sample, cnvDir)
-   	listDtype = {'names': ('chrom', 'start', 'end', 'CN', 'type'), 'formats': ('S10', 'int', 'int', 'int', 'S10')}
+   	listDtype = {'names': ('chrom', 'start', 'end', 'CN'), 'formats': ('S10', 'int', 'int', 'int')}
 	if os.stat(listFile).st_size > 32:
 		cnvs = np.loadtxt(listFile, skiprows=1, dtype=listDtype)
 		cnvs = np.atleast_1d(cnvs)
