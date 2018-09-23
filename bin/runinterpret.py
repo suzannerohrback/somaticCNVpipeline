@@ -105,6 +105,10 @@ def runAll(args):
 	
 	
 	#FUnC: CNV filtering#
+	if args.nofilter:
+		print '\nFURTHER CODE IS ONLY DEVELOPED FOR WHEN FUnC IS IMPLEMENTED, EXITING NOW\n\n\n'
+		raise SystemExit
+		
 #	funcfile.FUnCone(analysisSamples[0], args.species, folderDict['Segments'], CNVdir, 
 #			 ploidyDict[analysisSamples[0]], genderDict[analysisSamples[0]])
 	argList = [(x, args.species, folderDict['Segments'], CNVdir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
