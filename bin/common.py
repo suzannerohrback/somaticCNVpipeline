@@ -150,7 +150,18 @@ def importSegData(sample, segDir, binArray):
 
 
 		
-																		
+#determine what euploid copy number is for a given chromosome on a given sample#
+def getNormalCN(chrom, gender):
+	normalCN = 2.
+	if chrom in ['chrX', 'chrY'] and gender == 'M':
+		normalCN = 1.
+	elif chrom == 'chrY' and gender == 'F':
+		normalCN = 0.
+	return normalCN
+
+
+
+
 ###daemon to run multiprocessing and parallelize tasks###
 def daemon(target, argList, name, cpuPerProcess=1, kwargs=False, returnTest=True):
 	print( str( '\t' + str(len(argList)) + ' processes to run to ' + name ) )
