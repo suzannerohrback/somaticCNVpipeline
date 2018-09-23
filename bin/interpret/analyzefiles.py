@@ -74,10 +74,10 @@ def getSummaryStats(cnvs, gender, chromList, chromSizes):
 		
 		if i['CN'] < normalCN:
 			cellStats['delCount'] += 1
-			cellStats['delMB'] = float(abs(normalCN - i['CN']) * (i['end'] - i['start'] + 1)) / 1e6
+			cellStats['delMB'] += float(abs(normalCN - i['CN']) * (i['end'] - i['start'] + 1)) / 1e6
 		else:
 			cellStats['ampCount'] += 1
-			cellStats['ampMB'] = float(abs(normalCN - i['CN']) * (i['end'] - i['start'] + 1)) / 1e6
+			cellStats['ampMB'] += float(abs(normalCN - i['CN']) * (i['end'] - i['start'] + 1)) / 1e6
 			
 	print cellStats
 	raise SystemExit
