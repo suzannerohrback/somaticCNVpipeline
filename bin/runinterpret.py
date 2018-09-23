@@ -112,7 +112,7 @@ def runAll(args):
 	
 	
 	#CNV analysis#
-	analyzefiles.analyzeOne(analysisSamples[0], args.species, folderDict['Segments'], folderDict['LowessBinCounts'], CNplotDir, ploidyDict[analysisSamples[0]], genderDict[analysisSamples[0]])
+	analyzefiles.analyzeOne(analysisSamples[0], args.species, CNVdir, folderDict['LowessBinCounts'], CNplotDir, ploidyDict[analysisSamples[0]], genderDict[analysisSamples[0]])
 #	argList = [(x, folderDict['Segments'], folderDict['LowessBinCounts'], CNplotDir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
 #	common.daemon(analyzefiles.analyzeOne, argList, ' create summary file(s)')
 	
