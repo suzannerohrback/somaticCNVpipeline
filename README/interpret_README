@@ -85,16 +85,6 @@ Options:
 	-f/--nofilter
 		Set this flag if you do not want to perform FUnC filtering on CNV calls
 		(default = perform FUnC to remove unreliable CNV calls)
-	-i/--infofile
-		A filepath to a .txt file containing sample-specific information to inform processing
-		This file must contain 
-			Unique sample name(s), the number of cells collected for the sample, and the sample group
-		(default = assume all samples agenerated from a single cell and in the same group)
-	-c/--columns
-		The location of the columns to import from the infofile, if specified
-		Three numbers, zero-indexed
-		Order: name column, cell number column, group column
-		(default = 0 1 2)
 	-l/--lowess
 		A filepath to the directory where the .lowess.txt files are saved
 			(default = .../analysis directory/LowessBinCounts/)
@@ -184,5 +174,15 @@ Notes
 		Further testing and possibly some minor additions may be warranted
 			Setting the option to skip FUnC simply exits after QC determination, unsure if an alternate should be written
 			I have not tested use of any of the optional arguments either!
-
+			Considering adding the following options too
+				-i/--infofile
+					A filepath to a .txt file containing sample-specific information to inform processing
+					This file must contain 
+						Unique sample name(s), the number of cells collected for the sample, and the sample group
+					(default = assume all samples agenerated from a single cell and in the same group)
+				-c/--columns
+					The location of the columns to import from the infofile, if specified
+					Three numbers, zero-indexed
+					Order: name column, cell number column, group column
+					(default = 0 1 2)
 
