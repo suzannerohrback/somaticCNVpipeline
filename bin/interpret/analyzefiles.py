@@ -90,11 +90,10 @@ def analyzeOne(sample, species, cnvDir, lowessDir, plotDir, ploidy, gender):
 	if os.stat(listFile).st_size > 32:
 		cnvs = np.loadtxt(listFile, skiprows=1, dtype=listDtype)
 		cnvs = np.atleast_1d(cnvs)
-		print cnvs
 		for j in cnvs:
 			print j
-			startBin = [x for x,y in enumerate(binArray) if x['chrom'] == j['chrom'] and x['chrStart'] == j['start']][0]
-			endBin = [x for x,y in enumerate(binArray) if x['chrom'] == j['chrom'] and x['chrStart'] + x['size'] - 1 == j['end'][0]]
+			startBin = [x for x,y in enumerate(binArray) if y['chrom'] == j['chrom'] and y['chrStart'] == j['start']][0]
+			endBin = [x for x,y in enumerate(binArray) if y['chrom'] == j['chrom'] and y['chrStart'] + y['size'] - 1 == j['end'][0]]
 			cnvData[startBin:endBin] = j['CN']
 			
 			
