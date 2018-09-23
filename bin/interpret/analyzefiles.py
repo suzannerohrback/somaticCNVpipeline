@@ -33,7 +33,7 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	fig, ax = plt.subplots()
 
 	#ideally make these prettier colors like were used in the paper#
-	ax.scatter(xVals, lowessData, color='#247afd', marker='d')#s=3)
+	ax.scatter(xVals, lowessData, color='#247afd', marker='d's=3)
 #	ax.plot(xVals, cnvData, color='#980002', lw=1, ls='steps')
 
 #	for j in chromEdges:
@@ -51,7 +51,7 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 
 	ax.tick_params(direction='out', which='both', pad=0., length=3, top='off', right='off')
 
-	fig.set_size_inches(1.4, 0.9, forward=True)
+	fig.set_size_inches(6, 4, forward=True)
 	plt.subplots_adjust(left=0.13, right=0.98, bottom=0.3, top=0.91)
 
 #	fig.tight_layout()
