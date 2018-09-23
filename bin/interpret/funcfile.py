@@ -200,7 +200,8 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 			print mergePass[i+1]
 			print thisEntry
 			print '\n'
-		#	raise SystemExit
+			if thisEntry['chrom'] == 'chr4':
+				raise SystemExit
 		
 		
 		mergeSmall.append(thisEntry)
