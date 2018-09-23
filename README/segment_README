@@ -54,13 +54,12 @@ Get a help message:
 	somaticCNVcalling segment --help
 	
 Options:
-	somaticCNVcalling segment [options] /path/to/bincounts.txt/files/ genome
+	somaticCNVcalling segment [options] /path/to/analysis/directory/ genome
+		The analysis directory contains a BinCounts/ folder with the .bincounts.txt files
 		Currently genome must be either hg38 or mm10
 
- 	-o/--output
-		A filepath to the directory where you would like the lowess.txt and segments.txt files saved
-			Each filetype will be saved in a separate directory
-			(default = same directory as where the Sam folder is located)
+ 	-b/--bincountdir
+		A filepath to the containing .bincounts.txt files, if not AnalysisDirectory/BinCounts
 	-i/--infofile
 		A filepath to a .txt file containing sample-specific information to inform correct normalization
 		This file must contain 
