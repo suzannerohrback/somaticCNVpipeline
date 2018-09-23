@@ -66,7 +66,11 @@ def plotChroms(sample, outDir, lowessData, refArray, chromList):
 	
 	fig, ax = plt.subplots()
 	
-	ax.bar(xTicks, graphData, width=0.8, color='#c0022f', align='center', yerr=graphErr)
+	ax.bar(xTicks, graphData, width=0.8, color='#c0022f', align='center', yerr=graphErr, ecolor='k')
+	
+	ax.set_xticks(xTicks)
+	ax.set_xticklabels(chromList, rotation=45)
+	ax.set_xlim(-1, xTicks[-1]+1)
 	
 #	fig.set_size_inches(8, 4, forward=True)
 #	plt.subplots_adjust(left=0.07, right=0.98, bottom=0.15, top=0.95)
