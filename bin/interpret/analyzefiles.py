@@ -72,7 +72,7 @@ def analyzeOne(sample, species, segDir, lowessDir, outDir, ploidy, gender):
 	
 	#load lowess counts and convert to CN state#
 	binData = np.loadtxt(lowessDir + common.findInfile(sample, lowessDir))
-	binData = (2 ** binData) * ploidyDict[i]
+	binData = (2 ** binData) * ploidy
 
 	
 	
