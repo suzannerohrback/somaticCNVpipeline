@@ -41,12 +41,12 @@ Get a help message:
 	somaticCNVcalling count --help
 	
 Options:
-	somaticCNVcalling count [options] /path/to/unique.sam/files/ genome
+	somaticCNVcalling count [options] /path/to/analysis/directory/ genome
+		The analysis directory contains a Sam/ folder with unique.sam files
 		Currently genome must be either hg38 or mm10
 
- 	-o/--output
-		A filepath to the directory where you would like bincount.txt files saved
-			(default = same directory as where the Sam folder is located)
+ 	-m/--mapdir /path/to/folder/with/*.unique.sam
+		A filepath to the directory with sam files from mapping, if in a differnet location, or a different name
   	-x/--statsdir
 		A filepath to the directory where you would like mapping statistics files saved
 			(default = same directory as where the Fastq folder is located)
