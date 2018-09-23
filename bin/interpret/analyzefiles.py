@@ -58,7 +58,7 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 
 	
 	
-def analyzeOne(sample, segDir, lowessDir, outDir, ploidy, gender):
+def analyzeOne(sample, species, segDir, lowessDir, outDir, ploidy, gender):
 
 	interpretVars = cfg.Interpret()
 	binArray = common.importInfoFile(interpretVars.binDict[species], [0, 1, 2, 4, 5], 'normref', skiprows=1)
