@@ -28,22 +28,22 @@ def runAll(args):
 
 
 	#Set up environment#
-	args.CountDirectory = common.fixDirName(args.CountDirectory)
-	
-	lowessDir = os.path.dirname(args.CountDirectory[:-1]) + '/LowessBinCounts/'
-	segmentDir = os.path.dirname(args.CountDirectory[:-1]) + '/Segments/'
-	tempDir = os.path.dirname(args.CountDirectory[:-1]) + '/Temp/'
+	args.AnalysisDirectory = common.fixDirName(args.AnalysisDirectory)
 
-	if args.output:
-		lowessDir = common.fixDirName(args.output) + 'LowessBinCounts/'
-		segmentDir = common.fixDirName(args.output) + 'Segments/'
+	CountDir = args.AnalysisDirectory + '/BinCounts/' #args.CountDirectory = common.fixDirName(args.CountDirectory)
+	if args.bincountdir:
+		CountDir = common.fixDirName(args.bincountdir)
+		
+	lowessDir = args.AnalysisDirectory + '/LowessBinCounts/' #os.path.dirname(args.CountDirectory[:-1]) + '/LowessBinCounts/'
+	segmentDir = args.AnalysisDirectory + '/Segments/ '#os.path.dirname(args.CountDirectory[:-1]) + '/Segments/'
+	tempDir = args.AnalysisDirectory  + '/Temp/' #os.path.dirname(args.CountDirectory[:-1]) + '/Temp/'
 
 	common.makeDir(lowessDir)
 	if not args.normalizeonly:
 		common.makeDir(segmentDir)
 		common.makeDir(tempDir)
 
-	sampleFiles = common.getSampleList(args.CountDirectory, args.samples, 'bincounts')
+	sampleFiles = common.getSampleList(CountDir, args.samples, 'bincounts')
 		
 		
 		
