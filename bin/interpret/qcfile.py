@@ -76,7 +76,7 @@ def getPloidy(segData, sample, plotDir, cutoff):
 	fig, ax = plt.subplots()		
 	
 	ax.plot(ploidyTestValues, CSarray, color='#2000b1', lw=3)
-	ax.plot([2, 2], [0, 1.1], color='#6b7c85', lw=0.5, zorder=0)
+	ax.plot([2, 2], [-1, 1.1], color='#6b7c85', lw=0.5, zorder=0)
 	ax.plot([1., 3], [cutoff, cutoff], color='#6b7c85', lw=0.5, zorder=0)
 	
 	ax.set_xticks(xTicks)
