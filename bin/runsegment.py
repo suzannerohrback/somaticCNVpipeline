@@ -40,7 +40,7 @@ def runAll(args):
 
 	common.makeDir(lowessDir)
 	if not args.normalizeonly:
-		common.makeDir(segmentDir)
+		common.makeDir(segmentDir[:-1])
 		common.makeDir(tempDir)
 
 	sampleFiles = common.getSampleList(CountDir, args.samples, 'bincounts')
