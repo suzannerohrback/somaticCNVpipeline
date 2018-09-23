@@ -320,11 +320,12 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	OUT = open(outfile, 'w')
 	OUT.write('Chromosome\tStart\tEnd\tCopyNumber\n')
 	for i in cnvData:
+		print i
 		OUT.write(i['chrom'])
 		OUT.write('\t')
 		OUT.write(str(refArray[binDict[i['start']]]['chrStart']))
 		OUT.write('\t')
-		OUT.write(str(refArray[binDict[i['end']]+1]['chrStart']-1))
+		OUT.write(str(refArray[binDict[i['end']+1]]['chrStart']-1))
 		OUT.write('\t')
 		OUT.write(str(np.round(i['CN'])))
 		OUT.write('\n')
