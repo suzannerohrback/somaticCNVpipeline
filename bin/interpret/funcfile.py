@@ -302,7 +302,7 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	
 	
 	#write output file#
-	outfile = CNVdir + sample + 'CNVlist.bed'
+	outfile = CNVdir + sample + '.CNVlist.bed'
 	OUT = open(outfile, 'w')
 	OUT.write('Chromosome\tStart\tEnd\tCopyNumber\n')
 	for i in cnvData:
