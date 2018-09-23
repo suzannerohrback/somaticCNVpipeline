@@ -99,7 +99,6 @@ def FUnC(dataDict, binDict, cutoffDict, gender):
 def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 	"""		
 	First, CNV calls < 3 bins are combined with the most similar neighbor (euploid or CNV)
-	Second, adjacent passing CNVs with the same copy number (on same chrom) are combined into one call
 	Third, small segments (<= 25 bins) that fail as CNV calls are either
 		Combined with neighboring CNVs IF 
 			Both are on the same chromosome
@@ -108,21 +107,16 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 			Both are > 25 bins
 			(because this indicates the baseline CN in this locus is not euploid)
 		Otherwise, converted to euploid
-	Euploid regions obviously stay euploid
 	Large segments (>25 bins) are automatically treated as euploid too
 	"""
 	
-	#pass 1: merge passing CNVs if same CN and same chrom#
+	#pass 1: merge passing CNVs if same CN and same chrom 
 	merge1 = [funcDict[0]]
 	for i, j in enumerate(funcDict[1:]):
 		thisEntry = j
 		if j['pass'] == funcDict[i]['pass'] == 'cnv': #both entries passed FUnC
 			if j['chrom'] == funcDict[i]['chrom']: #both entries on the same chromosome
 				if np.round(j['CN']) == np.round(funcDict[i]['CN']): #both entries have the same copy number
-					print 'NEED TO MERGE'
-					print merge1[-1]
-					print j
-					
 					prev = merge1.pop()
 					thisEntry = {
 						'chrom': j['chrom'],
@@ -132,12 +126,88 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 						'bins': prev['bins'] + j['bins'],
 						'pass': 'cnv'
 					}
-					print thisEntry
+		if j['bins'] < 3: #segment is unreliably small
+			#
+			
 		merge1.append(thisEntry)
+
+		
+	#pass 2: merge small segments with most similar adjacent (passing or euploid) neighbor#
+	merge2 = []
+	skipTest = False
+	for i,j in enumerate merge1:
+		if skipTest:
+			skipTest = False
+			continue
+		thisEntry = j
+		mergeTest = False
+
+		if j['bins'] < 3: #segment is unreliably small
+
+			#situations where you automatically merge with the previous segment
+			if (i == len(merge1) - 1) or (j['chrom'] != merge1[i+1]['chrom']) or (merge1[i+1]['pass'] == 'no' != merge1[i-1]):
+				mergeTest = i-1
 				
-	for i in merge1:
+			#situations where you automatically merge with the next segment
+			elif (i == 0) or (j['chrom'] != merge1[i-1]['chrom']) or (merge1[i-1]['pass'] == 'no' != merge1[i+1]):
+				mergeTest = i+1
+			
+			#situations where you need to figure out which segment to merge with
+			else:
+				if merge1[i-1]['pass'] == merge1[i+1]['pass'] == 'no':
+					if merge1[i-1]['bins'] > merge2[i+1]['bins'] or (merge1[i-1]['bins'] == merge2[i+1]['bins'] and abs(j['CN'] - merge1[i-1]['CN']) < abs(j['CN'] - merge1[i+1]['CN'])):
+						mergeTest = i-1
+					else:
+						mergeTest = i+1
+				elif abs(j['CN'] - merge1[i-1]['CN']) < abs(j['CN'] - merge1[i+1]['CN']):
+					mergeTest = i-1
+				else:
+					mergeTest = i+1
+					
+			#actually do the merging
+			if mergeTest == i-1:
+				parent = merge2.pop()
+				thisEntry = {
+					'start': parent['start'],
+					'end': j['end'],
+				}
+			elif mergeTest == i+1:
+				skipTest = True
+				parent = merge1[mergeTest]
+				thisEntry = {
+					'start': j['start'],
+					'end': parent['end'],
+				}
+
+			else:
+				print('ERROR: why was no segment found for merging?')
+			
+			thisEntry = {
+				'chrom': j['chrom'],
+				'CN': mergeSegCN(j, parent),
+				'bins': j['bins'] + parent['bins'],
+				'pass': parent['pass'],
+				}
+
+			print 'SMALL SEG NEEDED MERGING'
+			print merge1[i-1:i+2]
+			print mergeTest - i, skipTest
+			print thisEntry
+			print '\n'
+			raise SystemExit
+		
+		
+		merge2.append(thisEntry)
+	
+	
+
+
+	for i in merge2:
 		print i['chrom'], i['start'], i['end'], i['CN'], i['bins'], i['pass']
 	raise SystemExit
+	
+	
+	
 	
 	cnvList = []
 	
