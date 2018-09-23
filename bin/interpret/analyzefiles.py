@@ -43,11 +43,11 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 #	ax.set_xticklabels(chromList, rotation=45)
 #	ax.set_xlim(0, xVals[-1])
 
-#	yTicks = [0, 1, 2, 3, 4]
-#	ax.set_yticks(yTicks)
-#	ax.set_yticklabels(yTicks)
-#	ax.set_ylabel('Copy Number', labelpad=1)
-#	ax.set_ylim(-0.1, 4.6)
+	yTicks = [0, 1, 2, 3, 4]
+	ax.set_yticks(yTicks)
+	ax.set_yticklabels(yTicks)
+	ax.set_ylabel('Copy Number', labelpad=1)
+	ax.set_ylim(-0.1, 4.6)
 
 	ax.tick_params(direction='out', which='both', pad=0., length=3, top='off', right='off')
 
