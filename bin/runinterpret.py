@@ -80,7 +80,7 @@ def runAll(args):
 	ploidyDict = {}
 	genderDict = {}
 	
-	mergeQCfile = summaryDir + 'QC.txt'
+	mergeQCfile = summaryDir + 'QCmetrics.txt'
 	OUT = open(mergeQCfile, 'w')
 	OUT.write('Name\tReads\tMAPD\tCS\tPloidy\tGender\tPASS\n')
 	
@@ -111,13 +111,12 @@ def runAll(args):
 	
 	
 	
-	
 	#CNV analysis#
 	analyzefiles.analyzeOne(analysisSamples[0], args.species, CNVdir, folderDict['LowessBinCounts'], CNplotDir, ploidyDict[analysisSamples[0]], genderDict[analysisSamples[0]])
-#	argList = [(x, folderDict['Segments'], folderDict['LowessBinCounts'], CNplotDir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
+#	argList = [(x, args.species, CNVdir, folderDict['LowessBinCounts'], CNplotDir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
 #	common.daemon(analyzefiles.analyzeOne, argList, ' create summary file(s)')
 	
-	raise SystemExit
+	
 	
 	print('\nCNV analysis complete\n\n\n')
 	
