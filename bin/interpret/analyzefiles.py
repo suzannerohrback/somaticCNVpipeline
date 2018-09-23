@@ -93,7 +93,7 @@ def analyzeOne(sample, species, cnvDir, lowessDir, plotDir, ploidy, gender):
 			cnvData[j['start']:j['end']] = j['CN']
 			
 			
-	plotProfile(sample, plotDir, binData, cnvDats, binArray)
+	plotProfile(sample, plotDir, binData, cnvData, binArray)
 
 
 
