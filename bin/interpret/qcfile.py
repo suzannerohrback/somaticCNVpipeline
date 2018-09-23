@@ -55,7 +55,7 @@ def calcCS(data):
 	
 	
 	
-def getPloidy(segData, plotDir, cutoff):
+def getPloidy(segData, sample, plotDir, cutoff):
 	ploidyTestValues = np.arange(1.25, 2.76, 0.01)
 	CSarray = np.zeros(len(ploidyTestValues))
 	peakPloidy = 1.
@@ -102,7 +102,7 @@ def getPloidy(segData, plotDir, cutoff):
 
 
 
-def getGender(data, sample, chroms, ploidy):
+def getGender(data, chroms, ploidy):
 	binCN = 2 ** data * ploidy
 	
 	xData = [y for x,y in enumerate(binCN) if chroms[x] == 'chrX']
