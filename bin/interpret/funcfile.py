@@ -125,10 +125,7 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 						'CN': mergeSegCN(prev, j),
 						'bins': prev['bins'] + j['bins'],
 						'pass': 'cnv'
-					}
-		if j['bins'] < 3: #segment is unreliably small
-			#
-			
+					}	
 		merge1.append(thisEntry)
 
 		
