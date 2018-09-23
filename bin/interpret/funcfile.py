@@ -147,27 +147,38 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 		mergeTest = False
 
 		if j['bins'] < 3: #segment is unreliably small
+			print 'SMALL SEG NEEDED MERGING'
 
 			#situations where you automatically merge with the previous segment
 			if (i == len(mergePass) - 1) or (j['chrom'] != mergePass[i+1]['chrom']) or (mergePass[i+1]['pass'] == 'no' != mergeSmall[-1]):
+				print 'auto merge with previous segment'
 				mergeTest = i-1
 				
 			#situations where you automatically merge with the next segment
 			elif (i == 0) or (j['chrom'] != mergeSmall[-1]['chrom']) or (mergeSmall[-1]['pass'] == 'no' != mergePass[i+1]):
+				print 'auto merge with next segment'
 				mergeTest = i+1
 			
 			#situations where you need to figure out which segment to merge with
 			else:
 				if mergeSmall[-1]['pass'] == mergePass[i+1]['pass'] == 'no':
 					if mergeSmall[-1]['bins'] > mergePass[i+1]['bins'] or (mergeSmall[-1]['bins'] == mergePass[i+1]['bins'] and abs(j['CN'] - mergeSmall[-1]['CN']) < abs(j['CN'] - mergePass[i+1]['CN'])):
+						print 'merge with non passing but larger or CN matching prev seg'
 						mergeTest = i-1
 					else:
+						print 'merge with non passing but larger or CN matching next seg'
 						mergeTest = i+1
 				elif abs(j['CN'] - mergeSmall[-1]['CN']) < abs(j['CN'] - mergePass[i+1]['CN']):
+					print 'merge with passing and CN matching prev seg'
 					mergeTest = i-1
 				else:
+					print 'merge with passing and CN matching next seg'
 					mergeTest = i+1
-					
+
+			print mergeSmall[-1]
+			print j
+			print mergePass[i+1]
+			
 			#actually do the merging
 			if mergeTest == i-1:
 				parent = mergeSmall.pop()
@@ -191,15 +202,10 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 			thisEntry['bins'] = j['bins'] + parent['bins']
 			thisEntry['pass'] = parent['pass']
 
-			print 'SMALL SEG NEEDED MERGING'
 			print mergeTest - i, skipTest
-			print mergePass[i-1]
-			print j
-			print mergePass[i+1]
 			print thisEntry
 			print '\n'
-			if thisEntry['chrom'] == 'chr4':
-				raise SystemExit
+
 		
 		
 		mergeSmall.append(thisEntry)
