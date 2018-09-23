@@ -53,8 +53,27 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray, chromList):
 	plt.savefig(outDir + sample + '.copyNumberProfile.png', dpi=666)
 
 	plt.close()
+	
+	
+	
+	
+#plot estimated overall chromosome ploidy states--CALCULATED FROM LOWESS DATA, NOT SEGMENT DATA#
+def plotChroms(sample, outDir, lowessData, refArray, chromList):
+	graphData = [np.mean(lowessData[refArray['chrom'] == x]) for x in chromList]
+	graphErr = [np.std(lowessData[refArray['chrom'] == x]) for x in chromList]
+	graphErr = [abs(graphData[x] - graphErr[x]) for x in range(len(chromList))]
+	xTicks = np.arange(0, len(chromList))
+	
+	fig, ax = plt.subplots()
+	
+	ax.bar(xTicks, graphData, width=0.8, color='#c0022f', align='center', yerr=graphErr)
+	
+#	fig.set_size_inches(8, 4, forward=True)
+#	plt.subplots_adjust(left=0.07, right=0.98, bottom=0.15, top=0.95)
+	plt.savefig(outDir + sample + '.chromosomeCopyNumber.png', dpi=666)
+	plt.close()
 
-
+	
 	
 	
 	
@@ -99,7 +118,7 @@ def getSummaryStats(cnvs, gender, chromList, chromSizes):
 	
 	
 	
-def analyzeOne(sample, species, cnvDir, lowessDir, plotDir, ploidy, gender):
+def analyzeOne(sample, species, cnvDir, lowessDir, plotDir, chromPlotDir, ploidy, gender):
 
 	interpretVars = cfg.Interpret()
 	
@@ -139,7 +158,7 @@ def analyzeOne(sample, species, cnvDir, lowessDir, plotDir, ploidy, gender):
 			
 			
 	plotProfile(sample, plotDir, binData, cnvData, binArray, chromList)
-
+	plotChroms(sample, chromPlotDir, lowessData, binArray, chromList)
 	summaryStats = getSummaryStats(cnvs, gender, chromList, chromSizes)
 	
 	return summaryStats
