@@ -45,9 +45,9 @@ def runAll(args):
 	CNVdir = args.AnalysisDirectory + 'CNVlists/'
 	summaryDir = args.AnalysisDirectory + 'SummaryFiles/'
 	CNplotDir = args.AnalysisDirectory + 'CopyNumberProfilePlots/'
-	#ChromPlotDir = args.AnalysisDirectory + 'ChromosomeCopyNumberPlots/'
+	ChromPlotDir = args.AnalysisDirectory + 'ChromosomeCopyNumberPlots/'
 	
-	for i in [args.AnalysisDirectory, QCdir, CNVdir, summaryDir, CNplotDir]:#, ChromPlotDir]:#
+	for i in [args.AnalysisDirectory, QCdir, CNVdir, summaryDir, CNplotDir, ChromPlotDir]:#
 		common.makeDir(i)
 	
 	
@@ -106,20 +106,21 @@ def runAll(args):
 #	funcfile.FUnCone(analysisSamples[0], args.species, folderDict['Segments'], CNVdir, 
 #			 ploidyDict[analysisSamples[0]], genderDict[analysisSamples[0]])
 	argList = [(x, args.species, folderDict['Segments'], CNVdir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
-	common.daemon(funcfile.FUnCone, argList, ' remove unreliable CNV calls')
+	common.daemon(funcfile.FUnCone, argList, 'remove unreliable CNV calls')
 	
 	
 	
 	#CNV analysis#
-	summaryStats = analyzefiles.analyzeOne(analysisSamples[0], args.species, CNVdir, folderDict['LowessBinCounts'], CNplotDir, ploidyDict[analysisSamples[0]], genderDict[analysisSamples[0]])
+	summaryStats = analyzefiles.analyzeOne(analysisSamples[0], args.species, CNVdir, folderDict['LowessBinCounts'], CNplotDir, ChromPlotDir, ploidyDict[analysisSamples[0]], genderDict[analysisSamples[0]])
 	summaryStats = [summaryStats]
-#	argList = [(x, args.species, CNVdir, folderDict['LowessBinCounts'], CNplotDir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
-#	summaryStats = common.daemon(analyzefiles.analyzeOne, argList, ' create summary file(s)')
+#	argList = [(x, args.species, CNVdir, folderDict['LowessBinCounts'], CNplotDir, ChromPlotDir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
+#	summaryStats = common.daemon(analyzefiles.analyzeOne, argList, 'create summary file(s)')
 	
 	cellStatsFile = summaryDir + 'CellStats.txt'
 	chromAmpFile = summaryDir + 'ChromosomeAmplifiedPercent.txt'
 	chromDelFile = summaryDir + 'ChromosomeDeletedPercent.txt'
 	
+	#write summary statistics files#
 	with open(cellStatsFile, 'w') as CELL, open(chromAmpFile, 'w') as AMP, open(chromDelFile, 'w') as DEL:
 		CELL.write('Sample\tDeletionNumber\tAmplificationNumber\tTotalCNVnumber\tDeletedMB\tAmplifiedMB\tNetDNAalterdMB\n')
 		chromHeader = 'Sample\t' + '\t'.join(summaryStats[0]['chroms']) + '\n'
