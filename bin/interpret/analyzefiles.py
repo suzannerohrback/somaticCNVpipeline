@@ -63,9 +63,10 @@ def analyzeOne(sample, species, segDir, lowessDir, outDir, ploidy, gender):
 
 	interpretVars = cfg.Interpret()
 	binArray = common.importInfoFile(interpretVars.binDict[species], [0, 1, 2, 4, 5], 'normref', skiprows=1)
-
-	#this is probably the wrong filename
-	binData = np.loadtxt(lowessDir + sample + '.lowessBinCounts.txt')
+	print len(binArray)
+	
+	binData = np.loadtxt(lowessDir + sample + '.lowess.txt')
+	print len(binData)
 	binData = (2 ** binData[:len(refData)]) * ploidyDict[i]
 
 	
