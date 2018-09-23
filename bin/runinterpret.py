@@ -106,7 +106,7 @@ def runAll(args):
 #	funcfile.FUnCone(analysisSamples[0], args.species, folderDict['Segments'], CNVdir, 
 #			 ploidyDict[analysisSamples[0]], genderDict[analysisSamples[0]])
 	argList = [(x, args.species, folderDict['Segments'], CNVdir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
-	common.daemon(funcfile.runFUNCone, argList, ' remove unreliable CNV calls')
+	common.daemon(funcfile.FUnCone, argList, ' remove unreliable CNV calls')
 	
 	raise SystemExit
 	
