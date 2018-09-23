@@ -132,7 +132,7 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 	#pass 2: merge small segments with most similar adjacent (passing or euploid) neighbor#
 	mergeSmall = []
 	skipTest = False
-	for i,j in enumerate(merge1):
+	for i,j in enumerate(mergePass):
 		if skipTest:
 			skipTest = False
 			continue
