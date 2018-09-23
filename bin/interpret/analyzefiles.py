@@ -53,7 +53,7 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	fig.set_size_inches(1.4, 0.9, forward=True)
 #	plt.subplots_adjust(left=0.13, right=0.98, bottom=0.3, top=0.91)
 
-	fig.tight_layout()
+#	fig.tight_layout()
 	plt.savefig(outDir + sample + '.copyNumberProfile.png', dpi=666)
 
 	plt.close()
