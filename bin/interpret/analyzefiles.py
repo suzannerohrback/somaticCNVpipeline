@@ -87,7 +87,7 @@ def getSummaryStats(cnvs, gender, chromList, chromSizes):
 	chromAmp = {y: (100. * chromAmp[y]) / float(chromSizes[x]) for x,y in enumerate(chromList) if y != 'chrY'}
 	chromDel = {y: (100. * chromDel[y]) / float(chromSizes[x]) for x,y in enumerate(chromList) if y != 'chrY'}
 
-	thisResult = {'chroms': chromList, 'cellStats': cellStats, 'chromAmp': chromAmp, 'chromDel': chromDel}
+	thisResult = {'chroms': [x for x in chromList if x != 'chrY'], 'cellStats': cellStats, 'chromAmp': chromAmp, 'chromDel': chromDel}
 	return thisResult
 	
 	
