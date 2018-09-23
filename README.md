@@ -57,6 +57,7 @@ General usage (see function README files for further information):
 	python somaticCNVcalling segment [options]
 	python somaticCNVcalling interpret [options]
 
+See EXAMPLE_SHELL_COMMANDS.sh for actual examples
 
 
 ========================================================================================================================
