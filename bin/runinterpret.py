@@ -80,7 +80,7 @@ def runAll(args):
 	ploidyDict = {}
 	genderDict = {}
 	
-	mergeQCfile = summaryDir + 'ALL_SAMPLES.QC.txt'
+	mergeQCfile = summaryDir + 'QC.txt'
 	OUT = open(mergeQCfile, 'w')
 	OUT.write('Name\tReads\tMAPD\tCS\tPloidy\tGender\tPASS\n')
 	
