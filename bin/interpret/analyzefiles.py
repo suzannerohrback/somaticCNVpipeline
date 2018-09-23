@@ -19,7 +19,10 @@ import common
 def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	xVals = [x['abspos'] + (x['size']/2) for x in refArray]
 
-	chromStarts = [min([y['start'] for y in refArray[refArray['chrom'] == x]]) for x in np.unique(refArray['chrom'])]
+	chromStarts = [refArray[refArray['chrom'] == x]['abspos'][0] for x in np.unique(refArray['chrom'])]
+	print chromStarts
+	
+#	chromStarts = [min([y['start'] for y in refArray[refArray['chrom'] == x]]) for x in np.unique(refArray['chrom'])]
 	chromEnds = [max([y['start'] + y['size'] for y in refArray[refArray['chrom'] == x]]) for x in np.unique(refArray['chrom'])]
 	chromEdges = chromEnds[:-1]
 	xTicks = [np.mean([chromStarts[x], chromEnds[x]]) for x,y in enumerate(np.unique(refArray['chrom'])[:-1])]
