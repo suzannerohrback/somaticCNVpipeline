@@ -38,7 +38,7 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 		ax.plot([j, j], [-1, 5], lw=1, ls='-', color='gray', zorder=0)
 
 	ax.set_xticks(xTicks)
-	ax.set_xticklabels(xUse, fontsize=pFonts.fontSizeDict['tick'], fontname=fontType, rotation=45)
+	ax.set_xticklabels(chromList.strip('chr'), fontsize=pFonts.fontSizeDict['tick'], fontname=fontType, rotation=45)
 	ax.set_xlabel('Genome Location (Chrom)', fontsize=pFonts.fontSizeDict['axis'], fontname=fontType, labelpad=1)
 	ax.set_xlim(0, xVals[-1])
 
