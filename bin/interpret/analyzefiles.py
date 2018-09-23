@@ -36,11 +36,11 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	ax.scatter(xVals, lowessData, color='#247afd', marker='d', s=3)
 #	ax.plot(xVals, cnvData, color='#980002', lw=1, ls='steps')
 
-#	for j in chromEdges:
-#		ax.plot([j, j], [-1, 5], lw=1, ls='-', color='gray', zorder=0)
+	for j in chromEdges:
+		ax.plot([j, j], [-1, 5], lw=1, ls='-', color='#6b7c85', zorder=0)
 
-#	ax.set_xticks(xTicks)
-#	ax.set_xticklabels(chromList, rotation=45)
+	ax.set_xticks(xTicks)
+	ax.set_xticklabels(chromList, rotation=45)
 	ax.set_xlim(-10000000, xVals[-1]+10000000)
 
 	yTicks = [0, 1, 2, 3, 4]
