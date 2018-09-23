@@ -35,7 +35,7 @@ def runAll(args):
 		CountDir = common.fixDirName(args.bincountdir)
 		
 	lowessDir = args.AnalysisDirectory + 'LowessBinCounts/' #os.path.dirname(args.CountDirectory[:-1]) + '/LowessBinCounts/'
-	segmentDir = args.AnalysisDirectory + 'Segments/ '#os.path.dirname(args.CountDirectory[:-1]) + '/Segments/'
+	segmentDir = args.AnalysisDirectory + 'Segments/' #os.path.dirname(args.CountDirectory[:-1]) + '/Segments/'
 	tempDir = args.AnalysisDirectory  + 'Temp/' #os.path.dirname(args.CountDirectory[:-1]) + '/Temp/'
 
 	common.makeDir(lowessDir)
