@@ -46,13 +46,13 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	yTicks = [0, 1, 2, 3, 4]
 	ax.set_yticks(yTicks)
 	ax.set_yticklabels(yTicks)
-	ax.set_ylabel('Copy Number', labelpad=1)
+	ax.set_ylabel('Copy Number', labelpad=5)
 	ax.set_ylim(-0.1, 4.6)
 
 	ax.tick_params(direction='out', which='both', pad=0., length=3, top='off', right='off')
 
-	fig.set_size_inches(6, 4, forward=True)
-	plt.subplots_adjust(left=0.13, right=0.98, bottom=0.3, top=0.91)
+	fig.set_size_inches(8, 4, forward=True)
+	plt.subplots_adjust(left=0.05, right=0.98, bottom=0.07, top=0.95)
 
 #	fig.tight_layout()
 	plt.savefig(outDir + sample + '.copyNumberProfile.png', dpi=666)
