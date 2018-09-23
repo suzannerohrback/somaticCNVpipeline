@@ -108,15 +108,15 @@ def runAll(args):
 	argList = [(x, args.species, folderDict['Segments'], CNVdir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
 	common.daemon(funcfile.FUnCone, argList, ' remove unreliable CNV calls')
 	
-	raise SystemExit
 	
 	
 	
 	#CNV analysis#
-	argList = [(x, folderDict['Segments'], folderDict['LowessBinCounts'], CNplotDir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
-	common.daemon(analyzefiles.analyzeOne, argList, ' create summary file(s)')
+	analyzefiles.analyzeOne(analysisSamples[0], folderDict['Segments'], folderDict['LowessBinCounts'], CNplotDir, ploidyDict[analysisSamples[0]], genderDict[analysisSamples[0]])
+#	argList = [(x, folderDict['Segments'], folderDict['LowessBinCounts'], CNplotDir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
+#	common.daemon(analyzefiles.analyzeOne, argList, ' create summary file(s)')
 	
-	#there really was more I indented to add, but, seriously, if you've gotten far enough to find this message you could code it yourself, and I have a real job now#
+	raise SystemExit
 	
 	print('\nCNV analysis complete\n\n\n')
 	
