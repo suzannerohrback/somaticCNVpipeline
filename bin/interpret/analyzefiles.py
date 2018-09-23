@@ -24,6 +24,7 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray, chromList):
 
 	chromEdges = chromEnds[:-1]
 	xTicks = [np.mean([chromStarts[x], chromEnds[x]]) for x in range(len(chromList))]
+	yTicks = [0, 1, 2, 3, 4]
 
 
 	
@@ -40,7 +41,6 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray, chromList):
 	ax.set_xticklabels(chromList, rotation=45)
 	ax.set_xlim(-10000000, xVals[-1]+10000000)
 
-	yTicks = [0, 1, 2, 3, 4]
 	ax.set_yticks(yTicks)
 	ax.set_yticklabels(yTicks)
 	ax.set_ylabel('Copy Number', labelpad=5)
@@ -62,8 +62,10 @@ def plotChroms(sample, outDir, lowessData, refArray, chromList):
 	graphData = [np.mean(lowessData[refArray['chrom'] == x]) for x in chromList]
 	graphErr = [np.std(lowessData[refArray['chrom'] == x]) for x in chromList]
 	graphErr = [abs(graphData[x] - graphErr[x]) for x in range(len(chromList))]
+
 	xTicks = np.arange(0, len(chromList))
-	
+	yTicks = [0, 1, 2, 3, 4]
+
 	fig, ax = plt.subplots()
 	
 	ax.bar(xTicks, graphData, width=0.8, color='#c0022f', align='center', yerr=graphErr, ecolor='k')
@@ -71,9 +73,16 @@ def plotChroms(sample, outDir, lowessData, refArray, chromList):
 	ax.set_xticks(xTicks)
 	ax.set_xticklabels(chromList, rotation=45)
 	ax.set_xlim(-1, xTicks[-1]+1)
+
+	ax.set_yticks(yTicks)
+	ax.set_yticklabels(yTicks)
+	ax.set_ylabel('Copy Number', labelpad=5)
+	ax.set_ylim(-0.1, 4.6)
 	
-#	fig.set_size_inches(8, 4, forward=True)
-#	plt.subplots_adjust(left=0.07, right=0.98, bottom=0.15, top=0.95)
+	ax.tick_params(direction='out', which='both', pad=0., length=3, top='off', right='off')
+	
+	fig.set_size_inches(8, 4, forward=True)
+	plt.subplots_adjust(left=0.07, right=0.98, bottom=0.15, top=0.95)
 	plt.savefig(outDir + sample + '.chromosomeCopyNumber.png', dpi=666)
 	plt.close()
 
