@@ -2,6 +2,10 @@
 import os, sys, inspect
 import numpy as np
 
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir) 
@@ -51,7 +55,7 @@ def calcCS(data):
 	
 	
 	
-def getPloidy(segData):
+def getPloidy(segData, plotDir, cutoff):
 	ploidyTestValues = np.arange(1.25, 2.76, 0.01)
 	CSarray = np.zeros(len(ploidyTestValues))
 	peakPloidy = 1.
@@ -65,9 +69,33 @@ def getPloidy(segData):
 			peakCS = CSarray[i]
 			peakPloidy = j
 
-	#DO I WANT THIS FUNCTION? DOESN'T YET EXIST#
-#	thisPlots.makeQCplot(ploidyTestValues, CSarray, CScutoff, peakCS, peakPloidy)
+			
+	xTicks = np.arange(1.25, 2.76, 0.25)
+	yTicks = np.arange(0, 1.1, 0.2)
+	
+	fig, ax = plt.subplots()		
+	
+	ax.plot(ploidyTestValues, CSarray, color='#2000b1', lw=3)
+	ax.plot([2, 2], [0, 1.1], color='#6b7c85', lw=0.5, zorder=0)
+	ax.plot([1., 3], [cutoff, cutoff], color='#6b7c85', lw=0.5, zorder=0)
+	
+	ax.set_xticks(xTicks)
+	ax.set_xticklabels(xTicks)
+	ax.set_xlabel('Ploidy Value', labelpad=5)
+	ax.set_xlim(1.25, 2.75)
 
+	ax.set_yticks(yTicks)
+	ax.set_yticklabels(yTicks)
+	ax.set_ylabel('Confidence Score', labelpad=5)
+	ax.set_ylim(-0.02, 1.02)
+	
+	ax.tick_params(direction='out', which='both', pad=0., length=3, top='off', right='off')
+	
+	fig.set_size_inches(4, 4, forward=True)
+	plt.subplots_adjust(left=0.07, right=0.98, bottom=0.15, top=0.95)
+	plt.savefig(plotDir + sample + '.ploidyDeterminationPlot.png', dpi=666)
+	plt.close()
+	
 	return peakCS, peakPloidy
 
 
@@ -120,7 +148,7 @@ def getGender(data, chroms, ploidy):
 
 
 
-def runQCone(sample, species, statsDir, lowessDir, segmentDir, QCdir):
+def runQCone(sample, species, statsDir, lowessDir, segmentDir, QCdir, plotDir):
 	#import config info#
 	interpretVars = cfg.Interpret()
 	binArray = common.importInfoFile(interpretVars.binDict[species], [0, 1, 2, 4, 5], 'normref', skiprows=1)
@@ -139,7 +167,7 @@ def runQCone(sample, species, statsDir, lowessDir, segmentDir, QCdir):
 	
 	#determine the optimal ploidy value and CS#
 	segData, segArray = common.importSegData(sample, segmentDir, binArray)
-	CS, ploidy = getPloidy(segArray)
+	CS, ploidy = getPloidy(segArray, plotDir, interpretVars.QCdict['CS'])
 		
 	
 	
