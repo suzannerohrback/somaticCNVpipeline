@@ -119,7 +119,7 @@ def mergePassing(funcDict):
 
 
 
-def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
+def mergeCNfinal(funcDict):
 	
 	print 'starting with', len(funcDict), 'segments'
 	
@@ -224,81 +224,54 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 			skipTest = False
 			continue
 		thisEntry = j
-		normalCN = getNormalCN(j['chrom'], gender)
 
 		if j['pass'] == 'no' and j['bins'] <= 25: #segment is a candidate for additional merging
 			
 			if i == 0 or j['chrom'] != baselineMerge[-1]['chrom']: #segment at 5' end of chromosome#
 				if remergePass[i+1]['pass'] == 'cnv' and remergePass[i+1]['bins'] > 25:
 					if np.round(remergePass[i+1]['CN']) == np.round(mergeSegCN(j, remergePass[i+1])): #extra check b/c at chrom edge
-						print 'At the 5prime chrom end and passes merging requirements'
-						print j
-						print remergePass[i+1]
-						
+			#			print 'At the 5prime chrom end and passes merging requirements'
+			#			print j
+			#			print remergePass[i+1]
 						thisEntry = remergePass[i+1]
 						thisEntry['bins'] = thisEntry['bins'] + j['bins']
 						thisEntry['start'] = j['start']
-						skipTest = True
-						
-						print thisEntry, '\n'
+						skipTest = True	
+			#			print thisEntry, '\n'
 			
 			if i == len(remergePass)-1 or j['chrom'] != remergePass[i+1]['chrom']: #segment at 3' end of chromosome#
 				if baselineMerge[-1]['pass'] == 'cnv' and baselineMerge[-1]['bins'] > 25:
 					if np.round(baselineMerge[-1]['CN']) == np.round(mergeSegCN(j, baselineMerge[-1])): #extra check b/c at chrom edge
-						print 'At the 3prime chrom end and passes merging requirements'
-						print baselineMerge[-1]
-						print j
-						
+			#			print 'At the 3prime chrom end and passes merging requirements'
+			#			print baselineMerge[-1]
+			#			print j
 						thisEntry = baselineMerge.pop()
 						thisEntry['bins'] = thisEntry['bins'] + j['bins']
 						thisEntry['end'] = j['end']
-						print thisEntry, '\n'
+			#			print thisEntry, '\n'
 
 			else: #segment in middle of chromosome#
 				if baselineMerge[-1]['pass'] == remergePass[i+1]['pass'] == 'cnv': #both are passing CNVs#
 					if np.round(baselineMerge[-1]['CN']) == np.round(remergePass[i+1]['CN']): #both are the same CN#
 						if baselineMerge[-1]['bins'] > 25 and remergePass[i+1]['pass'] > 25: #both are more than 25 bins#
-							print 'Inside of a chromosome and follows baseline copy number shift expectations'
-							print baselineMerge[-1]
-							print j
-							print remergePass[i+1]
-
 							thisEntry = baselineMerge.pop()
 							thisEntry['bins'] = thisEntry['bins'] + j['bins'] + remergePass[i+1]['bins']
 							thisEntry['end'] = remergePass[i+1]['end']
 							thisEntry['CN'] = mergeSegCN(thisEntry, remergePass[i+1])
 							skipTest = True
-							print thisEntry, '\n'
 			
 		baselineMerge.append(thisEntry)
 	
 	
 	print 'after merging  small segments surrounded by baseline copy number shift', len(baselineMerge), 'segments remain'
 	
-		
-	for i in baselineMerge:
-		print i['chrom'], i['start'], i['end'], i['CN'], i['bins'], i['pass']
-	raise SystemExit
-	
-	
-	
-	
-	cnvList = []
-	
-	
-	outfile = outDir + sample + 'CNVlist.txt'
-	OUT = open(outfile, 'w')
-	OUT.write('Chromosome\tStart\tEnd\tCopyNumber\n')
-	for i in cnvList:
-		OUT.write(i['chrom'])
-		OUT.write('\t')
-		OUT.write(str(refArray[[i['abspos']]]['chrStart']))
-		OUT.write('\t')
-		OUT.write(str(refArray[i]['abspos']['chrStart'] + refArray[i]['size'] - 1))
-		OUT.write('\t')
-		OUT.write(str(np.round(i['CN'])))
-		OUT.write('\n')
-	OUT.close
+	cnvData = [x for x in baselineMerge if x['pass'] == 'cnv']
+	return cnvData
+
+
+
+
+
 
 
 
@@ -337,78 +310,35 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	
 
 	
-	#second merge and write output file#
-	mergeCNfinal(funcDataDict, len(refArray), binDict, gender, CNVdir, sample)
-	raise SystemExit
+	#second merge#
+	cnvData = mergeCNfinal(funcDataDict)
+
 	
-	printText = '\t\tFinished performing FUnC on ' + sample + ', removed ' + str(numFail) + ' of ' + str(numFail + numPass) + ' CNV calls'
+	
+	#write output file#
+	outfile = CNVdir + sample + 'CNVlist.bed'
+	OUT = open(outfile, 'w')
+	OUT.write('Chromosome\tStart\tEnd\tCopyNumber\n')
+	for i in cnvData:
+		OUT.write(i['chrom'])
+		OUT.write('\t')
+		OUT.write(str(refArray[binDict[i['start']]]['chrStart']))
+		OUT.write('\t')
+		OUT.write(str(refArray[binDict[i['end']]+1]['chrStart']-1))
+		OUT.write('\t')
+		OUT.write(str(np.round(i['CN'])))
+		OUT.write('\n')
+	OUT.close
+
+	
+	
+	printText = '\t\tFinished performing FUnC on ' + sample + ', removed ' + str(numFail) + ' of ' + str(numFail + numPass) + ' putative CNV segments'
+	printText += '\n\t\t\tFor a total of ' + str(len(cnvData)) + ' CNVs after merging'
 	print(printText)
-
-	
-	
-	
-####OLD-delete when second merge works
-def junk(dataDict, numBins, binDict, gender, outDir, sample):
-	cnvList = []
-	
-	#go through every segment call
-	for i in range(len(dataDict)):
-		if dataDict['i']['chrom'] == 'chrY':
-			break		
-		normalCN = getNormalCN(dataDict[i]['chrom'], gender)
-			
-		#if CNV passes, check if it should be merged with previous segment
-		if dataDict[i]['pass'] == 'cnv':
-			if i == 0:
-				cnvList.append(dataDict[i])
-			elif np.round(dataDict[i]['CN']) == np.round(dataDict[i-1]['CN']) and dataDict[i]['chrom'] == dataDict[i-1]['chrom']:
-				cnvList[-1] = {'chrom': dataDict[i]['chrom'],
-							  'start': cnvList[-1]['start'],
-							  'end': dataDict[i]['end'],
-							  'cn': np.round(np.mean([dataDict[i]['CN'], dataDict[i-1]['CN']])),
-							  'pass': 'cnv'}
-			else:
-				cnvList.append(dataDict[i])
-				
-
-		###THIS REQUIRES MORE REWORKING, ITS CREATING SYNTAX ERRORS AND IS WRITTEN WAY TO COMPLICATEDLY
-			#As a placeholder, I'm just skipping over it for now
-		#if a CNV doesn't pass
-		elif dataDict[i]['pass'] == 'no':
-			mergeTest = False
-			
-			#if less than 25 bins
-			thisSize = binDict[dataDict[i]['abspos'] + dataDict[i]['size']] - binDict[dataDict[i]['abspos']]
-			if thisSize <= 25:
-				pass
-				#and both surrounding segments on same chrom 
-					#with same CN that pass, merge w/ them (do they need to be large too?)
-				
-				#and prior seg on same chrom, next seg on diff chrom
-					#with same CN that pass, merge w/ it
-				
-				#and prior seg on diff chrom, next seg on same chrom
-					#with same CN that pass, merge w/ it
-				
-				
-				
-		#	if (binDict[dataDict[i]['abspos'] + dataDict[i]['size']] - binDict[dataDict[i]['abspos']] <= 25 and \
- 		#	((i == 0 or np.round(binDict[i-1]['CN']) == np.round(binDict[i]['CN'])) and binDict[i-1]['chrom']) == np.round(binDict[i]['chrom'])) and \
-		#	   (np.round(binDict[i+1]['CN']) == np.round(binDict[i]['CN'])) and binDict[i+1]['chrom']) == np.round(binDict[i]['chrom']) and \
-		#	   ((i == 0 or binDict[i-1]['pass'] == 'cnv') and binDict[i+1]['pass'] == 'cnv') \
-		#	):
-				
-			if mergeTest:
-				cnvList[-1] = {'chrom': dataDict[i]['chrom'],
-							  'start': cnvList[-1]['start'],
-							  'end': dataDict[i]['end'],
-							  'cn': np.round(np.mean([dataDict[i]['CN'], dataDict[i-1]['CN']])),
-							  'pass': 'cnv'}
-	#			mergeTest = False
-				
-				
-			#in any other situation (more than 25 bins, euploid call, lack of concordance), convert to euploid
-			else:
-				continue #Wait, this isn't doing any sort of conversion...is that fine? I think so...
-
 	raise SystemExit
+
+	
+	
+	
+	
+	
