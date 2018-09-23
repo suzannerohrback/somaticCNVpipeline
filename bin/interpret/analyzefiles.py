@@ -28,7 +28,7 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 
 	print xVals[:10]
 	print lowessData[:10]
-	print cnvData[:10]
+	print np.unique(cnvData)
 	
 	fig, ax = plt.subplots()
 
