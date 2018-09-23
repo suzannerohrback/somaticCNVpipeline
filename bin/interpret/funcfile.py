@@ -314,6 +314,8 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 		OUT.write('\t')
 		OUT.write(str(np.round(i['CN'])))
 		OUT.write('\n')
+		print i, refArray[binDict[i['start']]]['chrStart'], refArray[binDict[i['end']+1]]['chrStart']-1
+		
 	OUT.close
 
 	
