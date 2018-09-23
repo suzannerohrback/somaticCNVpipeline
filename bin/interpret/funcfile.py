@@ -312,7 +312,7 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 		OUT.write('\t')
 		OUT.write(str(refArray[binDict[i['end']+1]-1]['chrStart'] + refArray[binDict[i['end']+1]-1]['size'] -1))
 		OUT.write('\t')
-		OUT.write(str(np.round(i['CN'])))
+		OUT.write(str(int(np.round(i['CN']))))
 		OUT.write('\n')		
 	OUT.close
 
