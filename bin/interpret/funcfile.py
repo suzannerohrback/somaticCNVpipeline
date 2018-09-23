@@ -320,7 +320,6 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	OUT = open(outfile, 'w')
 	OUT.write('Chromosome\tStart\tEnd\tCopyNumber\n')
 	for i in cnvData:
-		print i
 		OUT.write(i['chrom'])
 		OUT.write('\t')
 		OUT.write(str(refArray[binDict[i['start']]]['chrStart']))
@@ -333,10 +332,9 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 
 	
 	
-	printText = '\t\tFinished performing FUnC on ' + sample + ', removed ' + str(numFail) + ' of ' + str(numFail + numPass) + ' putative CNV segments'
+	printText = '\t\tFinished performing FUnC on ' + sample + ', masking ' + str(numFail) + ' of ' + str(numFail + numPass) + ' putative CNV segments'
 	printText += '\n\t\t\tFor a total of ' + str(len(cnvData)) + ' CNVs after merging'
 	print(printText)
-	raise SystemExit
 
 	
 	
