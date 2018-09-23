@@ -158,7 +158,7 @@ def analyzeOne(sample, species, cnvDir, lowessDir, plotDir, chromPlotDir, ploidy
 			
 			
 	plotProfile(sample, plotDir, binData, cnvData, binArray, chromList)
-	plotChroms(sample, chromPlotDir, lowessData, binArray, chromList)
+	plotChroms(sample, chromPlotDir, binData, binArray, chromList)
 	summaryStats = getSummaryStats(cnvs, gender, chromList, chromSizes)
 	
 	return summaryStats
