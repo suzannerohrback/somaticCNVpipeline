@@ -55,7 +55,6 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 
 #function to create cell summary file (one row per sample)
 
-#function to creat CNV summary file (one line per CNV)
 	
 	
 def analyzeOne(sample, segDir, lowessDir, outDir, ploidy, gender):
