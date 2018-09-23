@@ -26,7 +26,9 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	chromEdges = chromEnds[:-1]
 	xTicks = [np.mean([chromStarts[x], chromEnds[x]]) for x in range(len(chromList))]
 
-	
+	print xVals[:10]
+	print lowessData[:10]
+	print cnvData[:10]
 	
 	fig, ax = plt.subplots()
 
@@ -51,7 +53,7 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	ax.tick_params(direction='out', which='both', pad=0., length=3, top='off', right='off')
 
 	fig.set_size_inches(1.4, 0.9, forward=True)
-#	plt.subplots_adjust(left=0.13, right=0.98, bottom=0.3, top=0.91)
+	plt.subplots_adjust(left=0.13, right=0.98, bottom=0.3, top=0.91)
 
 #	fig.tight_layout()
 	plt.savefig(outDir + sample + '.copyNumberProfile.png', dpi=666)
