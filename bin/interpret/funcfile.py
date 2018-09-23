@@ -120,18 +120,6 @@ def mergePassing(funcDict):
 
 
 def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
-	"""		
-	First, CNV calls < 3 bins are combined with the most similar neighbor (euploid or CNV)
-	Third, small segments (<= 25 bins) that fail as CNV calls are either
-		Combined with neighboring CNVs IF 
-			Both are on the same chromosome
-			Both have the same copy number
-			Both pass FUnC
-			Both are > 25 bins
-			(because this indicates the baseline CN in this locus is not euploid)
-		Otherwise, converted to euploid
-	Large segments (>25 bins) are automatically treated as euploid too
-	"""
 	
 	print 'starting with', len(funcDict), 'segments'
 	
@@ -150,7 +138,7 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 		mergeTest = False
 
 		if j['bins'] < 3: #segment is unreliably small
-			print 'SMALL SEG NEEDED MERGING'
+	#		print 'SMALL SEG NEEDED MERGING'
 
 			#situations where you automatically merge with the previous segment
 			if (i == len(mergePass) - 1) or (j['chrom'] != mergePass[i+1]['chrom']) or (mergePass[i+1]['pass'] == 'no' != mergeSmall[-1]):
@@ -215,7 +203,81 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 	remergePass = mergePassing(mergeSmall)
 	print 'after second merge of passing CNVs', len(remergePass), 'segments remain'
 	
-	for i in remergePass:
+
+	"""		
+	Third, small segments (<= 25 bins) that fail as CNV calls are either
+		Combined with neighboring CNVs IF 
+			Both are on the same chromosome
+			Both have the same copy number
+			Both pass FUnC
+			Both are > 25 bins
+			(because this indicates the baseline CN in this locus is not euploid)
+		Otherwise, converted to euploid
+	Large segments (>25 bins) are automatically treated as euploid too
+	"""
+	
+	#pass 4: <=25 bin segments that fail as CNV calls are merged with neighboring CNVs if they show a baseline CN shift
+	baselineMerge = []
+	skipTest = False
+	for i,j in enumerate(remergePass):
+		if skipTest:
+			skipTest = False
+			continue
+		thisEntry = j
+		normalCN = getNormalCN(j['chrom'], gender)
+
+		if j['pass'] == 'no' and j['bins'] <= 25: #segment is a candidate for additional merging
+			
+			if i == 0 or j['chrom'] != baselineMerge[-1]['chrom']: #segment at 5' end of chromosome#
+				if remergePass[i+1]['pass'] == 'cnv' and remergePass[i+1]['bins'] > 25:
+					if np.round(remergePass[i+1]['CN']) == np.round(mergeSegCN(j, remergePass[i+1])): #extra check b/c at chrom edge
+						print 'At the 5prime chrom end and passes merging requirements'
+						print j
+						print remergePass[i+1]
+						
+						thisEntry = remergePass[i+1]
+						thisEntry['bins'] = thisEntry['bins'] + j['bins']
+						thisEntry['start'] = j['start']
+						skipTest = True
+			
+			if i == len(remergePass)-1 or j['chrom'] != remergePass[i+1]['chrom']: #segment at 3' end of chromosome#
+				if baselineMerge[-1]['pass'] == 'cnv' and baselineMerge[-1]['bins'] > 25:
+					if np.round(baselineMerge[-1]['CN']) == np.round(mergeSegCN(j, baselineMerge[-1])): #extra check b/c at chrom edge
+						print 'At the 3prime chrom end and passes merging requirements'
+						print baselineMerge[-1]
+						print j
+						
+						thisEntry = baselineMerge.pop()
+						thisEntry['bins'] = thisEntry['bins'] + j['bins']
+						thisEntry['end'] = j['end']
+
+			else: #segment in middle of chromosome#
+				if baselineMerge[-1]['pass'] == remergePass[i+1]['pass']: #both are passing CNVs#
+					if np.round(baselineMerge[-1]['CN']) == np.round(remergePass[i+1]['CN']): #both are the same CN#
+						if baselineMerge[-1]['bins'] > 25 and remergePass[i+1]['pass'] > 25: #both are more than 25 bins#
+							print 'Inside of a chromosome and follows baseline copy number shift expectations'
+							print baselineMerge[-1]
+							print j
+							print remergePass[i+1]
+
+							thisEntry = baselineMerge.pop()
+							thisEntry['bins'] = thisEntry['bins'] + j['bins'] + remergePass[i+1]['bins']
+							thisEntry['end'] = remergePass[i+1]['end']
+							thisEntry['CN'] = mergeSegCN(thisEntry, remergePass[i+1])
+							skipTest = True
+
+			
+			
+		baselineMerge.append(thisEntry)
+	
+	
+	print 'after merging  small segments surrounded by baseline copy number shift', len(baselineMerge), 'segments remain'
+	
+		
+	#pass 5: merge passing CNVs again if same CN and same chrom because merging small segments can bring them into contact
+	reremergePass = mergePassing(baselineMerge)
+	print 'after third merge of passing CNVs', len(reremergePass), 'segments remain'
+	for i in reremergePass:
 		print i['chrom'], i['start'], i['end'], i['CN'], i['bins'], i['pass']
 	raise SystemExit
 	
@@ -224,14 +286,6 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 	
 	cnvList = []
 	
-	#go through every segment call
-	for i in range(len(funcDict)):
-		if funcDict[i]['chrom'] == 'chrY':
-			break		
-		normalCN = getNormalCN(funcDict[i]['chrom'], gender)
-
-
-	raise SystemExit
 	
 	outfile = outDir + sample + 'CNVlist.txt'
 	OUT = open(outfile, 'w')
