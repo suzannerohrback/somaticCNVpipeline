@@ -96,21 +96,7 @@ def FUnC(dataDict, binDict, cutoffDict, gender):
 
 
 
-def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
-	"""		
-	First, CNV calls < 3 bins are combined with the most similar neighbor (euploid or CNV)
-	Third, small segments (<= 25 bins) that fail as CNV calls are either
-		Combined with neighboring CNVs IF 
-			Both are on the same chromosome
-			Both have the same copy number
-			Both pass FUnC
-			Both are > 25 bins
-			(because this indicates the baseline CN in this locus is not euploid)
-		Otherwise, converted to euploid
-	Large segments (>25 bins) are automatically treated as euploid too
-	"""
-	
-	#pass 1: merge passing CNVs if same CN and same chrom 
+def mergePassing(funcDict):
 	mergePass = [funcDict[0]]
 	for i, j in enumerate(funcDict[1:]):
 		thisEntry = j
@@ -127,7 +113,28 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 						'pass': 'cnv'
 					}	
 		mergePass.append(thisEntry)
+		
+	return mergePass
 
+
+
+
+def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
+	"""		
+	First, CNV calls < 3 bins are combined with the most similar neighbor (euploid or CNV)
+	Third, small segments (<= 25 bins) that fail as CNV calls are either
+		Combined with neighboring CNVs IF 
+			Both are on the same chromosome
+			Both have the same copy number
+			Both pass FUnC
+			Both are > 25 bins
+			(because this indicates the baseline CN in this locus is not euploid)
+		Otherwise, converted to euploid
+	Large segments (>25 bins) are automatically treated as euploid too
+	"""
+	
+	#pass 1: merge passing CNVs if same CN and same chrom 
+	mergePass = mergePassing(funcDict)
 		
 	#pass 2: merge small segments with most similar adjacent (passing or euploid) neighbor#
 	mergeSmall = []
@@ -193,7 +200,7 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 			print mergePass[i+1]
 			print thisEntry
 			print '\n'
-			raise SystemExit
+		#	raise SystemExit
 		
 		
 		mergeSmall.append(thisEntry)
@@ -201,7 +208,7 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 	
 
 
-	for i in merge2:
+	for i in mergeSmall:
 		print i['chrom'], i['start'], i['end'], i['CN'], i['bins'], i['pass']
 	raise SystemExit
 	
