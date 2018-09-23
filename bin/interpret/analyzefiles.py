@@ -59,7 +59,7 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 
 	
 	
-def analyzeOne(sample, species, cnvDir, lowessDir, outDir, ploidy, gender):
+def analyzeOne(sample, species, cnvDir, lowessDir, plotDir, ploidy, gender):
 
 	interpretVars = cfg.Interpret()
 	
@@ -93,7 +93,7 @@ def analyzeOne(sample, species, cnvDir, lowessDir, outDir, ploidy, gender):
 			cnvData[j['start']:j['end']] = j['CN']
 			
 			
-	plotProfile(sample, outDir, binData, cnvDat, binArray)
+	plotProfile(sample, plotDir, binData, cnvDats, binArray)
 
 
 
