@@ -58,15 +58,14 @@ def runAll(args):
 	sampleFiles = common.getSampleList(folderDict['Segments'], args.samples, 'segments')
 	sampleNames = [x.split('/')[-1].split('.')[0] for x in sampleFiles]
 
-	info = common.importInfoFile(args.infofile, args.columns, 'interpret')
-
-	if args.infofile:
-		refArray = info
-	else:
-		thisDtype = info
-		refArray = np.array(
-			[ (x, 1, 'unk',) for x in sampleNames],
-			dtype=thisDtype)
+#	info = common.importInfoFile(args.infofile, args.columns, 'interpret')
+#	if args.infofile:
+#		refArray = info
+#	else:
+#		thisDtype = info
+#		refArray = np.array(
+#			[ (x, 1, 'unk',) for x in sampleNames],
+#			dtype=thisDtype)
 		
 
 	
