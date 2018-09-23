@@ -92,7 +92,7 @@ def getPloidy(segData, sample, plotDir, cutoff):
 	ax.tick_params(direction='out', which='both', pad=0., length=3, top='off', right='off')
 	
 	fig.set_size_inches(4, 4, forward=True)
-	plt.subplots_adjust(left=0.15, right=0.91, bottom=0.12, top=0.95)
+	plt.subplots_adjust(left=0.15, right=0.93, bottom=0.12, top=0.95)
 	plt.savefig(plotDir + sample + '.ploidyDeterminationPlot.png', dpi=666)
 	plt.close()
 	
