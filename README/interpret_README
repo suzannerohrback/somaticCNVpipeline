@@ -180,7 +180,7 @@ Notes
 	Debugging complete for runfunc
 		I have confirmed that it will properly perform final merging of CNV calls so there are not adjacent CNVs with the same copy number
 		An output .bed file is written containing CNV locations in chromosome position coordinates (0-indexed)
-	Still need to assess the plot function in analyzefile
+	Debugging complete for generating a cell CN profile plot in analyzefile
 	Still need a function to write a summary file for all samples in analyzefile
 
 
