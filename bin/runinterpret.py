@@ -43,7 +43,7 @@ def runAll(args):
 	
 	QCdir = args.AnalysisDirectory + 'QC/'
 	CNVdir = args.AnalysisDirectory + 'CNVlists/'
-	summaryDir = args.AnalysisDirectory + 'CNVsummary/'
+	summaryDir = args.AnalysisDirectory + 'SummaryFiles/'
 	CNplotDir = args.AnalysisDirectory + 'CopyNumberProfilePlots/'
 	#ChromPlotDir = args.AnalysisDirectory + 'ChromosomeCopyNumberPlots/'
 	#summaryPlotDir = args.AnalysisDirectory + 'CombinedSamplesPlots/'
@@ -80,7 +80,7 @@ def runAll(args):
 	ploidyDict = {}
 	genderDict = {}
 	
-	mergeQCfile = QCdir + 'ALL_SAMPLES.QC.txt'
+	mergeQCfile = summaryDir + 'ALL_SAMPLES.QC.txt'
 	OUT = open(mergeQCfile, 'w')
 	OUT.write('Name\tReads\tMAPD\tCS\tPloidy\tGender\tPASS\n')
 	
@@ -99,6 +99,7 @@ def runAll(args):
 		os.remove(QCdir + i + '.qcTEMP.txt')
 		
 	OUT.close()
+	os.rmdir(QCdir)
 	
 	
 	
