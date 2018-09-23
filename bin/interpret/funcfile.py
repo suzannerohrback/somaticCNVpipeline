@@ -319,7 +319,7 @@ def FUnCone(sample, species, segmentDir, CNVdir, ploidy, gender):
 	
 	
 	printText = '\t\tFinished performing FUnC on ' + sample + ', masking ' + str(numFail) + ' of ' + str(numFail + numPass) + ' putative CNV segments'
-	printText += '\n\t\t\tFor a total of ' + str(len(cnvData)) + ' CNVs after merging'
+	printText += ', for a total of ' + str(len(cnvData)) + ' merged CNVs'
 	print(printText)
 
 	
