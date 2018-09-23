@@ -24,7 +24,7 @@ def parentArgs():
 	  *count (count number of reads in 25,000 genomic bins)
 	  *segment (run CBS -- requires Matlab!)
 	  *interpret (perform QC assessment and removal of low-quality CNV calls)
-	  [More functions coming soon...]
+	#  [More functions coming soon...]
 		''')
 
 	parser.print_help()
