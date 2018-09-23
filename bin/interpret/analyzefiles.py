@@ -16,10 +16,9 @@ import common
 
 
 
-def plotProfile(sample, outDir, lowessData, cnvData, refArray):
+def plotProfile(sample, outDir, lowessData, cnvData, refArray, chromList):
 	xVals = [x['abspos'] + (x['size']/2) for x in refArray]
 
-	chromList = ['chr1'] + [y for x,y in enumerate(refArray['chrom'][1:]) if y != refArray['chrom'][x]]
 	chromStarts = [refArray[refArray['chrom'] == x]['abspos'][0] for x in chromList]
 	chromEnds = [refArray[refArray['chrom'] == x]['abspos'][-1] + refArray[refArray['chrom'] == x]['size'][-1] for x in chromList]
 
@@ -56,8 +55,43 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	plt.close()
 
 
-#function to create cell summary file (one row per sample)
-
+	
+	
+	
+#function to calculate cell summary stats
+def getSummaryStats(cnvs, gender, chromList, chromSizes):
+	cellStats = {
+		'delCount': 0,
+		'ampCount: 0,
+		'delMB': 0.,
+		'ampMB': 0.,
+	}
+	chromAmp = {x: 0. for x in chromList}
+	chromDel = {x: 0. for x in chromList}
+	
+	for i in cnvs:
+		normalCN = common.getNormalCN(i['chrom'], gender)
+		
+		if i['CN'] < normalCN:
+			cellStats['delCount'] += 1
+			cellStats['delMB'] = float(abs(normalCN - i['CN']) * (i['end'] - i['start'] + 1)) / 1e6
+		else:
+			cellStats['ampCount'] += 1
+			cellStats['ampMB'] = float(abs(normalCN - i['CN']) * (i['end'] - i['start'] + 1)) / 1e6
+			
+	print cellStats
+	raise SystemExit
+	
+	
+	return cellStats, chromAmp, chromDel
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 def analyzeOne(sample, species, cnvDir, lowessDir, plotDir, ploidy, gender):
@@ -69,6 +103,9 @@ def analyzeOne(sample, species, cnvDir, lowessDir, plotDir, ploidy, gender):
 	xBins = [x for x,y in enumerate(binArray) if y['chrom'] == 'chrX']
 	yBins = [x for x,y in enumerate(binArray) if y['chrom'] == 'chrY']
 	
+	chromList = ['chr1'] + [y for x,y in enumerate(binArray['chrom'][1:]) if y != binArray['chrom'][x]]
+	chromSizes = [binArray[binArray['chrom'] == x]['chrStart'][-1] + binArray[binArray['chrom'] == x]['size'][-1] for x in chromList]
+		#this might need an extra -1
 	
 	
 	#load lowess counts and convert to CN state#
@@ -96,9 +133,11 @@ def analyzeOne(sample, species, cnvDir, lowessDir, plotDir, ploidy, gender):
 			cnvData[startBin:endBin] = j['CN']
 			
 			
-	plotProfile(sample, plotDir, binData, cnvData, binArray)
+	plotProfile(sample, plotDir, binData, cnvData, binArray, chromList)
 
-
+	summaryStats = getSummaryStats(cnvs, gender, chromList, chromSizes)
+	
+	return summaryStats
 
 
 
