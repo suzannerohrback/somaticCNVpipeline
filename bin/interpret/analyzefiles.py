@@ -62,7 +62,7 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray, chromList):
 def getSummaryStats(cnvs, gender, chromList, chromSizes):
 	cellStats = {
 		'delCount': 0,
-		'ampCount: 0,
+		'ampCount': 0,
 		'delMB': 0.,
 		'ampMB': 0.,
 	}
