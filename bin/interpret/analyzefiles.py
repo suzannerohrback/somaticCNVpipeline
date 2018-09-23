@@ -41,7 +41,7 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 
 #	ax.set_xticks(xTicks)
 #	ax.set_xticklabels(chromList, rotation=45)
-#	ax.set_xlim(0, xVals[-1])
+	ax.set_xlim(-1, xVals[-1]+1)
 
 	yTicks = [0, 1, 2, 3, 4]
 	ax.set_yticks(yTicks)
