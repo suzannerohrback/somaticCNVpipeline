@@ -186,12 +186,10 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 			else:
 				print('ERROR: why was no segment found for merging?')
 			
-			thisEntry = {
-				'chrom': j['chrom'],
-				'CN': mergeSegCN(j, parent),
-				'bins': j['bins'] + parent['bins'],
-				'pass': parent['pass'],
-				}
+			thisEntry['chrom'] = j['chrom']
+			thisEntry['CN'] = mergeSegCN(j, parent)
+			thisEntry['bins'] = j['bins'] + parent['bins']
+			thisEntry['pass'] = parent['pass']
 
 			print 'SMALL SEG NEEDED MERGING'
 			print mergeTest - i, skipTest
