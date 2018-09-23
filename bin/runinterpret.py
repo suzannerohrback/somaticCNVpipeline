@@ -46,9 +46,8 @@ def runAll(args):
 	summaryDir = args.AnalysisDirectory + 'SummaryFiles/'
 	CNplotDir = args.AnalysisDirectory + 'CopyNumberProfilePlots/'
 	#ChromPlotDir = args.AnalysisDirectory + 'ChromosomeCopyNumberPlots/'
-	#summaryPlotDir = args.AnalysisDirectory + 'CombinedSamplesPlots/'
 	
-	for i in [args.AnalysisDirectory, QCdir, CNVdir, summaryDir, CNplotDir]:#, ChromPlotDir]#, summaryPlotDir]:
+	for i in [args.AnalysisDirectory, QCdir, CNVdir, summaryDir, CNplotDir]:#, ChromPlotDir]:#
 		common.makeDir(i)
 	
 	
@@ -112,9 +111,41 @@ def runAll(args):
 	
 	
 	#CNV analysis#
-	analyzefiles.analyzeOne(analysisSamples[0], args.species, CNVdir, folderDict['LowessBinCounts'], CNplotDir, ploidyDict[analysisSamples[0]], genderDict[analysisSamples[0]])
+	summaryStats = analyzefiles.analyzeOne(analysisSamples[0], args.species, CNVdir, folderDict['LowessBinCounts'], CNplotDir, ploidyDict[analysisSamples[0]], genderDict[analysisSamples[0]])
 #	argList = [(x, args.species, CNVdir, folderDict['LowessBinCounts'], CNplotDir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
-#	common.daemon(analyzefiles.analyzeOne, argList, ' create summary file(s)')
+#	summaryStats = common.daemon(analyzefiles.analyzeOne, argList, ' create summary file(s)')
+	
+	cellStatsFile = summaryDir + 'CellStats.txt'
+	chromAmpFile = summaryDir + 'ChromosomeAmplifiedPercent.txt'
+	chromDelFile = summaryDir + 'ChromosomeDeletedPercent.txt'
+	
+	with open(cellStatsFile, 'w') as CELL, open(chromAmpFile, 'w') as AMP, open(chromDelFile, 'w') as DEL:
+		CELL.write('Sample\tDeletionNumber\tAmplificationNumber\tTotalCNVnumber\tDeletedMB\tAmplifiedMB\tNetDNAalterdMB\n')
+		chromHeader = 'Sample\t' + '\t'.join(summaryStats[0]['chroms']) + '\n'
+		AMP.write(chromHeader)
+		DEL.write(chromHeader)
+		
+		for i,j in enumerate(analysisSamples):
+			CELL.write(str(j + '\t'))
+			cellOut = [summaryStats[i]['cellStats']['delCount'],
+				   summaryStats[i]['cellStats']['ampCount'],
+				   summaryStats[i]['cellStats']['delCount'] + summaryStats[i]['cellStats']['ampCount'],
+				   np.round(summaryStats[i]['cellStats']['delMB'], 3),
+				   np.round(summaryStats[i]['cellStats']['ampMB'], 3),
+				   np.round(summaryStats[i]['cellStats']['ampMB'] - summaryStats[i]['cellStats']['delMB'], 3)]
+			cellOut = '\t'.join(map(str, cellOut)) + '\n'
+			CELL.write(cellOut)
+			
+			AMP.write(str(j + '\t'))
+			ampOut = [np.round(summaryStats[i]['chromAmp'][x], 3) for x in summaryStats[0]['chroms']]
+			ampOut = '\t'.join(map(str, ampOut)) + '\n'
+			AMP.write(ampOut)
+					   
+			DEL.write(str(j + '\t'))
+			delOut = [np.round(summaryStats[i]['chromDel'][x], 3) for x in summaryStats[0]['chroms']]
+			delOut = '\t'.join(map(str, delOut)) + '\n'
+			DEL.write(delOut)
+			
 	
 	
 	
