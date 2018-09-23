@@ -23,20 +23,23 @@ def runAll(args):
 
 
 	#set up environment#
-	args.SamDirectory = common.fixDirName(args.SamDirectory)
+	args.AnalysisDirectory = common.fixDirName(args.AnalysisDirectory)
 	
-	countDir = os.path.dirname(args.SamDirectory[:-1]) + '/BinCounts/'
+	
+	SamDir = args.AnalysisDirectory + '/Sam/' #args.SamDirectory = common.fixDirName(args.SamDirectory)
+	
+	countDir = args.AnalysisDirectory + '/BinCounts/' #os.path.dirname(args.SamDirectory[:-1]) + '/BinCounts/'
 	if args.output:
 		countDir = common.fixDirName(args.output)
 	
-	statsDir = os.path.dirname(args.SamDirectory[:-1]) + '/PipelineStats/'
+	statsDir =  args.AnalysisDirectory + '/PipelineStats/' #os.path.dirname(args.SamDirectory[:-1]) + '/PipelineStats/'
 	if args.statdir:
 		statsDir = common.fixDirName(args.statdir)
 			
 	for i in [countDir, statsDir]:
 		common.makeDir(i)
 
-	samFiles = common.getSampleList(args.SamDirectory, args.samples, 'sam')
+	samFiles = common.getSampleList(SamDir, args.samples, 'sam')
 		
 		
 	
