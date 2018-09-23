@@ -31,8 +31,8 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	fig, ax = plt.subplots()
 
 	#ideally make these prettier colors like were used in the paper#
-	ax.scatter(xVals, lowessData, color='b', marker='d', s=3, linewidths=0)
-	ax.plot(xVals, cnvData, color='r', lw=1, ls='steps')
+	ax.scatter(xVals, lowessData, color='#247afd', marker='d', s=3, linewidths=0)
+	ax.plot(xVals, cnvData, color='#980002', lw=1, ls='steps')
 
 	for j in chromEdges:
 		ax.plot([j, j], [-1, 5], lw=1, ls='-', color='gray', zorder=0)
