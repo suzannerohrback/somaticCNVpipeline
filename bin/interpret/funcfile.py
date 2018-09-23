@@ -12,13 +12,13 @@ import config as cfg
 
 
 
-def getNormalCN(chrom, gender):
-	normalCN = 2.
-	if chrom in ['chrX', 'chrY'] and gender == 'M':
-		normalCN = 1.
-	elif chrom == 'chrY' and gender == 'F':
-		normalCN = 0.
-	return normalCN
+#def getNormalCN(chrom, gender):
+#	normalCN = 2.
+#	if chrom in ['chrX', 'chrY'] and gender == 'M':
+#		normalCN = 1.
+#	elif chrom == 'chrY' and gender == 'F':
+#		normalCN = 0.
+#	return normalCN
 
 
 
@@ -54,7 +54,7 @@ def mergeCNinitial(dataDict, gender):
 			weightedAverageCN, weightedAverageIntdist, mergeIntdist = mergeSegCN(newData[-1], i, intD=True)
 
 			#previously was <= but that's stupid b/c it can really only improve
-			if mergeIntdist < weightedAverageIntdist or np.round(i['CN']) == getNormalCN(i['chrom'], gender):
+			if mergeIntdist < weightedAverageIntdist or np.round(i['CN']) == common.getNormalCN(i['chrom'], gender):
 			#	print 'passed', weightedAverageIntdist, mergeIntdist
 				prevMerge = newData.pop()
 				addData =	{
@@ -79,7 +79,7 @@ def FUnC(dataDict, binDict, cutoffDict, gender):
 
 	#for each entry, calc bin size, compare to cutoffDict
 	for i in range(len(dataDict)):
-		normalCN = getNormalCN(dataDict[i]['chrom'], gender)
+		normalCN = common.getNormalCN(dataDict[i]['chrom'], gender)
 		thisSize = binDict[dataDict[i]['end']+1] - binDict[dataDict[i]['start']]
 		dataDict[i]['bins'] = thisSize
 		
