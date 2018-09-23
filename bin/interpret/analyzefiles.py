@@ -19,15 +19,15 @@ import common
 def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	xVals = [x['abspos'] + (x['size']/2) for x in refArray]
 
-#	chromList = ['chr1'] + [y for x,y in enumerate(refArray['chrom'][1:]) if y != refArray['chrom'][x]]
-#	chromStarts = [refArray[refArray['chrom'] == x]['abspos'][0] for x in chromList]
-#	chromEnds = [refArray[refArray['chrom'] == x]['abspos'][-1] + refArray[refArray['chrom'] == x]['size'][-1] for x in chromList]
-#
-#	chromEdges = chromEnds[:-1]
-#	xTicks = [np.mean([chromStarts[x], chromEnds[x]]) for x in range(len(chromList))]
-#
-	print xVals[:10]
-	print lowessData[:10]
+	chromList = ['chr1'] + [y for x,y in enumerate(refArray['chrom'][1:]) if y != refArray['chrom'][x]]
+	chromStarts = [refArray[refArray['chrom'] == x]['abspos'][0] for x in chromList]
+	chromEnds = [refArray[refArray['chrom'] == x]['abspos'][-1] + refArray[refArray['chrom'] == x]['size'][-1] for x in chromList]
+
+	chromEdges = chromEnds[:-1]
+	xTicks = [np.mean([chromStarts[x], chromEnds[x]]) for x in range(len(chromList))]
+
+	print min(xVals), max(xVals)
+	print xTicks
 	print np.unique(cnvData)
 	
 	fig, ax = plt.subplots()
@@ -41,7 +41,7 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 
 #	ax.set_xticks(xTicks)
 #	ax.set_xticklabels(chromList, rotation=45)
-	ax.set_xlim(-1000000, xVals[-1]+1000000)
+	ax.set_xlim(-10000000, xVals[-1]+10000000)
 
 	yTicks = [0, 1, 2, 3, 4]
 	ax.set_yticks(yTicks)
