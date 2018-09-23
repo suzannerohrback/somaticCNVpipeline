@@ -42,13 +42,13 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	ax.set_xticks(xTicks)
 	ax.set_xticklabels(chromList, rotation=45)
 #	ax.set_xlabel('Genome Location (Chrom)', fontsize=pFonts.fontSizeDict['axis'], fontname=fontType, labelpad=1)
-	ax.set_xlim(0, xVals[-1])
+#	ax.set_xlim(0, xVals[-1])
 
 	yTicks = [0, 1, 2, 3, 4]
 	ax.set_yticks(yTicks)
 	ax.set_yticklabels(yTicks)
 	ax.set_ylabel('Copy Number', labelpad=1)
-	ax.set_ylim(-0.1, 4.6)
+#	ax.set_ylim(-0.1, 4.6)
 
 	ax.tick_params(direction='out', which='both', pad=0., length=3, top='off', right='off')
 
@@ -89,6 +89,7 @@ def analyzeOne(sample, species, cnvDir, lowessDir, plotDir, ploidy, gender):
 		cnvData[yBins] = len(yBins) * [1]
 	else:
 		cnvData[yBins] = len(yBins) * [0]
+	print np.unique(cnvData)
 
 	listFile = cnvDir + common.findInfile(sample, cnvDir)
    	listDtype = {'names': ('chrom', 'start', 'end', 'CN'), 'formats': ('S10', 'int', 'int', 'int')}
