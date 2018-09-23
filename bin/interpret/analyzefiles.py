@@ -60,7 +60,7 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray, chromList):
 #plot estimated overall chromosome ploidy states--CALCULATED FROM LOWESS DATA, NOT SEGMENT DATA#
 def plotChroms(sample, outDir, lowessData, refArray, chromList):
 	graphData = [np.mean(lowessData[refArray['chrom'] == x]) for x in chromList]
-	graphErr = [np.std(lowessData[refArray['chrom'] == x]) / (float(len(refArray[refArray['chrom'] == x]))**0.5) for x in chromList]
+	graphErr = [np.std(lowessData[refArray['chrom'] == x]) for x in chromList]
 	graphErr = [abs(graphData[x] - graphErr[x]) for x in range(len(chromList))]
 
 	xTicks = np.arange(0, len(chromList))
@@ -77,7 +77,7 @@ def plotChroms(sample, outDir, lowessData, refArray, chromList):
 	ax.set_yticks(yTicks)
 	ax.set_yticklabels(yTicks)
 	ax.set_ylabel('Copy Number', labelpad=5)
-	ax.set_ylim(-0.1, 4.6)
+	ax.set_ylim(0, 4.6)
 	
 	ax.tick_params(direction='out', which='both', pad=0., length=3, top='off', right='off')
 	
