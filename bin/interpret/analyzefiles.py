@@ -78,7 +78,7 @@ def analyzeOne(sample, species, segDir, lowessDir, outDir, ploidy, gender):
 	
 	#load CNV data and convert to array form#
 	cnvData = np.array( len(binArray) * [2], dtype='int' )
-	if genderDict[i] == 'M':
+	if gender == 'M':
 		cnvData[xBins] = len(xBins) * [1]
 		cnvData[yBins] = len(yBins) * [1]
 	else:
