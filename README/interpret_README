@@ -175,6 +175,12 @@ Notes
 			Otherwise, converted to euploid
 		Euploid regions obviously stay euploid
 		Large segments (>25 bins) are automatically treated as euploid too
-		
+	
+9/22/2018
+	Debugging complete for runfunc
+		I have confirmed that it will properly perform final merging of CNV calls so there are not adjacent CNVs with the same copy number
+		An output .bed file is written containing CNV locations in chromosome position coordinates (0-indexed)
+	Still need to assess the plot function in analyzefile
+	Still need a function to write a summary file for all samples in analyzefile
 
 
