@@ -52,9 +52,7 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 	ax.tick_params(direction='out', which='both', pad=0., length=3, top='off', right='off')
 
 	fig.set_size_inches(8, 4, forward=True)
-	plt.subplots_adjust(left=0.05, right=0.98, bottom=0.07, top=0.95)
-
-#	fig.tight_layout()
+	plt.subplots_adjust(left=0.07, right=0.98, bottom=0.15, top=0.95)
 	plt.savefig(outDir + sample + '.copyNumberProfile.png', dpi=666)
 
 	plt.close()
