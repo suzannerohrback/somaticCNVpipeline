@@ -133,8 +133,11 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 	Large segments (>25 bins) are automatically treated as euploid too
 	"""
 	
+	print 'starting with', len(funcDict), 'segments'
+	
 	#pass 1: merge passing CNVs if same CN and same chrom 
 	mergePass = mergePassing(funcDict)
+	print 'after first merge of passing CNVs', len(mergePass), 'segments remain'
 		
 	#pass 2: merge small segments with most similar adjacent (passing or euploid) neighbor#
 	mergeSmall = []
@@ -151,33 +154,31 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 
 			#situations where you automatically merge with the previous segment
 			if (i == len(mergePass) - 1) or (j['chrom'] != mergePass[i+1]['chrom']) or (mergePass[i+1]['pass'] == 'no' != mergeSmall[-1]):
-				print 'auto merge with previous segment'
+		#		print 'auto merge with previous segment'
 				mergeTest = i-1
 				
 			#situations where you automatically merge with the next segment
 			elif (i == 0) or (j['chrom'] != mergeSmall[-1]['chrom']) or (mergeSmall[-1]['pass'] == 'no' != mergePass[i+1]):
-				print 'auto merge with next segment'
+		#		print 'auto merge with next segment'
 				mergeTest = i+1
 			
 			#situations where you need to figure out which segment to merge with
 			else:
 				if mergeSmall[-1]['pass'] == mergePass[i+1]['pass'] == 'no':
 					if mergeSmall[-1]['bins'] > mergePass[i+1]['bins'] or (mergeSmall[-1]['bins'] == mergePass[i+1]['bins'] and abs(j['CN'] - mergeSmall[-1]['CN']) < abs(j['CN'] - mergePass[i+1]['CN'])):
-						print 'merge with non passing but larger or CN matching prev seg'
+				#		print 'merge with non passing but larger or CN matching prev seg'
 						mergeTest = i-1
 					else:
-						print 'merge with non passing but larger or CN matching next seg'
+				#		print 'merge with non passing but larger or CN matching next seg'
 						mergeTest = i+1
 				elif abs(j['CN'] - mergeSmall[-1]['CN']) < abs(j['CN'] - mergePass[i+1]['CN']):
-					print 'merge with passing and CN matching prev seg'
 					mergeTest = i-1
 				else:
-					print 'merge with passing and CN matching next seg'
 					mergeTest = i+1
 
-			print mergeSmall[-1]
-			print j
-			print mergePass[i+1]
+		#	print mergeSmall[-1]
+		#	print j
+		#	print mergePass[i+1]
 			
 			#actually do the merging
 			if mergeTest == i-1:
@@ -202,15 +203,19 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 			thisEntry['bins'] = j['bins'] + parent['bins']
 			thisEntry['pass'] = parent['pass']
 
-			print mergeTest - i, skipTest
-			print thisEntry
-			print '\n'
-
-		
-		
+		#	print mergeTest - i, skipTest
+		#	print thisEntry
+		#	print '\n'
+			
 		mergeSmall.append(thisEntry)
 		
-	for i in mergeSmall:
+	print 'after merging excessively small segments', len(mergeSmall), 'segments remain'
+
+	#pass 3: merge passing CNVs again if same CN and same chrom because merging small segments can bring them into contact
+	remergePass = mergePassing(mergeSmall)
+	print 'after second merge of passing CNVs', len(remergePass), 'segments remain'
+	
+	for i in remergePass:
 		print i['chrom'], i['start'], i['end'], i['CN'], i['bins'], i['pass']
 	raise SystemExit
 	
