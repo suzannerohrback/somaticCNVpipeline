@@ -120,12 +120,11 @@ def mergePassing(funcDict):
 
 
 def mergeCNfinal(funcDict):
-	
-	print 'starting with', len(funcDict), 'segments'
-	
+		
 	#pass 1: merge passing CNVs if same CN and same chrom 
 	mergePass = mergePassing(funcDict)
-	print 'after first merge of passing CNVs', len(mergePass), 'segments remain'
+		
+		
 		
 	#pass 2: merge small segments with most similar adjacent (passing or euploid) neighbor#
 	mergeSmall = []
@@ -197,24 +196,12 @@ def mergeCNfinal(funcDict):
 			
 		mergeSmall.append(thisEntry)
 		
-	print 'after merging excessively small segments', len(mergeSmall), 'segments remain'
 
+		
 	#pass 3: merge passing CNVs again if same CN and same chrom because merging small segments can bring them into contact
 	remergePass = mergePassing(mergeSmall)
-	print 'after second merge of passing CNVs', len(remergePass), 'segments remain'
-	
 
-	"""		
-	Third, small segments (<= 25 bins) that fail as CNV calls are either
-		Combined with neighboring CNVs IF 
-			Both are on the same chromosome
-			Both have the same copy number
-			Both pass FUnC
-			Both are > 25 bins
-			(because this indicates the baseline CN in this locus is not euploid)
-		Otherwise, converted to euploid
-	Large segments (>25 bins) are automatically treated as euploid too
-	"""
+	
 	
 	#pass 4: <=25 bin segments that fail as CNV calls are merged with neighboring CNVs if they show a baseline CN shift
 	baselineMerge = []
@@ -263,8 +250,7 @@ def mergeCNfinal(funcDict):
 		baselineMerge.append(thisEntry)
 	
 	
-	print 'after merging  small segments surrounded by baseline copy number shift', len(baselineMerge), 'segments remain'
-	
+		
 	cnvData = [x for x in baselineMerge if x['pass'] == 'cnv']
 	return cnvData
 
