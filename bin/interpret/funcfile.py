@@ -111,13 +111,13 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 	"""
 	
 	#pass 1: merge passing CNVs if same CN and same chrom 
-	merge1 = [funcDict[0]]
+	mergePass = [funcDict[0]]
 	for i, j in enumerate(funcDict[1:]):
 		thisEntry = j
 		if j['pass'] == funcDict[i]['pass'] == 'cnv': #both entries passed FUnC
 			if j['chrom'] == funcDict[i]['chrom']: #both entries on the same chromosome
 				if np.round(j['CN']) == np.round(funcDict[i]['CN']): #both entries have the same copy number
-					prev = merge1.pop()
+					prev = mergePass.pop()
 					thisEntry = {
 						'chrom': j['chrom'],
 						'start': prev['start'], 
@@ -126,11 +126,11 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 						'bins': prev['bins'] + j['bins'],
 						'pass': 'cnv'
 					}	
-		merge1.append(thisEntry)
+		mergePass.append(thisEntry)
 
 		
 	#pass 2: merge small segments with most similar adjacent (passing or euploid) neighbor#
-	merge2 = []
+	mergeSmall = []
 	skipTest = False
 	for i,j in enumerate(merge1):
 		if skipTest:
@@ -142,35 +142,35 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 		if j['bins'] < 3: #segment is unreliably small
 
 			#situations where you automatically merge with the previous segment
-			if (i == len(merge1) - 1) or (j['chrom'] != merge1[i+1]['chrom']) or (merge1[i+1]['pass'] == 'no' != merge1[i-1]):
+			if (i == len(mergePass) - 1) or (j['chrom'] != mergePass[i+1]['chrom']) or (mergePass[i+1]['pass'] == 'no' != mergeSmall[-1]):
 				mergeTest = i-1
 				
 			#situations where you automatically merge with the next segment
-			elif (i == 0) or (j['chrom'] != merge1[i-1]['chrom']) or (merge1[i-1]['pass'] == 'no' != merge1[i+1]):
+			elif (i == 0) or (j['chrom'] != mergeSmall[-1]['chrom']) or (mergeSmall[-1]['pass'] == 'no' != mergePass[i+1]):
 				mergeTest = i+1
 			
 			#situations where you need to figure out which segment to merge with
 			else:
-				if merge1[i-1]['pass'] == merge1[i+1]['pass'] == 'no':
-					if merge1[i-1]['bins'] > merge2[i+1]['bins'] or (merge1[i-1]['bins'] == merge2[i+1]['bins'] and abs(j['CN'] - merge1[i-1]['CN']) < abs(j['CN'] - merge1[i+1]['CN'])):
+				if mergeSmall[-1]['pass'] == mergePass[i+1]['pass'] == 'no':
+					if mergeSmall[-1]['bins'] > mergePass[i+1]['bins'] or (mergeSmall[-1]['bins'] == mergePass[i+1]['bins'] and abs(j['CN'] - mergeSmall[-1]['CN']) < abs(j['CN'] - mergePass[i+1]['CN'])):
 						mergeTest = i-1
 					else:
 						mergeTest = i+1
-				elif abs(j['CN'] - merge1[i-1]['CN']) < abs(j['CN'] - merge1[i+1]['CN']):
+				elif abs(j['CN'] - mergeSmall[-1]['CN']) < abs(j['CN'] - mergePass[i+1]['CN']):
 					mergeTest = i-1
 				else:
 					mergeTest = i+1
 					
 			#actually do the merging
 			if mergeTest == i-1:
-				parent = merge2.pop()
+				parent = mergeSmall.pop()
 				thisEntry = {
 					'start': parent['start'],
 					'end': j['end'],
 				}
 			elif mergeTest == i+1:
 				skipTest = True
-				parent = merge1[mergeTest]
+				parent = mergePass[mergeTest]
 				thisEntry = {
 					'start': j['start'],
 					'end': parent['end'],
@@ -187,14 +187,16 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 				}
 
 			print 'SMALL SEG NEEDED MERGING'
-			print merge1[i-1:i+2]
 			print mergeTest - i, skipTest
+			print mergePass[i-1]
+			print j
+			print mergePass[i+1]
 			print thisEntry
 			print '\n'
 			raise SystemExit
 		
 		
-		merge2.append(thisEntry)
+		mergeSmall.append(thisEntry)
 	
 	
 
