@@ -59,7 +59,7 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 
 	
 	
-def analyzeOne(sample, species, segDir, lowessDir, outDir, ploidy, gender):
+def analyzeOne(sample, species, cnvDir, lowessDir, outDir, ploidy, gender):
 
 	interpretVars = cfg.Interpret()
 	
@@ -84,7 +84,7 @@ def analyzeOne(sample, species, segDir, lowessDir, outDir, ploidy, gender):
 	else:
 		cnvData[yBins] = len(yBins) * [0]
 
-	listFile = './data/' + i + '.CNVlist.bed'
+	listFile = cnvDir + common.findInfile(sample, cnvDir)
    	listDtype = {'names': ('chrom', 'start', 'end', 'CN', 'type'), 'formats': ('S10', 'int', 'int', 'int', 'S10')}
 	if os.stat(listFile).st_size > 32:
 		cnvs = np.loadtxt(listFile, skiprows=1, dtype=listDtype)
