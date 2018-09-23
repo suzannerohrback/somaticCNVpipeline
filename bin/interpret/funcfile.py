@@ -208,7 +208,7 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 
 	print mergeSmall
 	for i in mergeSmall:
-		print i['chrom'], i['start'], i['end'], i['CN'], i['bins'], i['pass']
+		print i#['chrom'], i['start'], i['end'], i['CN'], i['bins'], i['pass']
 	raise SystemExit
 	
 	
