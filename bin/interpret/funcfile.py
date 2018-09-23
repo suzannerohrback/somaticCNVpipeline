@@ -239,6 +239,8 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 						thisEntry['bins'] = thisEntry['bins'] + j['bins']
 						thisEntry['start'] = j['start']
 						skipTest = True
+						
+						print thisEntry, '\n'
 			
 			if i == len(remergePass)-1 or j['chrom'] != remergePass[i+1]['chrom']: #segment at 3' end of chromosome#
 				if baselineMerge[-1]['pass'] == 'cnv' and baselineMerge[-1]['bins'] > 25:
@@ -250,6 +252,7 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 						thisEntry = baselineMerge.pop()
 						thisEntry['bins'] = thisEntry['bins'] + j['bins']
 						thisEntry['end'] = j['end']
+						print thisEntry, '\n'
 
 			else: #segment in middle of chromosome#
 				if baselineMerge[-1]['pass'] == remergePass[i+1]['pass']: #both are passing CNVs#
@@ -265,8 +268,7 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 							thisEntry['end'] = remergePass[i+1]['end']
 							thisEntry['CN'] = mergeSegCN(thisEntry, remergePass[i+1])
 							skipTest = True
-
-			
+							print thisEntry, '\n'
 			
 		baselineMerge.append(thisEntry)
 	
@@ -274,10 +276,7 @@ def mergeCNfinal(funcDict, numBins, binDict, gender, outDir, sample):
 	print 'after merging  small segments surrounded by baseline copy number shift', len(baselineMerge), 'segments remain'
 	
 		
-	#pass 5: merge passing CNVs again if same CN and same chrom because merging small segments can bring them into contact
-	reremergePass = mergePassing(baselineMerge)
-	print 'after third merge of passing CNVs', len(reremergePass), 'segments remain'
-	for i in reremergePass:
+	for i in baselineMerge:
 		print i['chrom'], i['start'], i['end'], i['CN'], i['bins'], i['pass']
 	raise SystemExit
 	
