@@ -62,23 +62,31 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 def analyzeOne(sample, species, segDir, lowessDir, outDir, ploidy, gender):
 
 	interpretVars = cfg.Interpret()
+	
+	#load reference data#
 	binArray = common.importInfoFile(interpretVars.binDict[species], [0, 1, 2, 4, 5], 'normref', skiprows=1)
-	print len(binArray)
+	xBins = [x for x,y in enumerate(binArray) if y['chrom'] == 'chrX']
+	yBins = [x for x,y in enumerate(binArray) if y['chrom'] == 'chrY']
 	
+	
+	
+	#load lowess counts and convert to CN state#
 	binData = np.loadtxt(lowessDir + common.findInfile(sample, lowessDir))
-	print len(binData)
-	binData = (2 ** binData[:len(refData)]) * ploidyDict[i]
+	binData = (2 ** binData) * ploidyDict[i]
 
 	
 	
-	listFile = './data/' + i + '.CNVlist.bed'
-	cnvData = np.array( len(refData) * [2], dtype='int' )
+	#load CNV data and convert to array form#
+	cnvData = np.array( len(binArray) * [2], dtype='int' )
 	if genderDict[i] == 'M':
-		cnvData[xBins] = len(xBins) * [1.]
+		cnvData[xBins] = len(xBins) * [1]
+		cnvData[yBins] = len(yBins) * [1]
+	else:
+		cnvData[yBins] = len(yBins) * [0]
 
-	#THIS NUMBER ALMOST CERTAINLY NEEDS TO BE SMALLER
+	listFile = './data/' + i + '.CNVlist.bed'
    	listDtype = {'names': ('chrom', 'start', 'end', 'CN', 'type'), 'formats': ('S10', 'int', 'int', 'int', 'S10')}
-	if os.stat(listFile).st_size > 47:
+	if os.stat(listFile).st_size > 32:
 		cnvs = np.loadtxt(listFile, skiprows=1, dtype=listDtype)
 		cnvs = np.atleast_1d(cnvs)
 		for j in cnvs:
