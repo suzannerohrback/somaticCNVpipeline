@@ -38,14 +38,14 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray):
 		ax.plot([j, j], [-1, 5], lw=1, ls='-', color='gray', zorder=0)
 
 	ax.set_xticks(xTicks)
-	ax.set_xticklabels(chromList, fontsize=pFonts.fontSizeDict['tick'], fontname=fontType, rotation=45)
+	ax.set_xticklabels(chromList, rotation=45)
 #	ax.set_xlabel('Genome Location (Chrom)', fontsize=pFonts.fontSizeDict['axis'], fontname=fontType, labelpad=1)
 	ax.set_xlim(0, xVals[-1])
 
 	yTicks = [0, 1, 2, 3, 4]
 	ax.set_yticks(yTicks)
-	ax.set_yticklabels(yTicks, fontsize=pFonts.fontSizeDict['tick'], fontname=fontType)
-	ax.set_ylabel('Copy Number', fontsize=pFonts.fontSizeDict['axis'], fontname=fontType, labelpad=1)
+	ax.set_yticklabels(yTicks)
+	ax.set_ylabel('Copy Number', labelpad=1)
 	ax.set_ylim(-0.1, 4.6)
 
 	ax.tick_params(direction='out', which='both', pad=0., length=3, top='off', right='off')
