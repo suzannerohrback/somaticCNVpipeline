@@ -44,10 +44,11 @@ def runAll(args):
 	QCdir = args.AnalysisDirectory + 'QC/'
 	CNVdir = args.AnalysisDirectory + 'CNVlists/'
 	summaryDir = args.AnalysisDirectory + 'SummaryFiles/'
+	PloidyPlotDir = args.AnalysisDirectory + 'PloidyDeterminationPlots/'
 	CNplotDir = args.AnalysisDirectory + 'CopyNumberProfilePlots/'
 	ChromPlotDir = args.AnalysisDirectory + 'ChromosomeCopyNumberPlots/'
 	
-	for i in [args.AnalysisDirectory, QCdir, CNVdir, summaryDir, CNplotDir, ChromPlotDir]:#
+	for i in [args.AnalysisDirectory, QCdir, CNVdir, summaryDir, PloidyPlotDir, CNplotDir, ChromPlotDir]:#
 		common.makeDir(i)
 	
 	
@@ -72,8 +73,9 @@ def runAll(args):
 	
 	
 	#QC assessment#
-	argList = [(x, args.species, folderDict['PipelineStats'], folderDict['LowessBinCounts'], folderDict['Segments'], QCdir) for x in sampleNames]
-	common.daemon(qcfile.runQCone, argList, 'assess sample quality')
+	qcfile.runQCone(sampleNames[0], args.species, folderDict['PipelineStats'], folderDict['lowessBinCounts'], folderDict['Segments'], QCdir, PloidyPlotDir)
+#	argList = [(x, args.species, folderDict['PipelineStats'], folderDict['LowessBinCounts'], folderDict['Segments'], QCdir, PloidyPlotDir) for x in sampleNames]
+#	common.daemon(qcfile.runQCone, argList, 'assess sample quality')
 
 	analysisSamples = []
 	ploidyDict = {}
@@ -111,10 +113,10 @@ def runAll(args):
 	
 	
 	#CNV analysis#
-	summaryStats = analyzefiles.analyzeOne(analysisSamples[0], args.species, CNVdir, folderDict['LowessBinCounts'], CNplotDir, ChromPlotDir, ploidyDict[analysisSamples[0]], genderDict[analysisSamples[0]])
-	summaryStats = [summaryStats]
-#	argList = [(x, args.species, CNVdir, folderDict['LowessBinCounts'], CNplotDir, ChromPlotDir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
-#	summaryStats = common.daemon(analyzefiles.analyzeOne, argList, 'create summary file(s)')
+#	summaryStats = analyzefiles.analyzeOne(analysisSamples[0], args.species, CNVdir, folderDict['LowessBinCounts'], CNplotDir, ChromPlotDir, ploidyDict[analysisSamples[0]], genderDict[analysisSamples[0]])
+#	summaryStats = [summaryStats]
+	argList = [(x, args.species, CNVdir, folderDict['LowessBinCounts'], CNplotDir, ChromPlotDir, ploidyDict[x], genderDict[x]) for x in analysisSamples]
+	summaryStats = common.daemon(analyzefiles.analyzeOne, argList, 'create summary files')
 	
 	cellStatsFile = summaryDir + 'CellStats.txt'
 	chromAmpFile = summaryDir + 'ChromosomeAmplifiedPercent.txt'
