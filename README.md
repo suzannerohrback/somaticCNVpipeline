@@ -16,6 +16,9 @@ INSTALLATION
 	c) Statsmodels (python package)
 		For the best results, enter the following at the command line
 			pip install --user statsmodels
+	d) Matlab
+		And this should be accessible at the command line
+		Only required for the CBS step of the segment function
 		
 2) Create mapping reference(s) for mm10 and/or hg38, if you do not currently have them
 	http://bowtie-bio.sourceforge.net/manual.shtml#the-bowtie-build-indexer
