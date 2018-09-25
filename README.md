@@ -67,9 +67,7 @@ See EXAMPLE_SHELL_COMMANDS.sh for actual examples
 CITATION
 ========================================================================================================================
 Feel free to use this code, but please provide credit if utilized for a publication
-Our paper has not yet been published, so currently cite as a URL:
-  Rohrback, Suzanne. Somatic CNV Analysis Pipeline. https://github.com/suzannerohrback/somaticCNVpipeline/. Accession Date.
-  ###PAPER WAS RECENTLY ACCEPTED TO PNAS, FULL CITATION COMING SOON###
+Suzanne Rohrback el al., "Submegabase copy number variations arise during cerebral cortical neurogenesis as revealed by a single-cell sequencing approach," PNAS (2018). www.pnas.org/cgi/doi/10.1073/pnas.1812702115 
   
 
 
