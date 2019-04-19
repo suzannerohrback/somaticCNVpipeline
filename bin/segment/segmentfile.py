@@ -70,7 +70,7 @@ def segmentOne(sample, species, tempDir, lowessDir, segmentDir):
 	cmd = 'matlab -nodisplay -r ' + scriptName
 	cmd = shlex.split(cmd)
 	
-	p = sub.Popen(cmd, stdout = stdout, stderr = sub.STDOUT, shell=True)
+	p = sub.Popen(cmd, stdout = stdout, stderr = sub.STDOUT)
 	p.wait()
 	
 	stdout.close()
