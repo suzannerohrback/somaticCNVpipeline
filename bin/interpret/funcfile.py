@@ -92,24 +92,42 @@ def FUnC(dataDict, binDict, cutoffDict, gender):
 			
 	return dataDict
 
+####original code, but seems to just compare CNVs to themselves?
+#def mergePassing(funcDict):
+       # mergePass = [funcDict[0]]
+        #for i, j in enumerate(funcDict[1:]):
+             #   thisEntry = j
+            #    if j['pass'] == funcDict[i]['pass'] == 'cnv': #both entries passed FUnC
+           #             if j['chrom'] == funcDict[i]['chrom']: #both entries on the same chromosome
+          #                      if np.round(j['CN']) == np.round(funcDict[i]['CN']): #both entries have the same copy number
+         #                               prev = mergePass.pop()
+        #                                thisEntry = {
+       #                                         'chrom': j['chrom'],
+      #                                          'start': prev['start'],
+     #                                           'end': j['end'],
+    #                                            'CN': mergeSegCN(prev, j),
+   #                                             'bins': prev['bins'] + j['bins'],
+  #                                              'pass': 'cnv'
+ #                                       }
+#                mergePass.append(thisEntry)
 
-
+       # return mergePass
 
 
 def mergePassing(funcDict):
 	mergePass = [funcDict[0]]
-	for i, j in enumerate(funcDict[1:]):
-		thisEntry = j
-		if j['pass'] == funcDict[i]['pass'] == 'cnv': #both entries passed FUnC
-			if j['chrom'] == funcDict[i]['chrom']: #both entries on the same chromosome
-				if np.round(j['CN']) == np.round(funcDict[i]['CN']): #both entries have the same copy number
+	for i in funcDict[1:]:
+		thisEntry = i
+		if i['pass'] == mergePass[-1]['pass'] == 'cnv': #both entries passed FUnC
+			if i['chrom'] == mergePass[-1]['chrom']: #both entries on the same chromosome
+				if np.round(i['CN']) == np.round(mergePass[-1]['CN']): #both entries have the same copy number
 					prev = mergePass.pop()
 					thisEntry = {
-						'chrom': j['chrom'],
+						'chrom': i['chrom'],
 						'start': prev['start'], 
-						'end': j['end'],
-						'CN': mergeSegCN(prev, j),
-						'bins': prev['bins'] + j['bins'],
+						'end': i['end'],
+						'CN': mergeSegCN(prev, i),
+						'bins': prev['bins'] + i['bins'],
 						'pass': 'cnv'
 					}	
 		mergePass.append(thisEntry)
