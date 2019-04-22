@@ -169,7 +169,8 @@ def analyzeOne(sample, species, cnvDir, lowessDir, plotDir, chromPlotDir, ploidy
 			endBin = [x for x,y in enumerate(binArray) if y['chrom'] == j['chrom'] and y['chrStart'] + y['size'] - 1 == j['end']][0]
 			cnvData[startBin:endBin] = j['CN']
 		summaryStats = getSummaryStats(cnvs, gender, chromList, chromSizes)			
-			
+	else:
+		summaryStats=False		
 	plotProfile(sample, plotDir, binData, cnvData, binArray, chromList)
 	plotChroms(sample, chromPlotDir, binData, binArray, chromList)
 	#summaryStats = getSummaryStats(cnvs, gender, chromList, chromSizes)
