@@ -244,7 +244,7 @@ def mergeCNfinal(funcDict):
 						skipTest = True	
 			#			print thisEntry, '\n'
 			
-			if i == len(remergePass)-1 or j['chrom'] != remergePass[i+1]['chrom']: #segment at 3' end of chromosome#
+			elif i == len(remergePass)-1 or j['chrom'] != remergePass[i+1]['chrom']: #segment at 3' end of chromosome#
 				if baselineMerge[-1]['pass'] == 'cnv' and baselineMerge[-1]['bins'] > 25:
 					if np.round(baselineMerge[-1]['CN']) == np.round(mergeSegCN(j, baselineMerge[-1])): #extra check b/c at chrom edge
 			#			print 'At the 3prime chrom end and passes merging requirements'
