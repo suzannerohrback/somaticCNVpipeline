@@ -158,12 +158,12 @@ def mergeCNfinal(funcDict):
 	#		print 'SMALL SEG NEEDED MERGING'
 
 			#situations where you automatically merge with the previous segment
-			if (i == len(mergePass) - 1) or (j['chrom'] != mergePass[i+1]['chrom']) or (mergePass[i+1]['pass'] == 'no' != mergeSmall[-1]):
+			if (i == len(mergePass) - 1) or (j['chrom'] != mergePass[i+1]['chrom']) or (mergePass[i+1]['pass'] != 'no' and mergeSmall[-1]): #clarified this statement so that last statement couldn't potentially be an automatic merge to the previous segment when no previous segment existed
 		#		print 'auto merge with previous segment'
 				mergeTest = i-1
 				
 			#situations where you automatically merge with the next segment
-			elif (i == 0) or (j['chrom'] != mergeSmall[-1]['chrom']) or (mergeSmall[-1]['pass'] == 'no' != mergePass[i+1]):
+			elif (i == 0) or (j['chrom'] != mergeSmall[-1]['chrom']) or (mergeSmall[-1]['pass'] != 'no' and mergePass[i+1]): #clarified this statement so that the last statement couldn't potentially result in an automatic merge to the next segment when no next segment existed
 		#		print 'auto merge with next segment'
 				mergeTest = i+1
 			
