@@ -116,10 +116,10 @@ def getSummaryStats(cnvs, gender, chromList, chromSizes,noCNVs=False):
 				cellStats['ampMB'] += float(abs(normalCN - i['CN']) * (i['end'] - i['start'] + 1)) / 1e6
 				chromAmp[i['chrom']] += float(i['end'] - i['start'] + 1)
 			
-		chromAmp = {y: (100. * chromAmp[y]) / float(chromSizes[x]) for x,y in enumerate(chromList) if y != 'chrY'}
-		chromDel = {y: (100. * chromDel[y]) / float(chromSizes[x]) for x,y in enumerate(chromList) if y != 'chrY'}
+	chromAmp = {y: (100. * chromAmp[y]) / float(chromSizes[x]) for x,y in enumerate(chromList) if y != 'chrY'}
+	chromDel = {y: (100. * chromDel[y]) / float(chromSizes[x]) for x,y in enumerate(chromList) if y != 'chrY'}
 
-		thisResult = {'chroms': [x for x in chromList if x != 'chrY'], 'cellStats': cellStats, 'chromAmp': chromAmp, 'chromDel': chromDel}
+	thisResult = {'chroms': [x for x in chromList if x != 'chrY'], 'cellStats': cellStats, 'chromAmp': chromAmp, 'chromDel': chromDel}
 	return thisResult
 	
 	
