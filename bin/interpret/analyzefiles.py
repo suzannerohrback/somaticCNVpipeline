@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import os,sys,inspect
 import numpy as np
-
+from scipy import stats
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -60,8 +60,8 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray, chromList):
 #plot estimated overall chromosome ploidy states--CALCULATED FROM LOWESS DATA, NOT SEGMENT DATA#
 def plotChroms(sample, outDir, lowessData, refArray, chromList):
 	graphData = [np.mean(lowessData[refArray['chrom'] == x]) for x in chromList]
-	graphErr = [np.std(lowessData[refArray['chrom'] == x])/np.sqrt(len(lowessData[refArray['chrom']==x])) for x in chromList]
-	graphErr = [abs(graphData[x] - graphErr[x]) for x in range(len(chromList))]
+	graphErr = [np.std(lowessData[refArray['chrom'] == x]) for x in chromList]
+	#graphErr = [abs(graphData[x] - graphErr[x]) for x in range(len(chromList))]
 
 	xTicks = np.arange(0, len(chromList))
 	yTicks = [0, 1, 2, 3, 4]
