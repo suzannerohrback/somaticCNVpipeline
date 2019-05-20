@@ -91,7 +91,7 @@ def plotChroms(sample, outDir, lowessData, refArray, chromList):
 	
 	
 #function to calculate cell summary stats
-def getSummaryStats(cnvs, gender, chromList, chromSizes,noCNVs=False):
+def getSummaryStats(cnvs, gender, chromList, chromSizes, noCNVs=False):
 	cellStats = {
 		'delCount': 0,
 		'ampCount': 0,
