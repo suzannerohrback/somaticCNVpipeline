@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import os,sys,inspect
 import numpy as np
-
+from scipy import stats
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -61,7 +61,7 @@ def plotProfile(sample, outDir, lowessData, cnvData, refArray, chromList):
 def plotChroms(sample, outDir, lowessData, refArray, chromList):
 	graphData = [np.mean(lowessData[refArray['chrom'] == x]) for x in chromList]
 	graphErr = [np.std(lowessData[refArray['chrom'] == x]) for x in chromList]
-	graphErr = [abs(graphData[x] - graphErr[x]) for x in range(len(chromList))]
+	#graphErr = [abs(graphData[x] - graphErr[x]) for x in range(len(chromList))]
 
 	xTicks = np.arange(0, len(chromList))
 	yTicks = [0, 1, 2, 3, 4]
@@ -91,7 +91,7 @@ def plotChroms(sample, outDir, lowessData, refArray, chromList):
 	
 	
 #function to calculate cell summary stats
-def getSummaryStats(cnvs, gender, chromList, chromSizes):
+def getSummaryStats(cnvs, gender, chromList, chromSizes, noCNVs=False):
 	cellStats = {
 		'delCount': 0,
 		'ampCount': 0,
@@ -100,21 +100,21 @@ def getSummaryStats(cnvs, gender, chromList, chromSizes):
 	}
 	chromAmp = {x: 0. for x in chromList if x != 'chrY'}
 	chromDel = {x: 0. for x in chromList if x != 'chrY'}
-	
-	for i in cnvs:
-		normalCN = common.getNormalCN(i['chrom'], gender)
+	if not noCNVs:
+		for i in cnvs:
+			normalCN = common.getNormalCN(i['chrom'], gender)
 		
-		if i['chrom'] == 'chrY':
-			break
+			if i['chrom'] == 'chrY':
+				break
 		
-		if i['CN'] < normalCN:
-			cellStats['delCount'] += 1
-			cellStats['delMB'] += float(abs(normalCN - i['CN']) * (i['end'] - i['start'] + 1)) / 1e6
-			chromDel[i['chrom']] += float(i['end'] - i['start'] + 1)
-		else:
-			cellStats['ampCount'] += 1
-			cellStats['ampMB'] += float(abs(normalCN - i['CN']) * (i['end'] - i['start'] + 1)) / 1e6
-			chromAmp[i['chrom']] += float(i['end'] - i['start'] + 1)
+			if i['CN'] < normalCN:
+				cellStats['delCount'] += 1
+				cellStats['delMB'] += float(abs(normalCN - i['CN']) * (i['end'] - i['start'] + 1)) / 1e6
+				chromDel[i['chrom']] += float(i['end'] - i['start'] + 1)
+			else:
+				cellStats['ampCount'] += 1
+				cellStats['ampMB'] += float(abs(normalCN - i['CN']) * (i['end'] - i['start'] + 1)) / 1e6
+				chromAmp[i['chrom']] += float(i['end'] - i['start'] + 1)
 			
 	chromAmp = {y: (100. * chromAmp[y]) / float(chromSizes[x]) for x,y in enumerate(chromList) if y != 'chrY'}
 	chromDel = {y: (100. * chromDel[y]) / float(chromSizes[x]) for x,y in enumerate(chromList) if y != 'chrY'}
@@ -168,11 +168,12 @@ def analyzeOne(sample, species, cnvDir, lowessDir, plotDir, chromPlotDir, ploidy
 			startBin = [x for x,y in enumerate(binArray) if y['chrom'] == j['chrom'] and y['chrStart'] == j['start']][0]
 			endBin = [x for x,y in enumerate(binArray) if y['chrom'] == j['chrom'] and y['chrStart'] + y['size'] - 1 == j['end']][0]
 			cnvData[startBin:endBin] = j['CN']
-			
-			
+		summaryStats = getSummaryStats(cnvs, gender, chromList, chromSizes)			
+	else:
+		cnvs=0
+		summaryStats = getSummaryStats(cnvs, gender, chromList, chromSizes, noCNVs=True)
 	plotProfile(sample, plotDir, binData, cnvData, binArray, chromList)
 	plotChroms(sample, chromPlotDir, binData, binArray, chromList)
-	summaryStats = getSummaryStats(cnvs, gender, chromList, chromSizes)
 	
 	return summaryStats
 

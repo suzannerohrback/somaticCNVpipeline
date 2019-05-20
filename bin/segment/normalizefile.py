@@ -76,9 +76,12 @@ def runMakeMethodRef(species, sampleList, methodName, lowessDir):
 		return [False]
 		
 	binArray = common.importInfoFile(normVars.binDict[species], [0, 1, 2, 4, 6], 'normref', skiprows=0)
-	xLocs = [x for x,y in enumerate(binArray['chrom']) if y == 'chrX']
-	yLocs = [x for x,y in enumerate(binArray['chrom']) if y == 'chrY']
-	
+	if species == "hg38":
+		xLocs = [x for x,y in enumerate(binArray['chrom']) if y == '23']
+		yLocs = [x for x,y in enumerate(binArray['chrom']) if y == '24']
+	if species == "mm10":
+		xLocs = [x for x,y in enumerate(binArray['chrom']) if y=='20']
+		yLocs = [x for x,y in enumerate(binArray['chrom']) if y=='21']
 	mergeArray = np.zeros(len(binArray), dtype='int')
 	
 	sampleCount = 0

@@ -92,24 +92,42 @@ def FUnC(dataDict, binDict, cutoffDict, gender):
 			
 	return dataDict
 
+####original code, but seems to just compare CNVs to themselves?
+#def mergePassing(funcDict):
+       # mergePass = [funcDict[0]]
+        #for i, j in enumerate(funcDict[1:]):
+             #   thisEntry = j
+            #    if j['pass'] == funcDict[i]['pass'] == 'cnv': #both entries passed FUnC
+           #             if j['chrom'] == funcDict[i]['chrom']: #both entries on the same chromosome
+          #                      if np.round(j['CN']) == np.round(funcDict[i]['CN']): #both entries have the same copy number
+         #                               prev = mergePass.pop()
+        #                                thisEntry = {
+       #                                         'chrom': j['chrom'],
+      #                                          'start': prev['start'],
+     #                                           'end': j['end'],
+    #                                            'CN': mergeSegCN(prev, j),
+   #                                             'bins': prev['bins'] + j['bins'],
+  #                                              'pass': 'cnv'
+ #                                       }
+#                mergePass.append(thisEntry)
 
-
+       # return mergePass
 
 
 def mergePassing(funcDict):
 	mergePass = [funcDict[0]]
-	for i, j in enumerate(funcDict[1:]):
-		thisEntry = j
-		if j['pass'] == funcDict[i]['pass'] == 'cnv': #both entries passed FUnC
-			if j['chrom'] == funcDict[i]['chrom']: #both entries on the same chromosome
-				if np.round(j['CN']) == np.round(funcDict[i]['CN']): #both entries have the same copy number
+	for i in funcDict[1:]:
+		thisEntry = i
+		if i['pass'] == mergePass[-1]['pass'] == 'cnv': #both entries passed FUnC
+			if i['chrom'] == mergePass[-1]['chrom']: #both entries on the same chromosome
+				if np.round(i['CN']) == np.round(mergePass[-1]['CN']): #both entries have the same copy number
 					prev = mergePass.pop()
 					thisEntry = {
-						'chrom': j['chrom'],
+						'chrom': i['chrom'],
 						'start': prev['start'], 
-						'end': j['end'],
-						'CN': mergeSegCN(prev, j),
-						'bins': prev['bins'] + j['bins'],
+						'end': i['end'],
+						'CN': mergeSegCN(prev, i),
+						'bins': prev['bins'] + i['bins'],
 						'pass': 'cnv'
 					}	
 		mergePass.append(thisEntry)
@@ -140,12 +158,12 @@ def mergeCNfinal(funcDict):
 	#		print 'SMALL SEG NEEDED MERGING'
 
 			#situations where you automatically merge with the previous segment
-			if (i == len(mergePass) - 1) or (j['chrom'] != mergePass[i+1]['chrom']) or (mergePass[i+1]['pass'] == 'no' != mergeSmall[-1]):
+			if (i == len(mergePass) - 1) or (j['chrom'] != mergePass[i+1]['chrom']) or (mergePass[i+1]['pass'] != 'no' and mergeSmall[-1]): #clarified this statement so that last statement couldn't potentially be an automatic merge to the previous segment when no previous segment existed
 		#		print 'auto merge with previous segment'
 				mergeTest = i-1
 				
 			#situations where you automatically merge with the next segment
-			elif (i == 0) or (j['chrom'] != mergeSmall[-1]['chrom']) or (mergeSmall[-1]['pass'] == 'no' != mergePass[i+1]):
+			elif (i == 0) or (j['chrom'] != mergeSmall[-1]['chrom']) or (mergeSmall[-1]['pass'] != 'no' and mergePass[i+1]): #clarified this statement so that the last statement couldn't potentially result in an automatic merge to the next segment when no next segment existed
 		#		print 'auto merge with next segment'
 				mergeTest = i+1
 			
@@ -226,7 +244,7 @@ def mergeCNfinal(funcDict):
 						skipTest = True	
 			#			print thisEntry, '\n'
 			
-			if i == len(remergePass)-1 or j['chrom'] != remergePass[i+1]['chrom']: #segment at 3' end of chromosome#
+			elif i == len(remergePass)-1 or j['chrom'] != remergePass[i+1]['chrom']: #segment at 3' end of chromosome#
 				if baselineMerge[-1]['pass'] == 'cnv' and baselineMerge[-1]['bins'] > 25:
 					if np.round(baselineMerge[-1]['CN']) == np.round(mergeSegCN(j, baselineMerge[-1])): #extra check b/c at chrom edge
 			#			print 'At the 3prime chrom end and passes merging requirements'
